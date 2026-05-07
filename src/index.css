@@ -1,0 +1,125 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Libre+Baskerville:wght@400;700&family=Source+Code+Pro&display=swap');
+@import "tailwindcss";
+
+@theme {
+  /* Default Light Theme */
+  --color-primary: #78716C;
+  --color-secondary: #A8A29E;
+  --color-tertiary: #1C1917;
+  --color-background: #FAFAF9;
+  --color-surface: #F5F5F4;
+  --color-surface-raised: #EFEDEB;
+  --color-text-primary: #1C1917;
+  --color-text-secondary: #57534E;
+  --color-text-tertiary: #A8A29E;
+  --color-border-subtle: #E7E5E4;
+  --color-border-medium: #D6D3D1;
+  --color-border-strong: #A8A29E;
+  --color-success: #65A30D;
+  --color-warning: #CA8A04;
+  --color-error: #DC2626;
+
+  /* Typography */
+  --font-display: "Libre Baskerville", serif;
+  --font-body: "Inter", sans-serif;
+  --font-mono: "Source Code Pro", monospace;
+
+  /* Spacing */
+  --spacing-huge: 120px;
+  --spacing-xxl: 84px;
+}
+
+@layer base {
+  :root {
+    --color-primary: #78716C;
+    --color-secondary: #A8A29E;
+    --color-tertiary: #1C1917;
+    --color-background: #FAFAF9;
+    --color-surface: #F5F5F4;
+    --color-surface-raised: #EFEDEB;
+    --color-text-primary: #1C1917;
+    --color-text-secondary: #57534E;
+    --color-text-tertiary: #A8A29E;
+    --color-border-subtle: #E7E5E4;
+    --color-border-medium: #D6D3D1;
+    --color-border-strong: #A8A29E;
+  }
+
+  .dark {
+    --color-primary: #D6D3D1;
+    --color-secondary: #78716C;
+    --color-tertiary: #FAFAF9;
+    --color-background: #0C0A09;
+    --color-surface: #1C1917;
+    --color-surface-raised: #292524;
+    --color-text-primary: #FAFAF9;
+    --color-text-secondary: #A8A29E;
+    --color-text-tertiary: #57534E;
+    --color-border-subtle: #292524;
+    --color-border-medium: #44403C;
+    --color-border-strong: #78716C;
+  }
+
+  body {
+    @apply bg-background text-text-primary font-body;
+    font-size: 17px;
+    line-height: 1.8;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display font-bold text-text-primary tracking-tight;
+  }
+
+  /* Sharp edges as per ThoughtStream spec */
+  * {
+    border-radius: 0 !important;
+  }
+  
+  /* Avatars only full rounded */
+  .avatar {
+    border-radius: 9999px !important;
+  }
+}
+
+@layer components {
+  .section-divider {
+    @apply border-t border-border-subtle my-20 md:my-huge;
+  }
+  
+  .btn-primary {
+    @apply bg-primary text-background px-6 py-3 font-semibold text-[15px] border border-primary hover:bg-text-secondary transition-colors duration-200;
+  }
+  
+  .btn-secondary {
+    @apply bg-transparent text-primary px-6 py-3 font-semibold text-[15px] border border-border-medium hover:bg-surface transition-colors duration-200;
+  }
+
+  .card-default {
+    @apply bg-background border border-border-subtle p-9 hover:border-border-medium transition-colors duration-200;
+  }
+
+  /* Heatmap Styles */
+  .react-calendar-heatmap .color-empty { fill: #f0f0f0; }
+  .react-calendar-heatmap .color-scale-1 { fill: #9be9a8; }
+  .react-calendar-heatmap .color-scale-2 { fill: #40c463; }
+  .react-calendar-heatmap .color-scale-3 { fill: #30a14e; }
+  .react-calendar-heatmap .color-scale-4 { fill: #216e39; }
+
+  /* GitHub Calendar Specific overrides for light theme */
+  .react-github-calendar__chart {
+    background: transparent !important;
+  }
+  
+  .react-github-calendar__chart text {
+    fill: #6e7681 !important;
+  }
+
+  .react-calendar-heatmap text {
+    font-size: 10px;
+    fill: #6E7681;
+  }
+
+  .leetcode-heatmap .react-calendar-heatmap {
+    height: 120px;
+  }
+}
