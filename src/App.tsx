@@ -203,16 +203,15 @@ function LeetCodeStats({ glowColor }: { glowColor: string }) {
             </div>
           </div>
 
-          <div className="mb-8 p-4 bg-background border border-border-subtle">
-             <div className="flex justify-between items-center mb-4">
-              <span className="text-[10px] text-text-tertiary uppercase tracking-widest font-bold">Submission Heatmap</span>
-              <span className="text-[10px] text-primary font-mono">{currentYear}</span>
-            </div>
-            <div className="leetcode-heatmap overflow-hidden">
-              <CalendarHeatmap
-                startDate={startOfYear(new Date())}
+          <div className="flex-1 flex flex-col justify-center min-h-[220px] p-4 bg-background border border-border-subtle mb-8">
+            <div className="overflow-x-auto overflow-y-hidden custom-scrollbar pb-2">
+              <div className="min-w-[700px]">
+                <CalendarHeatmap
+                  startDate={startOfYear(new Date())}
                 endDate={endOfYear(new Date())}
                 values={heatmapValues}
+                gutterSize={4}
+                showWeekdayLabels={true}
                 classForValue={(value) => {
                   if (!value) return 'color-empty';
                   return `color-scale-${Math.min(value.count, 4)}`;
@@ -226,6 +225,23 @@ function LeetCodeStats({ glowColor }: { glowColor: string }) {
                 }}
               />
               <Tooltip id="leetcode-tooltip" style={{ borderRadius: '0', fontSize: '11px', backgroundColor: '#1A1A1A', color: 'white' }} />
+              </div>
+            </div>
+            
+            <div className="mt-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-[10px] text-text-tertiary uppercase tracking-widest font-bold">
+              <div className="flex items-center gap-4">
+                 <span>Less</span>
+                 <div className="flex gap-1">
+                   {['#EBEDF0', '#9BE9A8', '#40C463', '#30A14E', '#216E39'].map(c => (
+                     <div key={c} className="w-3 h-3" style={{ backgroundColor: c }} />
+                   ))}
+                 </div>
+                 <span>More</span>
+              </div>
+              <div className="flex items-center gap-2 text-primary bg-primary/10 px-3 py-1 border border-primary/20">
+                <CalendarDays size={12} />
+                <span>Activity Record • {currentYear}</span>
+              </div>
             </div>
           </div>
           
@@ -307,27 +323,31 @@ function GitHubActivity({ glowColor }: { glowColor: string }) {
         </div>
       </div>
       
-      <div className="overflow-hidden flex-1 flex flex-col justify-center min-h-[220px] p-4 bg-background border border-border-subtle">
-        <GitHubCalendar 
-          username="OmChauhan07" 
-          year={selectedYear === currentYear ? undefined : selectedYear}
-          fontSize={12}
-          blockSize={11}
-          blockMargin={4}
-          colorScheme="light"
-          theme={{
-             light: ['#EBEDF0', '#9BE9A8', '#40C463', '#30A14E', '#216E39'],
-          }}
-          hideColorLegend
-          showWeekdayLabels
-          renderBlock={(block, activity) => 
-            React.cloneElement(block as React.ReactElement, {
-              'data-tooltip-id': 'gh-tooltip',
-              'data-tooltip-content': `${activity.count} contributions on ${activity.date}`,
-            })
-          }
-        />
-        <Tooltip id="gh-tooltip" style={{ borderRadius: '0', fontSize: '11px', backgroundColor: '#1A1A1A', color: 'white' }} />
+      <div className="flex-1 flex flex-col justify-center min-h-[220px] p-4 bg-background border border-border-subtle">
+        <div className="overflow-x-auto overflow-y-hidden custom-scrollbar pb-2">
+          <div className="min-w-[700px]">
+            <GitHubCalendar 
+            username="OmChauhan07" 
+            year={selectedYear === currentYear ? undefined : selectedYear}
+            fontSize={12}
+            blockSize={11}
+            blockMargin={4}
+            colorScheme="light"
+            theme={{
+               light: ['#EBEDF0', '#9BE9A8', '#40C463', '#30A14E', '#216E39'],
+            }}
+            hideColorLegend
+            showWeekdayLabels
+            renderBlock={(block, activity) => 
+              React.cloneElement(block as React.ReactElement, {
+                'data-tooltip-id': 'gh-tooltip',
+                'data-tooltip-content': `${activity.count} contributions on ${activity.date}`,
+              })
+            }
+          />
+          <Tooltip id="gh-tooltip" style={{ borderRadius: '0', fontSize: '11px', backgroundColor: '#1A1A1A', color: 'white' }} />
+          </div>
+        </div>
         <div className="mt-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-[10px] text-text-tertiary uppercase tracking-widest font-bold">
           <div className="flex items-center gap-4">
              <span>Less</span>
@@ -535,7 +555,7 @@ export default function App() {
         >
           <GlobalSpotlight sectionRef={activityRef} glowColor={glowColor} />
           <h2 className="text-3xl mb-12">Live Activity</h2>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div className="flex flex-col gap-8">
             <GitHubActivity glowColor={glowColor} />
             <LeetCodeStats glowColor={glowColor} />
           </div>
