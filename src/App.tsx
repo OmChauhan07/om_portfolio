@@ -867,17 +867,17 @@ export default function App() {
                     type="text" 
                     required
                     className="w-full bg-background border border-border-medium px-4 py-3 text-sm focus:outline-none focus:border-primary transition-colors"
-                    placeholder="Your Name"
+                    placeholder="Name"
                   />
                 </div>
                 <div className="space-y-2">
-                  <label className="text-[11px] font-bold tracking-widest text-text-secondary uppercase">Your Email</label>
+                  <label className="text-[11px] font-bold tracking-widest text-text-secondary uppercase">Mail</label>
                   <input 
                     name="email"
                     type="email" 
                     required
                     className="w-full bg-background border border-border-medium px-4 py-3 text-sm focus:outline-none focus:border-primary transition-colors"
-                    placeholder="you@example.com"
+                    placeholder="Email"
                   />
                 </div>
                 <div className="space-y-2">
@@ -887,7 +887,7 @@ export default function App() {
                     rows={4} 
                     required
                     className="w-full bg-background border border-border-medium px-4 py-3 text-sm focus:outline-none focus:border-primary transition-colors"
-                    placeholder="How can we collaborate?"
+                    placeholder="message"
                   />
                 </div>
                 <button 
