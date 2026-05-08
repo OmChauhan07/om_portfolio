@@ -681,7 +681,7 @@ export default function App() {
               },
               {
                 title: "LinkHood Social Platform",
-                tags: "Flutter, Node.js, PostGIS",
+                tags: "Flutter, Supabase, PostGIS",
                 desc: "Real-time, location-aware social platform featuring geospatial queries and live post sharing.",
                 icon: <Smartphone className="text-primary" size={32} />,
                 url: "https://github.com/OmChauhan07/LinkHood.git"
@@ -695,7 +695,7 @@ export default function App() {
               },
               {
                 title: "DAO Browser",
-                tags: "Web3, Python, DAO",
+                tags: "Electron, Python, Chromium",
                 desc: "Decentralized dashboard for exploring and voting on DAO proposals across multiple blockchains.",
                 icon: <Terminal className="text-primary" size={32} />,
                 url: "https://github.com/Darshanh20/DAO-BROWSER.git"
@@ -838,41 +838,25 @@ export default function App() {
               <form 
                 id="contact-form"
                 className="space-y-8 relative z-20" 
-                onSubmit={async (e) => {
+                onSubmit={(e) => {
                   e.preventDefault();
                   const form = e.currentTarget;
                   const formData = new FormData(form);
-                  const data = {
-                    name: formData.get('name'),
-                    email: formData.get('email'),
-                    message: formData.get('message')
-                  };
-
-                  const btn = form.querySelector('button');
-                  if (btn) btn.disabled = true;
+                  const name = formData.get('name') || '';
+                  const email = formData.get('email') || '';
+                  const message = formData.get('message') || '';
                   
-                  try {
-                    const response = await fetch('/api/contact', {
-                      method: 'POST',
-                      headers: { 'Content-Type': 'application/json' },
-                      body: JSON.stringify(data)
-                    });
-                    
-                    const result = await response.json();
-                    if (result.success) {
-                      const success = document.getElementById('contact-success');
-                      if (success) {
-                        form.classList.add('hidden');
-                        success.classList.remove('hidden');
-                        form.reset();
-                      }
-                    } else {
-                      alert("Something went wrong. Please try again.");
-                    }
-                  } catch (err) {
-                    alert("Failed to reach server. Please try again.");
-                  } finally {
-                    if (btn) btn.disabled = false;
+                  // Direct to email (Gmail/default email client)
+                  const subject = encodeURIComponent(`Portfolio Contact from ${name}`);
+                  const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
+                  window.location.href = `mailto:odchauhan0702@gmail.com?subject=${subject}&body=${body}`;
+                  
+                  // Show success state
+                  const success = document.getElementById('contact-success');
+                  if (success) {
+                    form.classList.add('hidden');
+                    success.classList.remove('hidden');
+                    form.reset();
                   }
                 }}
               >
@@ -883,17 +867,17 @@ export default function App() {
                     type="text" 
                     required
                     className="w-full bg-background border border-border-medium px-4 py-3 text-sm focus:outline-none focus:border-primary transition-colors"
-                    placeholder="Om Chauhan"
+                    placeholder="Your Name"
                   />
                 </div>
                 <div className="space-y-2">
-                  <label className="text-[11px] font-bold tracking-widest text-text-secondary uppercase">Email</label>
+                  <label className="text-[11px] font-bold tracking-widest text-text-secondary uppercase">Your Email</label>
                   <input 
                     name="email"
                     type="email" 
                     required
                     className="w-full bg-background border border-border-medium px-4 py-3 text-sm focus:outline-none focus:border-primary transition-colors"
-                    placeholder="odchauhan0702@gmail.com"
+                    placeholder="you@example.com"
                   />
                 </div>
                 <div className="space-y-2">
