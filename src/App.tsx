@@ -524,14 +524,14 @@ export default function App() {
           className="max-w-3xl mb-huge"
         >
           <BlurText
-            text="Exploring the intersection of data and design."
+            text="Hi, I'm Om Chauhan."
             delay={150}
             animateBy="words"
             direction="top"
             className="text-5xl md:text-6xl lg:text-7xl mb-8 leading-[1.1] font-display font-bold"
           />
           <p className="text-xl text-text-secondary mb-10 max-w-2xl">
-            Data/AI-focused B.Tech IT student specialized in building ML models, data analysis, and full-stack digital experiences that feel inevitable rather than merely functional.
+            I specialize in building AI-powered analytics systems using Python, SQL, and modern visualization tools. Currently focused on ML engineering and scalable data workflows.
           </p>
           <div className="flex flex-wrap gap-4">
             <a href="#work" className="btn-primary flex items-center gap-2">
