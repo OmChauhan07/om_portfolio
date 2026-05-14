@@ -308,16 +308,23 @@ function GitHubActivity({ glowColor }: { glowColor: string }) {
           </a>
         </div>
         <div className="flex items-center gap-3">
-          <div className="flex bg-background border border-border-subtle p-1 h-8">
-            {years.map(y => (
-              <button 
-                key={y}
-                onClick={() => setSelectedYear(y)}
-                className={`px-3 text-[10px] font-bold transition-colors ${selectedYear === y ? 'bg-primary text-background' : 'text-text-tertiary hover:text-text-primary'}`}
-              >
-                {y}
-              </button>
-            ))}
+          <div className="relative">
+            <select
+              value={selectedYear}
+              onChange={(e) => setSelectedYear(Number(e.target.value))}
+              className="appearance-none bg-background border border-border-subtle text-text-primary text-[10px] font-bold py-1.5 pl-3 pr-8 focus:outline-none focus:border-primary transition-colors cursor-pointer h-8 block"
+            >
+              {years.map(y => (
+                <option key={y} value={y}>
+                  {y}
+                </option>
+              ))}
+            </select>
+            <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-text-tertiary">
+              <svg className="fill-current h-3 w-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+              </svg>
+            </div>
           </div>
           <Github size={20} className="text-text-tertiary" />
         </div>
@@ -531,7 +538,7 @@ export default function App() {
             className="text-5xl md:text-6xl lg:text-7xl mb-8 leading-[1.1] font-display font-bold"
           />
           <p className="text-xl text-text-secondary mb-10 max-w-2xl">
-            I specialize in building AI-powered analytics systems using Python, SQL, and modern visualization tools. Currently focused on ML engineering and scalable data workflows.
+            I specialize in building AI-powered analytics systems using Python, SQL and modern visualization tools. Currently focused on ML engineering and scalable data workflows.
           </p>
           <div className="flex flex-wrap gap-4">
             <a href="#work" className="btn-primary flex items-center gap-2">
