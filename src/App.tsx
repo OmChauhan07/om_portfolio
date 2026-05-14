@@ -72,7 +72,13 @@ function LeetCodeStats({ glowColor }: { glowColor: string }) {
 
   useEffect(() => {
     // Using a more reliable LeetCode stats API
-    axios.get("https://leetcode-api-faisalshohag.vercel.app/rQc2d1FK7A")
+    const apiUrl = import.meta.env.VITE_LEETCODE_API_URL;
+    if (!apiUrl) {
+      console.error("VITE_LEETCODE_API_URL is missing in environment variables.");
+      setLoading(false);
+      return;
+    }
+    axios.get(apiUrl)
       .then(res => {
         if (res.data && typeof res.data.totalSolved === "number") {
           setData(res.data);
