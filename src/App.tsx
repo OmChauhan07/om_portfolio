@@ -181,7 +181,18 @@ function LeetCodeStats({ glowColor }: { glowColor: string }) {
             rQc2d1FK7A <ExternalLink size={10} />
           </a>
         </div>
-        <Terminal size={20} className="text-text-tertiary" />
+        <a 
+          href="https://leetcode.com/u/rQc2d1FK7A/" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="flex items-center gap-2 group"
+        >
+          <svg viewBox="0 0 94 111" width="20" height="20" className="text-text-tertiary group-hover:text-primary transition-colors fill-current">
+            <path d="M67.5068 83.0664C70.0005 80.5764 74.0371 80.5829 76.5228 83.0809C79.0085 85.579 79.002 89.6226 76.5083 92.1127L65.4351 103.17C55.2192 113.371 38.5605 113.519 28.1723 103.513C28.1122 103.456 23.4866 98.9201 8.22703 83.957C-1.92478 74.0029 -2.93615 58.0749 6.61698 47.8464L24.4287 28.7745C33.91 18.6219 51.3874 17.5122 62.228 26.2789L78.4053 39.362C81.1449 41.5776 81.5728 45.5985 79.3611 48.3429C77.1493 51.0873 73.1355 51.5159 70.3959 49.3003L54.2187 36.2173C48.5493 31.6325 38.6319 32.2622 33.7399 37.5006L15.9279 56.5727C11.2772 61.5522 11.7866 69.574 17.1461 74.8292C28.3515 85.8169 36.9874 94.2846 36.9974 94.2942C42.3982 99.496 51.1309 99.4184 56.4336 94.1234L67.5068 83.0664Z" />
+            <path d="M40.607 72.0014C37.086 72.0014 34.2317 69.1421 34.2317 65.615C34.2317 62.0879 37.086 59.2286 40.607 59.2286L87.6247 59.2286C91.1457 59.2286 94 62.0879 94 65.615C94 69.1421 91.1457 72.0014 87.6247 72.0014L40.607 72.0014Z" />
+            <path d="M49.4124 2.02335C51.8179 -0.55232 55.8523 -0.686894 58.4235 1.72277C60.9946 4.13244 61.129 8.17385 58.7235 10.7495L15.9282 56.5729C11.2774 61.552 11.7867 69.5738 17.1459 74.8292L36.9094 94.2091C39.4256 96.6764 39.4686 100.72 37.0056 103.24C34.5426 105.761 30.5063 105.804 27.9901 103.337L8.22654 83.9567C-1.92467 74.0021 -2.93604 58.0741 6.61752 47.8463L49.4124 2.02335Z" />
+          </svg>
+        </a>
       </div>
       
       {data ? (
@@ -332,7 +343,14 @@ function GitHubActivity({ glowColor }: { glowColor: string }) {
               </svg>
             </div>
           </div>
-          <Github size={20} className="text-text-tertiary" />
+          <a 
+            href="https://github.com/OmChauhan07" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 group"
+          >
+            <Github size={20} className="text-text-tertiary group-hover:text-primary transition-colors" />
+          </a>
         </div>
       </div>
       
@@ -918,7 +936,7 @@ export default function App() {
       {/* Footer */}
       <footer className="border-t border-border-subtle bg-background">
         <div className="max-w-[1024px] mx-auto px-6 py-12 flex flex-col md:flex-row justify-between items-center gap-8">
-          <p className="text-sm text-text-tertiary">© 2026 Om Chauhan. Built with Zen & Precision.</p>
+          <p className="text-sm text-text-tertiary">© 2026 Om Chauhan.</p>
           <div className="flex gap-8">
             <a href="https://www.linkedin.com/in/om-chauhan-21043824b/" target="_blank" rel="noopener noreferrer" className="text-text-secondary hover:text-primary transition-colors flex items-center gap-2 text-sm font-semibold tracking-wide">
               <Linkedin size={16} /> LinkedIn
