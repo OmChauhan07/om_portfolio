@@ -5,6 +5,7 @@ import TextType from "./components/TextType";
 import { MagicCard, GlobalSpotlight } from "./components/MagicCard";
 import ShapeGrid from "./components/ShapeGrid";
 import { GitHubCalendar } from "react-github-calendar";
+import { AnimatedThemeToggler } from "@/registry/magicui/animated-theme-toggler";
 import { Tooltip } from "react-tooltip";
 import "react-tooltip/dist/react-tooltip.css";
 import { format, subDays, differenceInDays, parseISO } from "date-fns";
@@ -520,13 +521,12 @@ export default function App() {
               Resume
             </a>
             
-            <button 
-              onClick={toggleTheme}
-              className="p-2 ml-2 bg-surface border border-border-subtle hover:border-primary transition-colors text-text-primary"
-              aria-label="Toggle Theme"
-            >
-              {theme === 'light' ? <Moon size={18} /> : <Sun size={18} />}
-            </button>
+            <AnimatedThemeToggler 
+              theme={theme}
+              onThemeChange={(newTheme) => setTheme(newTheme)}
+              className="p-2 ml-2 bg-surface border border-border-subtle hover:border-primary transition-colors text-text-primary cursor-pointer"
+              duration={450}
+            />
           </div>
         </div>
       </nav>
