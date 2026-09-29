@@ -5,11 +5,9 @@ import TextType from "./components/TextType";
 import { MagicCard, GlobalSpotlight } from "./components/MagicCard";
 import ShapeGrid from "./components/ShapeGrid";
 import { GitHubCalendar } from "react-github-calendar";
-import CalendarHeatmap from "react-calendar-heatmap";
-import "react-calendar-heatmap/dist/styles.css";
 import { Tooltip } from "react-tooltip";
 import "react-tooltip/dist/react-tooltip.css";
-import { format, startOfYear, endOfYear, subDays, differenceInDays, parseISO } from "date-fns";
+import { format, subDays, differenceInDays, parseISO } from "date-fns";
 import axios from "axios";
 import { 
   Github, 
@@ -41,7 +39,12 @@ import {
   BarChart,
   Layers,
   Sun,
-  Moon
+  Moon,
+  Truck,
+  Compass,
+  Scale,
+  Sparkles,
+  Globe
 } from "lucide-react";
 
 const sectionVariants = {
@@ -71,7 +74,7 @@ function LeetCodeStats({ glowColor }: { glowColor: string }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Using a more reliable LeetCode stats API
+    // Keep LeetCode API directly in code
     axios.get("https://leetcode-api-faisalshohag.vercel.app/rQc2d1FK7A")
       .then(res => {
         if (res.data && typeof res.data.totalSolved === "number") {
@@ -84,14 +87,6 @@ function LeetCodeStats({ glowColor }: { glowColor: string }) {
         setLoading(false);
       });
   }, []);
-
-  const heatmapValues = useMemo(() => {
-    if (!data?.submissionCalendar) return [];
-    return Object.entries(data.submissionCalendar).map(([timestamp, count]) => ({
-      date: format(new Date(parseInt(timestamp) * 1000), "yyyy-MM-dd"),
-      count: count
-    }));
-  }, [data]);
 
   const streakInfo = useMemo(() => {
     if (!data?.submissionCalendar) return { current: 0, max: 0, activeDays: 0 };
@@ -151,37 +146,36 @@ function LeetCodeStats({ glowColor }: { glowColor: string }) {
   }, [data]);
 
   if (loading) return (
-    <div className="h-[430px] flex items-center justify-center bg-surface border border-border-subtle">
+    <div className="h-[220px] flex items-center justify-center bg-surface border border-border-subtle">
       <Loader2 className="animate-spin text-primary" />
     </div>
   );
 
-  const currentYear = new Date().getFullYear();
-
   return (
     <MagicCard 
-      className="bg-surface p-8 border border-border-subtle h-full flex flex-col group relative"
+      className="bg-surface p-8 border border-border-subtle flex flex-col group relative"
       glowColor={glowColor}
     >
-      <div className="flex justify-between items-start mb-8 relative z-20">
+      <div className="flex justify-between items-start mb-6 relative z-20">
         <div>
           <h3 className="text-text-primary text-lg font-bold mb-1">LeetCode Progress</h3>
           <a 
             href="https://leetcode.com/u/rQc2d1FK7A/" 
             target="_blank" 
             rel="noopener noreferrer"
-            className="text-text-tertiary text-xs uppercase tracking-widest hover:text-primary transition-colors flex items-center gap-1"
+            className="text-text-tertiary text-xs uppercase tracking-widest hover:text-primary transition-colors flex items-center gap-1 font-mono"
           >
-            rQc2d1FK7A <ExternalLink size={10} />
+            rQc2d1FK7A
           </a>
         </div>
         <a 
           href="https://leetcode.com/u/rQc2d1FK7A/" 
           target="_blank" 
           rel="noopener noreferrer"
-          className="flex items-center gap-2 group"
+          className="flex items-center gap-2 group p-1"
+          title="Visit LeetCode Profile"
         >
-          <svg viewBox="0 0 94 111" width="20" height="20" className="text-text-tertiary group-hover:text-primary transition-colors fill-current">
+          <svg viewBox="0 0 94 111" width="22" height="22" className="text-text-tertiary group-hover:text-primary transition-colors fill-current">
             <path d="M67.5068 83.0664C70.0005 80.5764 74.0371 80.5829 76.5228 83.0809C79.0085 85.579 79.002 89.6226 76.5083 92.1127L65.4351 103.17C55.2192 113.371 38.5605 113.519 28.1723 103.513C28.1122 103.456 23.4866 98.9201 8.22703 83.957C-1.92478 74.0029 -2.93615 58.0749 6.61698 47.8464L24.4287 28.7745C33.91 18.6219 51.3874 17.5122 62.228 26.2789L78.4053 39.362C81.1449 41.5776 81.5728 45.5985 79.3611 48.3429C77.1493 51.0873 73.1355 51.5159 70.3959 49.3003L54.2187 36.2173C48.5493 31.6325 38.6319 32.2622 33.7399 37.5006L15.9279 56.5727C11.2772 61.5522 11.7866 69.574 17.1461 74.8292C28.3515 85.8169 36.9874 94.2846 36.9974 94.2942C42.3982 99.496 51.1309 99.4184 56.4336 94.1234L67.5068 83.0664Z" />
             <path d="M40.607 72.0014C37.086 72.0014 34.2317 69.1421 34.2317 65.615C34.2317 62.0879 37.086 59.2286 40.607 59.2286L87.6247 59.2286C91.1457 59.2286 94 62.0879 94 65.615C94 69.1421 91.1457 72.0014 87.6247 72.0014L40.607 72.0014Z" />
             <path d="M49.4124 2.02335C51.8179 -0.55232 55.8523 -0.686894 58.4235 1.72277C60.9946 4.13244 61.129 8.17385 58.7235 10.7495L15.9282 56.5729C11.2774 61.552 11.7867 69.5738 17.1459 74.8292L36.9094 94.2091C39.4256 96.6764 39.4686 100.72 37.0056 103.24C34.5426 105.761 30.5063 105.804 27.9901 103.337L8.22654 83.9567C-1.92467 74.0021 -2.93604 58.0741 6.61752 47.8463L49.4124 2.02335Z" />
@@ -190,105 +184,103 @@ function LeetCodeStats({ glowColor }: { glowColor: string }) {
       </div>
       
       {data ? (
-        <>
-          <div className="flex items-center gap-8 mb-8">
-            <div className="relative w-28 h-28 border-4 border-border-subtle flex items-center justify-center bg-background">
-              <div className="text-center group-hover:scale-110 transition-transform">
-                <div className="text-xl font-bold text-text-primary leading-none">{data.totalSolved}</div>
-                <div className="text-[10px] uppercase text-text-tertiary mt-1">Solved</div>
+        <div className="space-y-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {/* Total Solved Card */}
+            <div className="p-4 bg-background border border-border-subtle flex items-center gap-4">
+              <div className="w-16 h-16 border-2 border-primary/30 flex items-center justify-center bg-surface shrink-0">
+                <div className="text-center">
+                  <div className="text-xl font-bold text-text-primary leading-none">{data.totalSolved}</div>
+                  <div className="text-[9px] uppercase tracking-wider text-text-tertiary mt-1 font-bold">Solved</div>
+                </div>
+              </div>
+              <div>
+                <div className="text-[10px] text-text-tertiary uppercase tracking-wider font-bold">Total Solved</div>
+                <div className="text-xs text-text-secondary mt-0.5">
+                  out of {data.totalQuestions}
+                </div>
+                <div className="text-[11px] font-mono text-primary font-semibold mt-1">
+                  {((data.totalSolved / (data.totalQuestions || 1)) * 100).toFixed(1)}% Solved
+                </div>
               </div>
             </div>
-            <div className="flex-1 space-y-3">
-              <div className="flex justify-between items-center text-xs">
-                <span className="text-cyan-600 font-medium">Easy</span>
-                <span className="text-text-primary font-mono">{data.easySolved}/{data.totalEasy}</span>
+
+            {/* Easy Card */}
+            <div className="p-4 bg-background border border-border-subtle flex flex-col justify-between">
+              <div className="flex justify-between items-center mb-2">
+                <span className="text-emerald-500 font-bold text-xs uppercase tracking-wider">Easy</span>
+                <span className="text-xs font-mono font-bold text-text-primary">{data.easySolved} <span className="text-text-tertiary font-normal">/ {data.totalEasy}</span></span>
               </div>
-              <div className="flex justify-between items-center text-xs">
-                <span className="text-yellow-600 font-medium">Medium</span>
-                <span className="text-text-primary font-mono">{data.mediumSolved}/{data.totalMedium}</span>
+              <div className="w-full bg-surface h-2 border border-border-subtle overflow-hidden">
+                <div 
+                  className="bg-emerald-500 h-full transition-all duration-500" 
+                  style={{ width: `${data.totalEasy ? Math.min(100, (data.easySolved / data.totalEasy) * 100) : 0}%` }}
+                />
               </div>
-              <div className="flex justify-between items-center text-xs">
-                <span className="text-red-600 font-medium">Hard</span>
-                <span className="text-text-primary font-mono">{data.hardSolved}/{data.totalHard}</span>
+              <div className="text-[10px] text-text-tertiary mt-2">
+                {data.totalEasy ? ((data.easySolved / data.totalEasy) * 100).toFixed(1) : 0}% completed
+              </div>
+            </div>
+
+            {/* Medium Card */}
+            <div className="p-4 bg-background border border-border-subtle flex flex-col justify-between">
+              <div className="flex justify-between items-center mb-2">
+                <span className="text-amber-500 font-bold text-xs uppercase tracking-wider">Medium</span>
+                <span className="text-xs font-mono font-bold text-text-primary">{data.mediumSolved} <span className="text-text-tertiary font-normal">/ {data.totalMedium}</span></span>
+              </div>
+              <div className="w-full bg-surface h-2 border border-border-subtle overflow-hidden">
+                <div 
+                  className="bg-amber-500 h-full transition-all duration-500" 
+                  style={{ width: `${data.totalMedium ? Math.min(100, (data.mediumSolved / data.totalMedium) * 100) : 0}%` }}
+                />
+              </div>
+              <div className="text-[10px] text-text-tertiary mt-2">
+                {data.totalMedium ? ((data.mediumSolved / data.totalMedium) * 100).toFixed(1) : 0}% completed
+              </div>
+            </div>
+
+            {/* Hard Card */}
+            <div className="p-4 bg-background border border-border-subtle flex flex-col justify-between">
+              <div className="flex justify-between items-center mb-2">
+                <span className="text-rose-500 font-bold text-xs uppercase tracking-wider">Hard</span>
+                <span className="text-xs font-mono font-bold text-text-primary">{data.hardSolved} <span className="text-text-tertiary font-normal">/ {data.totalHard}</span></span>
+              </div>
+              <div className="w-full bg-surface h-2 border border-border-subtle overflow-hidden">
+                <div 
+                  className="bg-rose-500 h-full transition-all duration-500" 
+                  style={{ width: `${data.totalHard ? Math.min(100, (data.hardSolved / data.totalHard) * 100) : 0}%` }}
+                />
+              </div>
+              <div className="text-[10px] text-text-tertiary mt-2">
+                {data.totalHard ? ((data.hardSolved / data.totalHard) * 100).toFixed(1) : 0}% completed
               </div>
             </div>
           </div>
 
-          <div className="flex-1 flex flex-col justify-center min-h-[220px] p-4 bg-background border border-border-subtle mb-8">
-            <div className="overflow-x-auto overflow-y-hidden custom-scrollbar pb-2">
-              <div className="min-w-[700px]">
-                <CalendarHeatmap
-                  startDate={startOfYear(new Date())}
-                endDate={endOfYear(new Date())}
-                values={heatmapValues}
-                gutterSize={4}
-                showWeekdayLabels={true}
-                classForValue={(value) => {
-                  if (!value) return 'color-empty';
-                  return `color-scale-${Math.min(value.count, 4)}`;
-                }}
-                tooltipDataAttrs={(value: any) => {
-                  if (!value || !value.date) return { 'data-tooltip-id': 'leetcode-tooltip', 'data-tooltip-content': 'No submissions' };
-                  return {
-                    'data-tooltip-id': 'leetcode-tooltip',
-                    'data-tooltip-content': `${value.count} submissions on ${value.date}`,
-                  };
-                }}
-              />
-              <Tooltip id="leetcode-tooltip" style={{ borderRadius: '0', fontSize: '11px', backgroundColor: '#1A1A1A', color: 'white' }} />
-              </div>
+          {/* Lower Row: Streaks & Global Rank */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-4 border-t border-border-subtle">
+            <div className="text-center p-3 bg-background border border-border-subtle">
+              <div className="text-[10px] text-text-tertiary uppercase tracking-wider mb-1 font-bold">Daily Streak</div>
+              <div className="text-base font-bold text-primary font-mono">{streakInfo.current}d</div>
             </div>
-            
-            <div className="mt-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-[10px] text-text-tertiary uppercase tracking-widest font-bold">
-              <div className="flex items-center gap-4">
-                 <span>Less</span>
-                 <div className="flex gap-1">
-                   {['#EBEDF0', '#9BE9A8', '#40C463', '#30A14E', '#216E39'].map(c => (
-                     <div key={c} className="w-3 h-3" style={{ backgroundColor: c }} />
-                   ))}
-                 </div>
-                 <span>More</span>
+            <div className="text-center p-3 bg-background border border-border-subtle">
+              <div className="text-[10px] text-text-tertiary uppercase tracking-wider mb-1 font-bold">Max Streak</div>
+              <div className="text-base font-bold text-primary font-mono">{streakInfo.max}d</div>
+            </div>
+            <div className="text-center p-3 bg-background border border-border-subtle">
+              <div className="text-[10px] text-text-tertiary uppercase tracking-wider mb-1 font-bold">Active Days</div>
+              <div className="text-base font-bold text-primary font-mono">{streakInfo.activeDays}d</div>
+            </div>
+            <div className="text-center p-3 bg-background border border-border-subtle flex flex-col justify-center items-center">
+              <div className="text-[10px] text-text-tertiary uppercase tracking-wider mb-1 font-bold flex items-center gap-1">
+                <Trophy size={11} className="text-primary" /> Global Rank
               </div>
-              <div className="flex items-center gap-2 text-primary bg-primary/10 px-3 py-1 border border-primary/20">
-                <CalendarDays size={12} />
-                <span>Activity Record • {currentYear}</span>
-              </div>
+              <div className="text-sm font-bold text-text-primary font-mono">#{data.ranking.toLocaleString()}</div>
             </div>
           </div>
-          
-          <div className="mt-auto pt-6 border-t border-border-subtle">
-            <div className="grid grid-cols-3 gap-4 mb-6">
-              <div className="text-center p-2 bg-background border border-border-subtle">
-                <div className="text-[10px] text-text-tertiary uppercase tracking-wider mb-1">Daily Streak</div>
-                <div className="text-sm font-bold text-primary">{streakInfo.current}d</div>
-              </div>
-              <div className="text-center p-2 bg-background border border-border-subtle">
-                <div className="text-[10px] text-text-tertiary uppercase tracking-wider mb-1">Max Streak</div>
-                <div className="text-sm font-bold text-primary">{streakInfo.max}d</div>
-              </div>
-              <div className="text-center p-2 bg-background border border-border-subtle">
-                <div className="text-[10px] text-text-tertiary uppercase tracking-wider mb-1">Active Days</div>
-                <div className="text-sm font-bold text-primary">{streakInfo.activeDays}d</div>
-              </div>
-            </div>
-
-            <div className="flex justify-between items-center mb-4">
-              <div className="flex gap-2">
-                {[...Array(3)].map((_, i) => (
-                  <div key={i} className="w-8 h-8 border border-primary/30 flex items-center justify-center bg-background">
-                    <Trophy size={14} className="text-primary" />
-                  </div>
-                ))}
-              </div>
-              <div className="text-right">
-                <div className="text-[10px] text-text-tertiary uppercase tracking-wider">Ranking</div>
-                <div className="text-xs font-mono text-text-primary">#{data.ranking.toLocaleString()}</div>
-              </div>
-            </div>
-          </div>
-        </>
+        </div>
       ) : (
-        <div className="flex-1 flex items-center justify-center text-text-tertiary italic text-sm text-center">
+        <div className="py-12 flex items-center justify-center text-text-tertiary italic text-sm text-center">
           Failed to load stats.<br/>The API might be down.
         </div>
       )}
@@ -606,17 +598,20 @@ export default function App() {
                 <div className="p-3 bg-primary/10 rounded-lg group-hover:scale-110 transition-transform">
                   <Code2 size={24} className="text-primary" />
                 </div>
-                <h3 className="text-xl font-bold">Web & Mobile</h3>
+                <h3 className="text-xl font-bold">Web & Backend</h3>
               </div>
               <p className="text-sm text-text-secondary mb-8 leading-relaxed">
-                Building robust, responsive interfaces using Flutter, React, and modern backend stacks like Node.js.
+                Architecting high-performance web applications and resilient REST APIs with Django, FastAPI, Node.js, and modern ORMs.
               </p>
               <div className="flex flex-wrap gap-3">
                 {[
                   { name: "REACT", icon: <Atom size={14} />, color: "text-[#61DAFB]" },
                   { name: "NODE.JS", icon: <Server size={14} />, color: "text-[#339933]" },
-                  { name: "FLUTTER", icon: <Layers size={14} />, color: "text-[#02569B]" },
-                  { name: "DART", icon: <Zap size={14} />, color: "text-[#0175C2]" },
+                  { name: "DJANGO", icon: <Server size={14} />, color: "text-[#44B78B]" },
+                  { name: "FASTAPI", icon: <Zap size={14} />, color: "text-[#059669]" },
+                  { name: "DRF", icon: <Code2 size={14} />, color: "text-[#A30000]" },
+                  { name: "PRISMA ORM", icon: <Layers size={14} />, color: "text-[#5A67D8]" },
+                  { name: "NEON POSTGRESQL", icon: <Database size={14} />, color: "text-[#00E599]" },
                   { name: "SUPABASE", icon: <Database size={14} />, color: "text-[#3ECF8E]" }
                 ].map(skill => (
                   <div key={skill.name} className="flex items-center gap-2 px-3 py-2 border border-border-medium bg-background group/skill hover:border-primary transition-colors">
@@ -632,18 +627,19 @@ export default function App() {
                 <div className="p-3 bg-primary/10 rounded-lg group-hover:scale-110 transition-transform">
                   <BrainCircuit size={24} className="text-primary" />
                 </div>
-                <h3 className="text-xl font-bold">AI / ML</h3>
+                <h3 className="text-xl font-bold">AI & Autonomous Systems</h3>
               </div>
               <p className="text-sm text-text-secondary mb-8 leading-relaxed">
-                Implementing predictive models and exploring generative AI techniques using Python and industry-standard frameworks.
+                Engineering generative AI applications, agentic workflows with CrewAI & LangChain, and integrating Gemini API models.
               </p>
               <div className="flex flex-wrap gap-3">
                 {[
                   { name: "PYTHON", icon: <FileCode2 size={14} />, color: "text-[#3776AB]" },
-                  { name: "TENSORFLOW", icon: <Network size={14} />, color: "text-[#FF6F00]" },
-                  { name: "SCIKIT-LEARN", icon: <Brain size={14} />, color: "text-[#F7931E]" },
-                  { name: "PYTORCH", icon: <Flame size={14} />, color: "text-[#EE4C2C]" },
-                  { name: "LLMS", icon: <MessageSquare size={14} />, color: "text-[#FF9900]" }
+                  { name: "GEMINI API", icon: <Sparkles size={14} />, color: "text-[#4E75F8]" },
+                  { name: "CREWAI", icon: <Brain size={14} />, color: "text-[#F97316]" },
+                  { name: "LANGCHAIN", icon: <Network size={14} />, color: "text-[#22D3EE]" },
+                  { name: "LLMS", icon: <MessageSquare size={14} />, color: "text-[#FF9900]" },
+                  { name: "SCIKIT-LEARN", icon: <Brain size={14} />, color: "text-[#F7931E]" }
                 ].map(skill => (
                   <div key={skill.name} className="flex items-center gap-2 px-3 py-2 border border-border-medium bg-background group/skill hover:border-primary transition-colors">
                     <span className={`${skill.color} filter brightness-90 group-hover/skill:brightness-110 transition-all`}>{skill.icon}</span>
@@ -658,7 +654,7 @@ export default function App() {
                 <div className="p-3 bg-primary/10 rounded-lg group-hover:scale-110 transition-transform">
                   <BarChart3 size={24} className="text-primary" />
                 </div>
-                <h3 className="text-xl font-bold">Data Science</h3>
+                <h3 className="text-xl font-bold">Data Science & Analytics</h3>
               </div>
               <p className="text-sm text-text-secondary mb-8 leading-relaxed">
                 Extracting narratives from complex datasets through EDA, statistical analysis, and clean visualizations.
@@ -698,55 +694,143 @@ export default function App() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
             {[
               {
-                title: "Restaurant Rating Prediction",
-                tags: "Python, Scikit-learn, Pandas",
-                desc: "Engineered an end-to-end machine learning pipeline to predict restaurant ratings with high accuracy.",
-                icon: <BrainCircuit className="text-primary" size={32} />,
-                url: "https://github.com/OmChauhan07/Restaurant-rating-analysis.git"
+                title: "TransitOps",
+                category: "Fleet Management & Operations",
+                tags: "React • Vite • Node.js • Express • Prisma • Neon PostgreSQL • Recharts",
+                desc: "An end-to-end transport operations and fleet management platform that digitizes vehicle & driver registries, trip dispatching, maintenance ticketing, and expense auditing while enforcing strict operational business rules and calculating fleet ROI through real-time KPI analytics.",
+                highlights: [
+                  "Role-Based Access Control (Fleet Manager, Driver, Safety Officer, Financial Analyst) with email OTP verification.",
+                  "Trip Dispatch Board automatically managing vehicle & driver availability constraints.",
+                  "Comprehensive maintenance tickets & fuel tracking to calculate true operational costs.",
+                  "Executive KPI analytics dashboard with Revenue vs. Cost charts and CSV export."
+                ],
+                icon: <Truck className="text-primary" size={32} />,
+                url: "https://github.com/OmChauhan07/TransitOps.git",
+                liveUrl: "https://transit-ops-peach.vercel.app"
               },
               {
-                title: "LinkHood Social Platform",
-                tags: "Flutter, Supabase, PostGIS",
-                desc: "Real-time, location-aware social platform featuring geospatial queries and live post sharing.",
-                icon: <Smartphone className="text-primary" size={32} />,
-                url: "https://github.com/OmChauhan07/LinkHood.git"
+                title: "GlobeTrotter",
+                category: "Multi-City Travel & Discovery",
+                tags: "React 19 • Vite • Django REST Framework • Neon PostgreSQL • @dnd-kit • Recharts • Geoapify",
+                desc: "A modern multi-city travel planning platform designed to make itinerary creation, attraction discovery, and budget analytics visual and effortless. Features drag-and-drop schedule reordering, multi-view calendar/timeline matrices, and public itinerary cloning.",
+                highlights: [
+                  "Interactive multi-city itinerary builder with arrival/departure boundary validation and drag-and-drop reordering.",
+                  "Geoapify Places API discovery engine with resilient server-side caching and offline curated catalog fallback.",
+                  "Server-authoritative budget engine with Recharts category spend donuts and daily expense alerts.",
+                  "Multi-view matrices (Timeline, Calendar grid, and List) plus public itinerary sharing and 1-click duplication."
+                ],
+                icon: <Compass className="text-primary" size={32} />,
+                url: "https://github.com/OmChauhan07/GlobeTrotter.git"
               },
               {
-                title: "AgriConnect Marketplace",
-                tags: "Flutter, Supabase, PostgreSQL",
-                desc: "Full-stack mobile marketplace facilitating direct peer-to-peer transactions between farmers and buyers.",
-                icon: <Database className="text-primary" size={32} />,
-                url: "https://github.com/OmChauhan07/Agri_Connect.git"
+                title: "Urban Furniture Accounting System",
+                category: "Enterprise Financial Ledger",
+                tags: "React 19 • Vite • Django 5.2 • DRF • Neon PostgreSQL • SimpleJWT • Swagger/OpenAPI",
+                desc: "An enterprise-grade full-stack double-entry accounting application engineered for bespoke furniture manufacturers. Enforces strict mathematical ledger invariants (Σ Debits == Σ Credits) with zero cached balances and real-time aggregated financial statements.",
+                highlights: [
+                  "Double-entry core invariant engine: all financial statements aggregate directly from posted JournalItem records in real-time.",
+                  "Complete AP/AR cycle: automated Sales Orders to Customer Invoices and Purchase Orders to Vendor Bills.",
+                  "Dynamic real-time Balance Sheet, Profit & Loss, Trial Balance, General Ledger, and aged partner balance reports.",
+                  "Multi-role security with scoped client/vendor portals preventing cross-tenant data access."
+                ],
+                icon: <Scale className="text-primary" size={32} />,
+                url: "https://github.com/OmChauhan07/Urban-Furniture-Accounting-System.git"
               },
               {
-                title: "DAO Browser",
-                tags: "Electron, Python, Chromium",
-                desc: "Decentralized dashboard for exploring and voting on DAO proposals across multiple blockchains.",
-                icon: <Terminal className="text-primary" size={32} />,
-                url: "https://github.com/Darshanh20/DAO-BROWSER.git"
+                title: "DocuMind",
+                category: "Generative AI & Autonomous Documentation",
+                tags: "React • Tailwind CSS • Python • CrewAI • Google Gemini • DOCX/PDF Pipeline",
+                desc: "An AI-powered smart documentation platform that automates publication-ready technical report generation from source code, Jupyter notebooks, datasets, and project files using CrewAI multi-agent orchestration backed by Google Gemini models with DOCX and PDF export pipelines.",
+                highlights: [
+                  "Multi-agent AI orchestration (CrewAI) executing source analysis, synthesis, structured drafting, and quality review.",
+                  "End-to-end processing pipeline accepting Python scripts, notebooks, datasets, and unstructured documentation.",
+                  "Publication-ready document generation with structured sections (Executive Summary, Methodology, Results).",
+                  "High-fidelity styled exports into formatted DOCX and PDF deliverables."
+                ],
+                icon: <Sparkles className="text-primary" size={32} />,
+                url: "https://github.com/OmChauhan07/DocuMind.git"
               }
             ].map((project, idx) => (
-              <MagicCard key={idx} className="group p-6 bg-surface border border-border-subtle" glowColor={glowColor}>
-                <div className="aspect-video bg-background mb-8 flex items-center justify-center border border-border-subtle group-hover:border-border-medium transition-colors">
-                  {project.icon}
-                </div>
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between">
-                    <h3 className="text-2xl leading-none">{project.title}</h3>
-                    <a href={project.url} target="_blank" rel="noopener noreferrer">
-                      <Github size={18} className="text-text-tertiary hover:text-primary transition-colors" />
-                    </a>
+              <MagicCard key={idx} className="group p-8 bg-surface border border-border-subtle flex flex-col justify-between" glowColor={glowColor}>
+                <div>
+                  <div className="aspect-video bg-background mb-8 flex flex-col items-center justify-center border border-border-subtle group-hover:border-border-medium transition-colors relative overflow-hidden p-6 text-center">
+                    <div className="p-4 bg-surface border border-border-subtle mb-3 group-hover:scale-110 transition-transform">
+                      {project.icon}
+                    </div>
+                    <span className="text-[10px] uppercase tracking-[0.2em] font-bold text-text-tertiary">
+                      {project.category}
+                    </span>
                   </div>
-                  <p className="text-sm text-text-secondary leading-relaxed uppercase tracking-widest font-bold font-body">{project.tags}</p>
-                  <p className="text-base text-text-secondary">{project.desc}</p>
+
+                  <div className="space-y-4">
+                    <div className="flex items-start justify-between gap-4">
+                      <div>
+                        <h3 className="text-2xl font-bold tracking-tight text-text-primary leading-snug">{project.title}</h3>
+                        <p className="text-xs text-primary font-semibold tracking-wider uppercase mt-1">{project.category}</p>
+                      </div>
+                      <div className="flex items-center gap-3 shrink-0">
+                        {'liveUrl' in project && project.liveUrl && (
+                          <a 
+                            href={project.liveUrl} 
+                            target="_blank" 
+                            rel="noopener noreferrer" 
+                            className="p-1 text-text-tertiary hover:text-primary transition-colors"
+                            title="Live Demo"
+                          >
+                            <ExternalLink size={18} />
+                          </a>
+                        )}
+                        <a 
+                          href={project.url} 
+                          target="_blank" 
+                          rel="noopener noreferrer" 
+                          className="p-1 text-text-tertiary hover:text-primary transition-colors"
+                          title="GitHub Repository"
+                        >
+                          <Github size={18} />
+                        </a>
+                      </div>
+                    </div>
+
+                    <p className="text-[11px] text-text-secondary leading-relaxed uppercase tracking-wider font-bold font-mono">
+                      {project.tags}
+                    </p>
+
+                    <p className="text-sm text-text-secondary leading-relaxed">
+                      {project.desc}
+                    </p>
+
+                    <div className="pt-2 border-t border-border-subtle space-y-1.5">
+                      {project.highlights.map((item, hIdx) => (
+                        <div key={hIdx} className="text-xs text-text-tertiary flex items-start gap-2">
+                          <span className="text-primary mt-1">•</span>
+                          <span>{item}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mt-8 pt-4 border-t border-border-subtle flex items-center justify-between">
                   <a 
                     href={project.url} 
                     target="_blank" 
                     rel="noopener noreferrer" 
-                    className="inline-flex items-center gap-1 text-[13px] font-bold tracking-widest text-primary uppercase border-b border-transparent hover:border-primary transition-all"
+                    className="inline-flex items-center gap-1.5 text-xs font-bold tracking-widest text-primary uppercase hover:underline"
                   >
-                    View Project <ChevronRight size={14} />
+                    View on GitHub <ChevronRight size={14} />
                   </a>
+
+                  {'liveUrl' in project && project.liveUrl && (
+                    <a 
+                      href={project.liveUrl} 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="inline-flex items-center gap-1 text-[11px] font-bold tracking-widest text-text-secondary hover:text-primary uppercase"
+                    >
+                      Live Demo <ExternalLink size={12} />
+                    </a>
+                  )}
                 </div>
               </MagicCard>
             ))}
