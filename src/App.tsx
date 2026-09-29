@@ -6,6 +6,7 @@ import { MagicCard, GlobalSpotlight } from "./components/MagicCard";
 import ShapeGrid from "./components/ShapeGrid";
 import { GitHubCalendar } from "react-github-calendar";
 import { AnimatedThemeToggler } from "@/registry/magicui/animated-theme-toggler";
+import ResumeModal from "./components/ResumeModal";
 import { Tooltip } from "react-tooltip";
 import "react-tooltip/dist/react-tooltip.css";
 import { format, subDays, differenceInDays, parseISO } from "date-fns";
@@ -45,7 +46,11 @@ import {
   Compass,
   Scale,
   Sparkles,
-  Globe
+  Globe,
+  Award,
+  FileText,
+  MapPin,
+  Phone
 } from "lucide-react";
 
 const sectionVariants = {
@@ -406,6 +411,7 @@ export default function App() {
   const projectsRef = useRef<HTMLDivElement>(null);
   const experienceRef = useRef<HTMLDivElement>(null);
   const contactRef = useRef<HTMLDivElement>(null);
+  const [isResumeOpen, setIsResumeOpen] = useState(false);
 
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
     if (typeof window !== 'undefined') {
@@ -512,14 +518,12 @@ export default function App() {
             <a href="#skills" className="text-sm font-medium hover:text-primary transition-colors">Skills</a>
             <a href="#experience" className="text-sm font-medium hover:text-primary transition-colors">Experience</a>
             <a href="#contact" className="text-sm font-medium hover:text-primary transition-colors">Contact</a>
-            <a 
-              href="https://drive.google.com/file/d/1BxtvmVCzSOm9cmZkN79Yy2S1jrIHU9Cp/view?usp=sharing" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="bg-tertiary text-background px-4 py-2 text-sm font-semibold tracking-wide hover:bg-primary transition-colors inline-block"
+            <button 
+              onClick={() => setIsResumeOpen(true)}
+              className="bg-tertiary text-background px-4 py-2 text-sm font-semibold tracking-wide hover:bg-primary transition-colors inline-block cursor-pointer"
             >
               Resume
-            </a>
+            </button>
             
             <AnimatedThemeToggler 
               theme={theme}
@@ -547,14 +551,22 @@ export default function App() {
             direction="top"
             className="text-5xl md:text-6xl lg:text-7xl mb-8 leading-[1.1] font-display font-bold"
           />
-          <p className="text-xl text-text-secondary mb-10 max-w-2xl">
-            I specialize in building AI-powered analytics systems using Python, SQL and modern visualization tools. Currently focused on ML engineering and scalable data workflows.
+          <p className="text-xl text-text-secondary mb-10 max-w-2xl leading-relaxed">
+            B.Tech Information Technology student & 3x national hackathon finalist with hands-on experience building full-stack applications, AI-powered systems, and data-driven solutions using Python, FastAPI, React, SQL, and generative AI.
           </p>
-          <div className="flex flex-wrap gap-4">
+          <div className="flex flex-wrap gap-4 items-center">
             <a href="#work" className="btn-primary flex items-center gap-2">
               View Work <ChevronRight size={18} />
             </a>
-            <a href="#contact" className="btn-secondary">Get in Touch</a>
+            <button 
+              onClick={() => setIsResumeOpen(true)}
+              className="btn-secondary flex items-center gap-2 cursor-pointer"
+            >
+              <FileText size={18} /> View Resume
+            </button>
+            <a href="#contact" className="text-sm font-semibold text-text-secondary hover:text-primary transition-colors px-2 py-3">
+              Get in Touch
+            </a>
           </div>
         </motion.section>
 
@@ -853,18 +865,30 @@ export default function App() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
             <div>
               <h2 className="text-3xl mb-12">Experience</h2>
-              <div className="space-y-12">
+              <div className="space-y-8">
                 <MagicCard className="relative pl-8 border-l border-border-subtle p-6 bg-surface" glowColor={glowColor}>
                   <div className="absolute left-0 top-0 w-[5px] h-full bg-primary" />
-                  <div className="flex justify-between items-start mb-2">
-                    <h3 className="text-xl font-bold">Data Science Intern</h3>
-                    <span className="text-xs text-text-tertiary">APR 2025 – MAY 2025</span>
+                  <div className="flex justify-between items-start mb-1">
+                    <h3 className="text-xl font-bold">Data Analysis Intern</h3>
+                    <span className="text-xs text-text-tertiary font-mono">MAY 2026 – JUNE 2026</span>
                   </div>
-                  <p className="text-primary font-bold text-sm mb-4">Cognifyz Technologies</p>
-                  <ul className="text-sm text-text-secondary space-y-3 leading-relaxed">
-                    <li>• Performed EDA on real-world datasets using Pandas and NumPy.</li>
-                    <li>• Engineered features and handled missing data for model training.</li>
-                    <li>• Built and compared multiple classification/regression models using Scikit-learn.</li>
+                  <p className="text-primary font-bold text-sm mb-1">Elevance Skills</p>
+                  <p className="text-[11px] text-text-tertiary font-mono mb-3">NumPy • Pandas • Matplotlib • Seaborn • Plotly • Streamlit</p>
+                  <ul className="text-sm text-text-secondary space-y-2 leading-relaxed">
+                    <li>• Cleaned and analyzed operational data, building Pandas/Streamlit dashboards to visualize trends and surface key insights for the team.</li>
+                  </ul>
+                </MagicCard>
+
+                <MagicCard className="relative pl-8 border-l border-border-subtle p-6 bg-surface" glowColor={glowColor}>
+                  <div className="absolute left-0 top-0 w-[5px] h-full bg-primary" />
+                  <div className="flex justify-between items-start mb-1">
+                    <h3 className="text-xl font-bold">Data Science Intern</h3>
+                    <span className="text-xs text-text-tertiary font-mono">APR 2025 – MAY 2025</span>
+                  </div>
+                  <p className="text-primary font-bold text-sm mb-1">Cognifyz Technologies</p>
+                  <p className="text-[11px] text-text-tertiary font-mono mb-3">NumPy • Pandas • Matplotlib • Seaborn • Scikit-learn</p>
+                  <ul className="text-sm text-text-secondary space-y-2 leading-relaxed">
+                    <li>• Cleaned and preprocessed large-scale datasets, engineered features, and trained/cross-validated predictive models in Scikit-learn, achieving 85% accuracy.</li>
                   </ul>
                 </MagicCard>
               </div>
@@ -874,16 +898,18 @@ export default function App() {
               <div className="space-y-8">
                 {[
                   {
-                    degree: "B.Tech in Information Technology",
-                    school: "CHARUSAT",
-                    date: "JULY 2024 – CURRENT",
-                    cgpa: "CGPA: 6.90"
+                    degree: "Bachelor of Technology in Information Technology",
+                    school: "Charotar University of Science and Technology (CHARUSAT)",
+                    location: "Anand, Gujarat",
+                    date: "JULY 2024 – PRESENT",
+                    cgpa: "CGPA: 7.14 / 10.00"
                   },
                   {
                     degree: "Diploma in Computer Engineering",
-                    school: "GTU",
+                    school: "D A Degree Engineering and Technology (GTU)",
+                    location: "Mahemdavad, Gujarat",
                     date: "MAY 2021 – JUNE 2024",
-                    cgpa: "CGPA: 8.00"
+                    cgpa: "CGPA: 8.00 / 10.00"
                   }
                 ].map((edu, idx) => (
                   <MagicCard key={idx} className="flex gap-6 items-start p-6 bg-surface border border-border-subtle" glowColor={glowColor}>
@@ -892,14 +918,79 @@ export default function App() {
                     </div>
                     <div>
                       <div className="flex justify-between items-start mb-1">
-                        <h3 className="text-xl font-bold">{edu.degree}</h3>
+                        <h3 className="text-lg font-bold leading-snug">{edu.degree}</h3>
                       </div>
-                      <p className="text-text-secondary text-sm mb-1">{edu.school} • {edu.date}</p>
-                      <p className="text-primary font-bold text-sm">{edu.cgpa}</p>
+                      <p className="text-text-secondary text-sm mb-0.5">{edu.school}</p>
+                      <p className="text-xs text-text-tertiary font-mono mb-2">{edu.location} • {edu.date}</p>
+                      <p className="text-primary font-bold text-sm font-mono">{edu.cgpa}</p>
                     </div>
                   </MagicCard>
                 ))}
               </div>
+            </div>
+          </div>
+
+          {/* Achievements & Certifications */}
+          <div className="mt-16">
+            <h3 className="text-2xl font-bold mb-8 flex items-center gap-3">
+              <Award className="text-primary" size={24} /> Achievements & Certifications
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <MagicCard className="p-6 bg-surface border border-border-subtle" glowColor={glowColor}>
+                <div className="flex items-start gap-4">
+                  <div className="p-3 bg-primary/10 border border-primary/20 shrink-0">
+                    <Trophy size={20} className="text-primary" />
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-text-primary text-base">National Hackathon Finalist (3x)</h4>
+                    <p className="text-xs text-text-secondary mt-1.5 leading-relaxed">
+                      Reached the national finals at Odoo x SPIT (Dec 2025), Odoo x CGC Mohali (Aug 2025), and Odoo x GVP (Mar 2025).
+                    </p>
+                  </div>
+                </div>
+              </MagicCard>
+
+              <MagicCard className="p-6 bg-surface border border-border-subtle" glowColor={glowColor}>
+                <div className="flex items-start gap-4">
+                  <div className="p-3 bg-primary/10 border border-primary/20 shrink-0">
+                    <Award size={20} className="text-primary" />
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-text-primary text-base">FreeCodeCamp Python Certification</h4>
+                    <p className="text-xs text-text-secondary mt-1.5 leading-relaxed">
+                      Demonstrated proficiency in Python programming, problem solving, data structures, and algorithmic concepts.
+                    </p>
+                  </div>
+                </div>
+              </MagicCard>
+
+              <MagicCard className="p-6 bg-surface border border-border-subtle" glowColor={glowColor}>
+                <div className="flex items-start gap-4">
+                  <div className="p-3 bg-primary/10 border border-primary/20 shrink-0">
+                    <BrainCircuit size={20} className="text-primary" />
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-text-primary text-base">IBM Machine Learning Professional Certificate</h4>
+                    <p className="text-xs text-text-secondary mt-1.5 leading-relaxed">
+                      Applied ML algorithms, data preprocessing pipelines, feature engineering, and predictive modeling.
+                    </p>
+                  </div>
+                </div>
+              </MagicCard>
+
+              <MagicCard className="p-6 bg-surface border border-border-subtle" glowColor={glowColor}>
+                <div className="flex items-start gap-4">
+                  <div className="p-3 bg-primary/10 border border-primary/20 shrink-0">
+                    <Server size={20} className="text-primary" />
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-text-primary text-base">AWS Cloud Development Certification</h4>
+                    <p className="text-xs text-text-secondary mt-1.5 leading-relaxed">
+                      Cloud computing fundamentals, infrastructure architecture, and application deployment workflows.
+                    </p>
+                  </div>
+                </div>
+              </MagicCard>
             </div>
           </div>
         </motion.section>
@@ -916,10 +1007,48 @@ export default function App() {
           ref={contactRef}
         >
           <GlobalSpotlight sectionRef={contactRef} glowColor={glowColor} />
-          <div className="max-w-2xl">
+          <div className="max-w-3xl">
             <h2 className="text-4xl mb-4">Let's Connect</h2>
-            <p className="text-text-secondary mb-12">Currently open for new opportunities or collaborations. Feel free to reach out via the form below or professional networks.</p>
+            <p className="text-text-secondary mb-8">Currently open for new opportunities or collaborations. Feel free to reach out via direct channels or send a message below.</p>
             
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+              <a 
+                href="tel:+917359798392"
+                className="p-4 bg-surface border border-border-subtle hover:border-primary transition-colors flex items-center gap-3 group"
+              >
+                <div className="p-2.5 bg-primary/10 text-primary shrink-0 group-hover:scale-105 transition-transform">
+                  <Phone size={18} />
+                </div>
+                <div>
+                  <div className="text-[10px] uppercase font-bold tracking-wider text-text-tertiary">Phone</div>
+                  <div className="text-xs font-mono font-semibold text-text-primary">+91-7359798392</div>
+                </div>
+              </a>
+
+              <a 
+                href="mailto:odchauhan0702@gmail.com"
+                className="p-4 bg-surface border border-border-subtle hover:border-primary transition-colors flex items-center gap-3 group"
+              >
+                <div className="p-2.5 bg-primary/10 text-primary shrink-0 group-hover:scale-105 transition-transform">
+                  <Mail size={18} />
+                </div>
+                <div>
+                  <div className="text-[10px] uppercase font-bold tracking-wider text-text-tertiary">Email</div>
+                  <div className="text-xs font-mono font-semibold text-text-primary truncate">odchauhan0702@gmail.com</div>
+                </div>
+              </a>
+
+              <div className="p-4 bg-surface border border-border-subtle flex items-center gap-3">
+                <div className="p-2.5 bg-primary/10 text-primary shrink-0">
+                  <MapPin size={18} />
+                </div>
+                <div>
+                  <div className="text-[10px] uppercase font-bold tracking-wider text-text-tertiary">Location</div>
+                  <div className="text-xs font-semibold text-text-primary">Mahemdavad, Gujarat</div>
+                </div>
+              </div>
+            </div>
+
             <MagicCard className="p-10 bg-surface border border-border-subtle" glowColor={glowColor}>
               <div id="contact-success" className="hidden flex flex-col items-center justify-center text-center py-10 space-y-6">
                 <div className="w-16 h-16 bg-primary/10 flex items-center justify-center rounded-full">
@@ -999,12 +1128,21 @@ export default function App() {
                     placeholder="message"
                   />
                 </div>
-                <button 
-                  type="submit" 
-                  className="btn-primary w-full md:w-auto disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
-                >
-                  Send Message
-                </button>
+                <div className="flex flex-wrap items-center justify-between gap-4">
+                  <button 
+                    type="submit" 
+                    className="btn-primary w-full md:w-auto disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                  >
+                    Send Message
+                  </button>
+                  <button 
+                    type="button"
+                    onClick={() => setIsResumeOpen(true)}
+                    className="text-xs font-semibold text-text-tertiary hover:text-primary transition-colors flex items-center gap-1.5 cursor-pointer"
+                  >
+                    <FileText size={14} /> Open Full Resume
+                  </button>
+                </div>
               </form>
             </MagicCard>
           </div>
@@ -1014,8 +1152,14 @@ export default function App() {
       {/* Footer */}
       <footer className="border-t border-border-subtle bg-background">
         <div className="max-w-[1024px] mx-auto px-6 py-12 flex flex-col md:flex-row justify-between items-center gap-8">
-          <p className="text-sm text-text-tertiary">© 2026 Om Chauhan.</p>
-          <div className="flex gap-8">
+          <p className="text-sm text-text-tertiary">© 2026 Om Chauhan. Mahemdavad, Gujarat, India.</p>
+          <div className="flex flex-wrap gap-8 items-center">
+            <button 
+              onClick={() => setIsResumeOpen(true)}
+              className="text-text-secondary hover:text-primary transition-colors flex items-center gap-1.5 text-sm font-semibold tracking-wide cursor-pointer"
+            >
+              <FileText size={16} /> Resume
+            </button>
             <a href="https://www.linkedin.com/in/om-chauhan-21043824b/" target="_blank" rel="noopener noreferrer" className="text-text-secondary hover:text-primary transition-colors flex items-center gap-2 text-sm font-semibold tracking-wide">
               <Linkedin size={16} /> LinkedIn
             </a>
@@ -1030,6 +1174,12 @@ export default function App() {
       </footer>
         </div>
       </motion.div>
+
+      {/* Full Resume Modal */}
+      <ResumeModal 
+        isOpen={isResumeOpen} 
+        onClose={() => setIsResumeOpen(false)} 
+      />
     </div>
   );
 }
