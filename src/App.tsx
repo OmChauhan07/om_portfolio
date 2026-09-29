@@ -27,7 +27,11 @@ import {
   SiPandas,
   SiNumpy,
   SiScikitlearn,
-  SiLangchain
+  SiLangchain,
+  SiPytorch,
+  SiTensorflow,
+  SiRedis,
+  SiLinux
 } from 'react-icons/si';
 import { Tooltip } from "react-tooltip";
 import "react-tooltip/dist/react-tooltip.css";
@@ -81,7 +85,7 @@ const sectionVariants = {
   }
 };
 
-const techLogos = [
+const techLogosRow1 = [
   { node: <SiPython />, title: "Python", href: "https://www.python.org" },
   { node: <SiReact />, title: "React", href: "https://react.dev" },
   { node: <SiFastapi />, title: "FastAPI", href: "https://fastapi.tiangolo.com" },
@@ -93,14 +97,23 @@ const techLogos = [
   { node: <SiPostgresql />, title: "PostgreSQL", href: "https://www.postgresql.org" },
   { node: <SiSupabase />, title: "Supabase", href: "https://supabase.com" },
   { node: <SiPrisma />, title: "Prisma", href: "https://www.prisma.io" },
-  { node: <SiDocker />, title: "Docker", href: "https://www.docker.com" },
-  { node: <SiGit />, title: "Git", href: "https://git-scm.com" },
-  { node: <SiGithub />, title: "GitHub", href: "https://github.com" },
+];
+
+const techLogosRow2 = [
+  { node: <SiLangchain />, title: "LangChain", href: "https://www.langchain.com" },
+  { node: <SiPytorch />, title: "PyTorch", href: "https://pytorch.org" },
+  { node: <SiTensorflow />, title: "TensorFlow", href: "https://www.tensorflow.org" },
+  { node: <SiScikitlearn />, title: "Scikit-Learn", href: "https://scikit-learn.org" },
   { node: <SiPandas />, title: "Pandas", href: "https://pandas.pydata.org" },
   { node: <SiNumpy />, title: "NumPy", href: "https://numpy.org" },
-  { node: <SiScikitlearn />, title: "Scikit-Learn", href: "https://scikit-learn.org" },
-  { node: <SiLangchain />, title: "LangChain", href: "https://www.langchain.com" },
+  { node: <SiDocker />, title: "Docker", href: "https://www.docker.com" },
+  { node: <SiRedis />, title: "Redis", href: "https://redis.io" },
+  { node: <SiLinux />, title: "Linux", href: "https://www.kernel.org" },
+  { node: <SiGit />, title: "Git", href: "https://git-scm.com" },
+  { node: <SiGithub />, title: "GitHub", href: "https://github.com" },
 ];
+
+const techLogos = [...techLogosRow1, ...techLogosRow2];
 
 interface LeetCodeData {
   totalSolved: number;
@@ -574,7 +587,7 @@ export default function App() {
           </div>
         </div>
       </nav>
-      <ScrollProgress className="top-[64px]" />
+      <ScrollProgress className="top-[64px] bg-neutral-900 dark:bg-white" />
 
       <main className="max-w-[1024px] mx-auto px-6 pt-32 pb-huge">
         {/* Hero Section */}
@@ -645,17 +658,28 @@ export default function App() {
           ref={skillsRef}
         >
           <GlobalSpotlight sectionRef={skillsRef} glowColor={glowColor} />
-          <div className="py-2">
+          <div className="flex flex-col gap-6 py-4">
             <LogoLoop
-              logos={techLogos}
-              speed={100}
+              logos={techLogosRow1}
+              speed={35}
               direction="left"
               logoHeight={56}
               gap={60}
               hoverSpeed={0}
               scaleOnHover
               fadeOut
-              ariaLabel="Technology partners"
+              ariaLabel="Skills & Technologies - Row 1"
+            />
+            <LogoLoop
+              logos={techLogosRow2}
+              speed={35}
+              direction="right"
+              logoHeight={56}
+              gap={60}
+              hoverSpeed={0}
+              scaleOnHover
+              fadeOut
+              ariaLabel="Skills & Technologies - Row 2"
             />
           </div>
         </motion.section>

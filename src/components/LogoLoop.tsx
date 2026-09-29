@@ -62,21 +62,21 @@ export function LogoLoop({
   const isVertical = direction === "up" || direction === "down";
   const isReverse = direction === "right" || direction === "down";
 
-  // Calculate dynamic duration based on item count, height/gap and speed
+  // Calculate dynamic duration based on total track length (including repeats), height/gap and speed
   const baseDuration = useMemo(() => {
-    const totalPx = logoList.length * (logoHeight + gap);
-    const calculatedDuration = totalPx / Math.max(speed, 10);
-    return Math.max(calculatedDuration, 15);
-  }, [logoList.length, logoHeight, gap, speed]);
+    const totalPx = Math.max(logoList.length, 1) * repeat * (logoHeight + gap);
+    const calculatedDuration = totalPx / Math.max(speed, 5);
+    return Math.max(calculatedDuration, 20);
+  }, [logoList.length, repeat, logoHeight, gap, speed]);
 
   // Adjust duration if hovered and hoverSpeed is specified (and > 0)
   const currentDuration = useMemo(() => {
     if (isHovered && hoverSpeed !== undefined && hoverSpeed > 0) {
-      const totalPx = logoList.length * (logoHeight + gap);
+      const totalPx = Math.max(logoList.length, 1) * repeat * (logoHeight + gap);
       return totalPx / hoverSpeed;
     }
     return baseDuration;
-  }, [isHovered, hoverSpeed, baseDuration, logoList.length, logoHeight, gap]);
+  }, [isHovered, hoverSpeed, baseDuration, logoList.length, repeat, logoHeight, gap]);
 
   const effectiveFadeColor = fadeOutColor || fadeColor || "var(--color-background, #FAFAF9)";
 
@@ -169,6 +169,8 @@ export function LogoLoop({
         )}
         style={{
           gap: `${gap}px`,
+          ["--gap" as string]: `${gap}px`,
+          ["--duration" as string]: `${currentDuration}s`,
           animationDuration: `${currentDuration}s`,
           animationDirection: isReverse ? "reverse" : "normal",
           animationPlayState: isHovered && hoverSpeed === 0 ? "paused" : "running",
@@ -195,6 +197,8 @@ export function LogoLoop({
         )}
         style={{
           gap: `${gap}px`,
+          ["--gap" as string]: `${gap}px`,
+          ["--duration" as string]: `${currentDuration}s`,
           animationDuration: `${currentDuration}s`,
           animationDirection: isReverse ? "reverse" : "normal",
           animationPlayState: isHovered && hoverSpeed === 0 ? "paused" : "running",
