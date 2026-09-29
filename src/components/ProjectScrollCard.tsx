@@ -126,11 +126,12 @@ export function ProjectScrollCard({
             href={targetRedirectUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full h-full block group cursor-pointer transition-transform duration-500 hover:scale-[1.005]"
+            className="w-full h-full block cursor-pointer"
             title={`Click to open ${project.title} (${safariUrl})`}
           >
             <Safari
               url={safariUrl}
+              imageSrc={project.image}
               mode="default"
               className="w-full h-full"
             />

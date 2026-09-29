@@ -50,7 +50,6 @@ import {
   Database,
   Terminal,
   Trophy,
-  GraduationCap,
   Loader2,
   CalendarDays,
   Atom,
@@ -71,7 +70,6 @@ import {
   Truck,
   Compass,
   Scale,
-  Sparkles,
   Globe,
   FileText,
   MapPin
@@ -463,7 +461,6 @@ export default function App() {
   const activityRef = useRef<HTMLDivElement>(null);
   const skillsRef = useRef<HTMLDivElement>(null);
   const projectsRef = useRef<HTMLDivElement>(null);
-  const experienceRef = useRef<HTMLDivElement>(null);
   const contactRef = useRef<HTMLDivElement>(null);
 
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
@@ -568,8 +565,6 @@ export default function App() {
               <a href="#" className="font-display font-bold text-xl tracking-tight">Om Chauhan</a>
               <div className="hidden md:flex gap-8 items-center">
                 <a href="#work" className="text-sm font-medium hover:text-primary transition-colors">Work</a>
-                <a href="#skills" className="text-sm font-medium hover:text-primary transition-colors">Skills</a>
-                <a href="#experience" className="text-sm font-medium hover:text-primary transition-colors">Experience</a>
                 <a href="#contact" className="text-sm font-medium hover:text-primary transition-colors">Contact</a>
                 <a
                   href="/Om.pdf"
@@ -629,8 +624,6 @@ export default function App() {
               </div>
             </motion.section>
 
-            <hr className="section-divider" />
-
             {/* Activity Section */}
             <motion.section
               initial="hidden"
@@ -648,8 +641,6 @@ export default function App() {
                 <LeetCodeStats glowColor={glowColor} />
               </div>
             </motion.section>
-
-            <hr className="section-divider" />
 
             {/* Skills Section */}
             <motion.section
@@ -688,8 +679,6 @@ export default function App() {
               </div>
             </motion.section>
 
-            <hr className="section-divider" />
-
             {/* Projects Section */}
             <motion.section
               initial="hidden"
@@ -721,9 +710,9 @@ export default function App() {
                     tags: "React • Vite • Node.js • Express • Prisma • Neon PostgreSQL • Recharts",
                     desc: "An end-to-end transport operations and fleet management platform that digitizes vehicle & driver registries, trip dispatching, maintenance ticketing, and expense auditing while enforcing strict operational business rules and calculating fleet ROI through real-time KPI analytics.",
                     icon: <Truck className="text-primary" size={32} />,
-                    image: "/projects/Screenshot 2026-09-29 230654.png",
+                    image: "/projects/transitops.jpg",
                     url: "https://github.com/OmChauhan07/TransitOps.git",
-                    liveUrl: "https://transit-ops-peach.vercel.app"
+                    liveUrl: "https://transit-ops-demo.vercel.app"
                   },
                   {
                     title: "GlobeTrotter",
@@ -731,7 +720,7 @@ export default function App() {
                     tags: "React 19 • Vite • Django REST Framework • Neon PostgreSQL • @dnd-kit • Recharts • Geoapify",
                     desc: "A modern multi-city travel planning platform designed to make itinerary creation, attraction discovery, and budget analytics visual and effortless. Features drag-and-drop schedule reordering, multi-view calendar/timeline matrices, and public itinerary cloning.",
                     icon: <Compass className="text-primary" size={32} />,
-                    image: "/projects/Screenshot 2026-09-29 230608.png",
+                    image: "/projects/globetrotter.jpg",
                     url: "https://github.com/OmChauhan07/GlobeTrotter.git",
                     liveUrl: "https://globetrotter-demo.vercel.app/"
                   },
@@ -741,17 +730,8 @@ export default function App() {
                     tags: "React 19 • Vite • Django 5.2 • DRF • Neon PostgreSQL • SimpleJWT • Swagger/OpenAPI",
                     desc: "A tailored accounting atelier and double-entry financial platform engineered for bespoke furniture manufacturers, showrooms, and interior ateliers. Enforces strict mathematical ledger invariants with real-time kiln batch valuation, artisan production tracking, and zero balance drift.",
                     icon: <Scale className="text-primary" size={32} />,
-                    image: "/projects/Screenshot 2026-09-29 233138.png",
+                    image: "/projects/urbanledger.jpg",
                     url: "https://github.com/OmChauhan07/Urban-Furniture-Accounting-System.git"
-                  },
-                  {
-                    title: "DocuMind",
-                    category: "Generative AI & Autonomous Documentation",
-                    tags: "React • Tailwind CSS • Python • CrewAI • Google Gemini • DOCX/PDF Pipeline",
-                    desc: "An AI-powered smart documentation platform that automates publication-ready technical report generation from source code, Jupyter notebooks, datasets, and project files using CrewAI multi-agent orchestration backed by Google Gemini models with DOCX and PDF export pipelines.",
-                    icon: <Sparkles className="text-primary" size={32} />,
-                    image: "/projects/documind-error.svg",
-                    url: "https://github.com/OmChauhan07/DocuMind.git"
                   }
                 ].map((project, idx, arr) => (
                   <ProjectScrollCard
@@ -764,89 +744,6 @@ export default function App() {
                 ))}
               </div>
             </motion.section>
-
-            <hr className="section-divider" />
-
-            {/* Experience & Education Section */}
-            <motion.section
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={sectionVariants}
-              className="mb-huge relative"
-              id="experience"
-              ref={experienceRef}
-            >
-              <GlobalSpotlight sectionRef={experienceRef} glowColor={glowColor} />
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
-                <div>
-                  <h2 className="text-3xl mb-12">Experience</h2>
-                  <div className="space-y-8">
-                    <MagicCard className="relative pl-8 border-l border-border-subtle p-6 bg-surface" glowColor={glowColor}>
-                      <div className="absolute left-0 top-0 w-[5px] h-full bg-primary" />
-                      <div className="flex justify-between items-start mb-1">
-                        <h3 className="text-xl font-bold">Data Analysis Intern</h3>
-                        <span className="text-xs text-text-tertiary font-mono">MAY 2026 – JUNE 2026</span>
-                      </div>
-                      <p className="text-primary font-bold text-sm mb-1">Elevance Skills</p>
-                      <p className="text-[11px] text-text-tertiary font-mono mb-3">NumPy • Pandas • Matplotlib • Seaborn • Plotly • Streamlit</p>
-                      <ul className="text-sm text-text-secondary space-y-2 leading-relaxed">
-                        <li>• Cleaned and analyzed operational data, building Pandas/Streamlit dashboards to visualize trends and surface key insights for the team.</li>
-                      </ul>
-                    </MagicCard>
-
-                    <MagicCard className="relative pl-8 border-l border-border-subtle p-6 bg-surface" glowColor={glowColor}>
-                      <div className="absolute left-0 top-0 w-[5px] h-full bg-primary" />
-                      <div className="flex justify-between items-start mb-1">
-                        <h3 className="text-xl font-bold">Data Science Intern</h3>
-                        <span className="text-xs text-text-tertiary font-mono">APR 2025 – MAY 2025</span>
-                      </div>
-                      <p className="text-primary font-bold text-sm mb-1">Cognifyz Technologies</p>
-                      <p className="text-[11px] text-text-tertiary font-mono mb-3">NumPy • Pandas • Matplotlib • Seaborn • Scikit-learn</p>
-                      <ul className="text-sm text-text-secondary space-y-2 leading-relaxed">
-                        <li>• Cleaned and preprocessed large-scale datasets, engineered features, and trained/cross-validated predictive models in Scikit-learn, achieving 85% accuracy.</li>
-                      </ul>
-                    </MagicCard>
-                  </div>
-                </div>
-                <div>
-                  <h2 className="text-3xl mb-12">Education</h2>
-                  <div className="space-y-8">
-                    {[
-                      {
-                        degree: "Bachelor of Technology in Information Technology",
-                        school: "Charotar University of Science and Technology (CHARUSAT)",
-                        location: "Anand, Gujarat",
-                        date: "JULY 2024 – PRESENT",
-                        cgpa: "CGPA: 7.14 / 10.00"
-                      },
-                      {
-                        degree: "Diploma in Computer Engineering",
-                        school: "D A Degree Engineering and Technology (GTU)",
-                        location: "Mahemdavad, Gujarat",
-                        date: "MAY 2021 – JUNE 2024",
-                        cgpa: "CGPA: 8.00 / 10.00"
-                      }
-                    ].map((edu, idx) => (
-                      <MagicCard key={idx} className="flex gap-6 items-start p-6 bg-surface border border-border-subtle" glowColor={glowColor}>
-                        <div className="p-3 bg-background border border-border-subtle shrink-0">
-                          <GraduationCap size={24} className="text-primary" />
-                        </div>
-                        <div>
-                          <div className="flex justify-between items-start mb-1">
-                            <h3 className="text-lg font-bold leading-snug">{edu.degree}</h3>
-                          </div>
-                          <p className="text-text-secondary text-sm mb-0.5">{edu.school}</p>
-                          <p className="text-xs text-text-tertiary font-mono mb-2">{edu.location} • {edu.date}</p>
-                          <p className="text-primary font-bold text-sm font-mono">{edu.cgpa}</p>
-                        </div>
-                      </MagicCard>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </motion.section>
-            <hr className="section-divider" />
 
             {/* Contact Section */}
             <motion.section
