@@ -42,7 +42,7 @@ export function ScrollStackItem({
       }}
       {...props}
     >
-      <div className="w-full bg-surface border border-border-subtle shadow-xl hover:border-primary/60 transition-colors">
+      <div className="w-full bg-surface border border-border-subtle shadow-xl hover:border-primary/60 transition-colors rounded-2xl md:rounded-3xl overflow-hidden">
         {children}
       </div>
     </div>

@@ -9,6 +9,7 @@ import { AnimatedThemeToggler } from "@/registry/magicui/animated-theme-toggler"
 import { ScrollProgress } from "@/registry/magicui/scroll-progress";
 import LogoLoop from "./LogoLoop";
 import ScrollStack, { ScrollStackItem } from "./ScrollStack";
+import ProjectScrollCard from "./components/ProjectScrollCard";
 import { 
   SiReact, 
   SiNextdotjs, 
@@ -697,21 +698,25 @@ export default function App() {
           ref={projectsRef}
         >
           <GlobalSpotlight sectionRef={projectsRef} glowColor={glowColor} />
-          <h2 className="text-3xl mb-12">Selected Projects</h2>
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-12 gap-4">
+            <div>
+              <span className="text-xs font-mono uppercase tracking-[0.25em] text-primary font-bold block mb-2">
+                Portfolio Showcases
+              </span>
+              <h2 className="text-3xl md:text-4xl font-bold tracking-tight">Selected Projects</h2>
+            </div>
+            <p className="text-xs font-mono text-text-tertiary">
+              Scroll down each card to inspect specs & live deployments ↓
+            </p>
+          </div>
 
-          <ScrollStack offset={96} itemDistance={28}>
+          <div className="relative w-full flex flex-col">
             {[
               {
                 title: "TransitOps",
                 category: "Fleet Management & Operations",
                 tags: "React • Vite • Node.js • Express • Prisma • Neon PostgreSQL • Recharts",
                 desc: "An end-to-end transport operations and fleet management platform that digitizes vehicle & driver registries, trip dispatching, maintenance ticketing, and expense auditing while enforcing strict operational business rules and calculating fleet ROI through real-time KPI analytics.",
-                highlights: [
-                  "Role-Based Access Control (Fleet Manager, Driver, Safety Officer, Financial Analyst) with email OTP verification.",
-                  "Trip Dispatch Board automatically managing vehicle & driver availability constraints.",
-                  "Comprehensive maintenance tickets & fuel tracking to calculate true operational costs.",
-                  "Executive KPI analytics dashboard with Revenue vs. Cost charts and CSV export."
-                ],
                 icon: <Truck className="text-primary" size={32} />,
                 image: "/projects/transitops.svg",
                 url: "https://github.com/OmChauhan07/TransitOps.git",
@@ -722,12 +727,6 @@ export default function App() {
                 category: "Multi-City Travel & Discovery",
                 tags: "React 19 • Vite • Django REST Framework • Neon PostgreSQL • @dnd-kit • Recharts • Geoapify",
                 desc: "A modern multi-city travel planning platform designed to make itinerary creation, attraction discovery, and budget analytics visual and effortless. Features drag-and-drop schedule reordering, multi-view calendar/timeline matrices, and public itinerary cloning.",
-                highlights: [
-                  "Interactive multi-city itinerary builder with arrival/departure boundary validation and drag-and-drop reordering.",
-                  "Geoapify Places API discovery engine with resilient server-side caching and offline curated catalog fallback.",
-                  "Server-authoritative budget engine with Recharts category spend donuts and daily expense alerts.",
-                  "Multi-view matrices (Timeline, Calendar grid, and List) plus public itinerary sharing and 1-click duplication."
-                ],
                 icon: <Compass className="text-primary" size={32} />,
                 image: "/projects/globetrotter.svg",
                 url: "https://github.com/OmChauhan07/GlobeTrotter.git",
@@ -738,12 +737,6 @@ export default function App() {
                 category: "Enterprise Financial Ledger",
                 tags: "React 19 • Vite • Django 5.2 • DRF • Neon PostgreSQL • SimpleJWT • Swagger/OpenAPI",
                 desc: "An enterprise-grade full-stack double-entry accounting application engineered for bespoke furniture manufacturers. Enforces strict mathematical ledger invariants (Σ Debits == Σ Credits) with zero cached balances and real-time aggregated financial statements.",
-                highlights: [
-                  "Double-entry core invariant engine: all financial statements aggregate directly from posted JournalItem records in real-time.",
-                  "Complete AP/AR cycle: automated Sales Orders to Customer Invoices and Purchase Orders to Vendor Bills.",
-                  "Dynamic real-time Balance Sheet, Profit & Loss, Trial Balance, General Ledger, and aged partner balance reports.",
-                  "Multi-role security with scoped client/vendor portals preventing cross-tenant data access."
-                ],
                 icon: <Scale className="text-primary" size={32} />,
                 image: "/projects/urban-furniture.svg",
                 url: "https://github.com/OmChauhan07/Urban-Furniture-Accounting-System.git"
@@ -753,104 +746,20 @@ export default function App() {
                 category: "Generative AI & Autonomous Documentation",
                 tags: "React • Tailwind CSS • Python • CrewAI • Google Gemini • DOCX/PDF Pipeline",
                 desc: "An AI-powered smart documentation platform that automates publication-ready technical report generation from source code, Jupyter notebooks, datasets, and project files using CrewAI multi-agent orchestration backed by Google Gemini models with DOCX and PDF export pipelines.",
-                highlights: [
-                  "Multi-agent AI orchestration (CrewAI) executing source analysis, synthesis, structured drafting, and quality review.",
-                  "End-to-end processing pipeline accepting Python scripts, notebooks, datasets, and unstructured documentation.",
-                  "Publication-ready document generation with structured sections (Executive Summary, Methodology, Results).",
-                  "High-fidelity styled exports into formatted DOCX and PDF deliverables."
-                ],
                 icon: <Sparkles className="text-primary" size={32} />,
                 image: "/projects/documind.svg",
                 url: "https://github.com/OmChauhan07/DocuMind.git"
               }
-            ].map((project, idx) => (
-              <ScrollStackItem key={idx}>
-                <div className="flex flex-col">
-                  {project.image && (
-                    <a
-                      href={'liveUrl' in project && project.liveUrl ? project.liveUrl : project.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="block w-full relative h-48 sm:h-64 md:h-72 border-b border-border-subtle bg-background overflow-hidden group cursor-pointer"
-                      title={`Open ${project.title}`}
-                    >
-                      <img
-                        src={project.image}
-                        alt={`${project.title} Preview`}
-                        className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-[1.03]"
-                        referrerPolicy="no-referrer"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-surface/60 via-transparent to-transparent pointer-events-none" />
-                      <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity bg-background/85 backdrop-blur-md px-3 py-1.5 text-xs font-mono font-semibold flex items-center gap-1.5 border border-border-subtle text-text-primary shadow-lg">
-                        <span>Open Project</span>
-                        <ExternalLink size={12} />
-                      </div>
-                    </a>
-                  )}
-                  <div className="p-8 md:p-10 flex flex-col lg:flex-row gap-8 items-start justify-between">
-                  <div className="w-full lg:w-1/3 shrink-0 flex flex-col justify-between">
-                    <div>
-                      <div className="w-14 h-14 bg-background border border-border-subtle flex items-center justify-center mb-5">
-                        {project.icon}
-                      </div>
-                      <span className="text-[11px] font-mono uppercase tracking-[0.2em] font-bold text-primary">
-                        {project.category}
-                      </span>
-                      <h3 className="text-2xl md:text-3xl font-bold tracking-tight text-text-primary mt-2 mb-3">
-                        {project.title}
-                      </h3>
-                      <p className="text-[11px] text-text-secondary uppercase tracking-wider font-mono font-semibold mb-6">
-                        {project.tags}
-                      </p>
-                    </div>
-
-                    <div className="flex items-center gap-3 pt-4 border-t border-border-subtle">
-                      <a 
-                        href={project.url} 
-                        target="_blank" 
-                        rel="noopener noreferrer" 
-                        className="btn-primary text-xs py-2.5 px-4 flex items-center gap-2"
-                      >
-                        <Github size={15} /> GitHub <ChevronRight size={14} />
-                      </a>
-                      {'liveUrl' in project && project.liveUrl && (
-                        <a 
-                          href={project.liveUrl} 
-                          target="_blank" 
-                          rel="noopener noreferrer" 
-                          className="btn-secondary text-xs py-2.5 px-4 flex items-center gap-1.5"
-                        >
-                          Live Demo <ExternalLink size={14} />
-                        </a>
-                      )}
-                    </div>
-                  </div>
-
-                  <div className="w-full lg:w-2/3 lg:border-l lg:border-border-subtle lg:pl-8 space-y-6">
-                    <div>
-                      <h4 className="text-xs uppercase font-mono tracking-widest text-text-tertiary mb-2 font-bold">Overview</h4>
-                      <p className="text-sm md:text-base text-text-secondary leading-relaxed">
-                        {project.desc}
-                      </p>
-                    </div>
-
-                    <div>
-                      <h4 className="text-xs uppercase font-mono tracking-widest text-text-tertiary mb-3 font-bold">Key Architectural Highlights</h4>
-                      <div className="grid grid-cols-1 gap-2.5">
-                        {project.highlights.map((item, hIdx) => (
-                          <div key={hIdx} className="text-xs md:text-sm text-text-secondary flex items-start gap-2.5 bg-background/50 border border-border-subtle p-3">
-                            <span className="text-primary font-bold mt-0.5">•</span>
-                            <span className="leading-relaxed">{item}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </ScrollStackItem>
+            ].map((project, idx, arr) => (
+              <ProjectScrollCard
+                key={project.title}
+                project={project}
+                index={idx}
+                total={arr.length}
+                topOffset={88}
+              />
             ))}
-          </ScrollStack>
+          </div>
         </motion.section>
 
         <hr className="section-divider" />
