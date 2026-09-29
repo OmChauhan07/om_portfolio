@@ -1,0 +1,116 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="100%" height="100%">
+  <defs>
+    <linearGradient id="ufBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#12100E"/>
+      <stop offset="50%" stop-color="#1A1714"/>
+      <stop offset="100%" stop-color="#241F1A"/>
+    </linearGradient>
+    <linearGradient id="amberGold" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#D97706"/>
+      <stop offset="100%" stop-color="#B45309"/>
+    </linearGradient>
+  </defs>
+  <style>
+    .font-sans { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
+    .font-mono { font-family: 'Source Code Pro', monospace; }
+  </style>
+  <rect width="1600" height="900" fill="url(#ufBg)"/>
+
+  <!-- Grid overlay -->
+  <g opacity="0.08" stroke="#FFFFFF" stroke-width="1">
+    <line x1="0" y1="200" x2="1600" y2="200"/>
+    <line x1="0" y1="400" x2="1600" y2="400"/>
+    <line x1="0" y1="600" x2="1600" y2="600"/>
+    <line x1="0" y1="800" x2="1600" y2="800"/>
+    <line x1="300" y1="0" x2="300" y2="900"/>
+    <line x1="650" y1="0" x2="650" y2="900"/>
+    <line x1="1000" y1="0" x2="1000" y2="900"/>
+    <line x1="1350" y1="0" x2="1350" y2="900"/>
+  </g>
+
+  <!-- Top bar -->
+  <g transform="translate(80, 50)">
+    <rect x="0" y="0" width="1440" height="60" rx="12" fill="#1C1814" stroke="#332B24" stroke-width="1.2"/>
+    <circle cx="36" cy="30" r="10" fill="#D97706"/>
+    <text x="58" y="36" class="font-sans" font-size="18" font-weight="700" fill="#FAFAF9">Urban Furniture Accounting</text>
+    <text x="1220" y="36" class="font-mono" font-size="13" font-weight="600" fill="#10B981">● Σ Debits == Σ Credits (BALANCED)</text>
+  </g>
+
+  <!-- Dashboard Metrics -->
+  <g transform="translate(80, 150)">
+    <!-- Metric 1 -->
+    <rect x="0" y="0" width="340" height="130" rx="12" fill="#181410" stroke="#2B241C" stroke-width="1.2"/>
+    <text x="24" y="40" class="font-mono" font-size="12" font-weight="700" fill="#A8A29E" letter-spacing="1">TOTAL ASSETS</text>
+    <text x="24" y="85" class="font-sans" font-size="34" font-weight="800" fill="#FFFFFF">$1,428,950.00</text>
+    <text x="24" y="112" class="font-mono" font-size="12" fill="#10B981">+18.4% YoY Growth</text>
+
+    <!-- Metric 2 -->
+    <rect x="365" y="0" width="340" height="130" rx="12" fill="#181410" stroke="#2B241C" stroke-width="1.2"/>
+    <text x="389" y="40" class="font-mono" font-size="12" font-weight="700" fill="#A8A29E" letter-spacing="1">NET PROFIT MARGIN</text>
+    <text x="389" y="85" class="font-sans" font-size="34" font-weight="800" fill="#FFFFFF">24.6%</text>
+    <text x="389" y="112" class="font-mono" font-size="12" fill="#D97706">Bespoke Millwork Orders</text>
+
+    <!-- Metric 3 -->
+    <rect x="730" y="0" width="340" height="130" rx="12" fill="#181410" stroke="#2B241C" stroke-width="1.2"/>
+    <text x="754" y="40" class="font-mono" font-size="12" font-weight="700" fill="#A8A29E" letter-spacing="1">POSTED JOURNAL ITEMS</text>
+    <text x="754" y="85" class="font-sans" font-size="34" font-weight="800" fill="#FFFFFF">18,492</text>
+    <text x="754" y="112" class="font-mono" font-size="12" fill="#60A5FA">Real-time aggregate engine</text>
+
+    <!-- Metric 4 -->
+    <rect x="1095" y="0" width="345" height="130" rx="12" fill="#181410" stroke="#2B241C" stroke-width="1.2"/>
+    <text x="1119" y="40" class="font-mono" font-size="12" font-weight="700" fill="#A8A29E" letter-spacing="1">CURRENT RATIO</text>
+    <text x="1119" y="85" class="font-sans" font-size="34" font-weight="800" fill="#FFFFFF">2.84x</text>
+    <text x="1119" y="112" class="font-mono" font-size="12" fill="#10B981">Strong Liquidity Invariant</text>
+  </g>
+
+  <!-- Ledger Table Interface -->
+  <g transform="translate(80, 310)">
+    <rect x="0" y="0" width="1440" height="520" rx="16" fill="#16120E" stroke="#2D251D" stroke-width="1.5"/>
+    <text x="32" y="48" class="font-sans" font-size="20" font-weight="700" fill="#FFFFFF">Double-Entry General Ledger</text>
+    <text x="32" y="74" class="font-mono" font-size="13" fill="#8C8275">Automated AP/AR cycles with real-time financial statement computation</text>
+
+    <!-- Table Header -->
+    <rect x="32" y="100" width="1376" height="44" rx="6" fill="#211B15"/>
+    <text x="56" y="128" class="font-mono" font-size="12" font-weight="700" fill="#A8A29E">TXN #</text>
+    <text x="180" y="128" class="font-mono" font-size="12" font-weight="700" fill="#A8A29E">ACCOUNT CODE</text>
+    <text x="420" y="128" class="font-mono" font-size="12" font-weight="700" fill="#A8A29E">DESCRIPTION / PARTNER</text>
+    <text x="820" y="128" class="font-mono" font-size="12" font-weight="700" fill="#A8A29E">DEBIT</text>
+    <text x="1050" y="128" class="font-mono" font-size="12" font-weight="700" fill="#A8A29E">CREDIT</text>
+    <text x="1280" y="128" class="font-mono" font-size="12" font-weight="700" fill="#A8A29E">STATUS</text>
+
+    <!-- Table Rows -->
+    <g transform="translate(32, 160)">
+      <line x1="0" y1="0" x2="1376" y2="0" stroke="#2B231A"/>
+      <text x="24" y="32" class="font-mono" font-size="13" fill="#D97706">#TXN-8492</text>
+      <text x="148" y="32" class="font-mono" font-size="13" fill="#E7E5E4">1010 - Cash Operating</text>
+      <text x="388" y="32" class="font-sans" font-size="14" fill="#D6D3D1">Client Deposit: Architectural Walnut Dining Suite</text>
+      <text x="788" y="32" class="font-mono" font-size="14" font-weight="700" fill="#10B981">$34,500.00</text>
+      <text x="1018" y="32" class="font-mono" font-size="14" fill="#78716C">—</text>
+      <text x="1248" y="32" class="font-mono" font-size="12" font-weight="700" fill="#10B981">POSTED</text>
+
+      <line x1="0" y1="52" x2="1376" y2="52" stroke="#2B231A"/>
+      <text x="24" y="84" class="font-mono" font-size="13" fill="#D97706">#TXN-8493</text>
+      <text x="148" y="84" class="font-mono" font-size="13" fill="#E7E5E4">4010 - Sales Revenue</text>
+      <text x="388" y="84" class="font-sans" font-size="14" fill="#D6D3D1">Custom Furnishing Contract: Meridian Towers</text>
+      <text x="788" y="84" class="font-mono" font-size="14" fill="#78716C">—</text>
+      <text x="1018" y="84" class="font-mono" font-size="14" font-weight="700" fill="#F59E0B">$34,500.00</text>
+      <text x="1248" y="84" class="font-mono" font-size="12" font-weight="700" fill="#10B981">POSTED</text>
+
+      <line x1="0" y1="104" x2="1376" y2="104" stroke="#2B231A"/>
+      <text x="24" y="136" class="font-mono" font-size="13" fill="#D97706">#TXN-8494</text>
+      <text x="148" y="136" class="font-mono" font-size="13" fill="#E7E5E4">5010 - Hardwood Raw Materials</text>
+      <text x="388" y="136" class="font-sans" font-size="14" fill="#D6D3D1">Lumber Supply Invoice: Quarter-Sawn White Oak</text>
+      <text x="788" y="136" class="font-mono" font-size="14" font-weight="700" fill="#10B981">$12,840.00</text>
+      <text x="1018" y="136" class="font-mono" font-size="14" fill="#78716C">—</text>
+      <text x="1248" y="136" class="font-mono" font-size="12" font-weight="700" fill="#10B981">POSTED</text>
+
+      <line x1="0" y1="156" x2="1376" y2="156" stroke="#2B231A"/>
+      <text x="24" y="188" class="font-mono" font-size="13" fill="#D97706">#TXN-8495</text>
+      <text x="148" y="188" class="font-mono" font-size="13" fill="#E7E5E4">2010 - Accounts Payable</text>
+      <text x="388" y="188" class="font-sans" font-size="14" fill="#D6D3D1">Vendor Bill: Cascade Timber Co.</text>
+      <text x="788" y="188" class="font-mono" font-size="14" fill="#78716C">—</text>
+      <text x="1018" y="188" class="font-mono" font-size="14" font-weight="700" fill="#F59E0B">$12,840.00</text>
+      <text x="1248" y="188" class="font-mono" font-size="12" font-weight="700" fill="#10B981">POSTED</text>
+    </g>
+  </g>
+</svg>

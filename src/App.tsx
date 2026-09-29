@@ -713,6 +713,7 @@ export default function App() {
                   "Executive KPI analytics dashboard with Revenue vs. Cost charts and CSV export."
                 ],
                 icon: <Truck className="text-primary" size={32} />,
+                image: "/projects/transitops.svg",
                 url: "https://github.com/OmChauhan07/TransitOps.git",
                 liveUrl: "https://transit-ops-peach.vercel.app"
               },
@@ -728,6 +729,7 @@ export default function App() {
                   "Multi-view matrices (Timeline, Calendar grid, and List) plus public itinerary sharing and 1-click duplication."
                 ],
                 icon: <Compass className="text-primary" size={32} />,
+                image: "/projects/globetrotter.svg",
                 url: "https://github.com/OmChauhan07/GlobeTrotter.git"
               },
               {
@@ -742,6 +744,7 @@ export default function App() {
                   "Multi-role security with scoped client/vendor portals preventing cross-tenant data access."
                 ],
                 icon: <Scale className="text-primary" size={32} />,
+                image: "/projects/urban-furniture.svg",
                 url: "https://github.com/OmChauhan07/Urban-Furniture-Accounting-System.git"
               },
               {
@@ -756,11 +759,34 @@ export default function App() {
                   "High-fidelity styled exports into formatted DOCX and PDF deliverables."
                 ],
                 icon: <Sparkles className="text-primary" size={32} />,
+                image: "/projects/documind.svg",
                 url: "https://github.com/OmChauhan07/DocuMind.git"
               }
             ].map((project, idx) => (
               <ScrollStackItem key={idx}>
-                <div className="p-8 md:p-10 flex flex-col lg:flex-row gap-8 items-start justify-between">
+                <div className="flex flex-col">
+                  {project.image && (
+                    <a
+                      href={'liveUrl' in project && project.liveUrl ? project.liveUrl : project.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block w-full relative h-48 sm:h-64 md:h-72 border-b border-border-subtle bg-background overflow-hidden group cursor-pointer"
+                      title={`Open ${project.title}`}
+                    >
+                      <img
+                        src={project.image}
+                        alt={`${project.title} Preview`}
+                        className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-[1.03]"
+                        referrerPolicy="no-referrer"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-surface/60 via-transparent to-transparent pointer-events-none" />
+                      <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity bg-background/85 backdrop-blur-md px-3 py-1.5 text-xs font-mono font-semibold flex items-center gap-1.5 border border-border-subtle text-text-primary shadow-lg">
+                        <span>Open Project</span>
+                        <ExternalLink size={12} />
+                      </div>
+                    </a>
+                  )}
+                  <div className="p-8 md:p-10 flex flex-col lg:flex-row gap-8 items-start justify-between">
                   <div className="w-full lg:w-1/3 shrink-0 flex flex-col justify-between">
                     <div>
                       <div className="w-14 h-14 bg-background border border-border-subtle flex items-center justify-center mb-5">
@@ -820,7 +846,8 @@ export default function App() {
                     </div>
                   </div>
                 </div>
-              </ScrollStackItem>
+              </div>
+            </ScrollStackItem>
             ))}
           </ScrollStack>
         </motion.section>

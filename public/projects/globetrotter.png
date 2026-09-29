@@ -1,0 +1,227 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="100%" height="100%">
+  <defs>
+    <linearGradient id="gtBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FBF8F3"/>
+      <stop offset="50%" stop-color="#F7F3EB"/>
+      <stop offset="100%" stop-color="#EFE9DC"/>
+    </linearGradient>
+
+    <linearGradient id="parisSky" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#211F38"/>
+      <stop offset="35%" stop-color="#3D2E4F"/>
+      <stop offset="65%" stop-color="#6E3D52"/>
+      <stop offset="85%" stop-color="#9E5B53"/>
+      <stop offset="100%" stop-color="#C97E5B"/>
+    </linearGradient>
+
+    <linearGradient id="waterGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1A2536"/>
+      <stop offset="50%" stop-color="#161F2E"/>
+      <stop offset="100%" stop-color="#0F141F"/>
+    </linearGradient>
+
+    <linearGradient id="goldButton" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#B88338"/>
+      <stop offset="100%" stop-color="#A5722E"/>
+    </linearGradient>
+
+    <linearGradient id="photoScrim" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="rgba(0,0,0,0)"/>
+      <stop offset="50%" stop-color="rgba(12,10,18,0.2)"/>
+      <stop offset="100%" stop-color="rgba(10,8,14,0.88)"/>
+    </linearGradient>
+
+    <filter id="cardShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="18" stdDeviation="24" flood-color="#5C4E3D" flood-opacity="0.18"/>
+    </filter>
+
+    <filter id="badgeShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#000000" flood-opacity="0.12"/>
+    </filter>
+
+    <filter id="lampGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <clipPath id="photoClip">
+      <rect x="840" y="160" width="680" height="640" rx="36" ry="36"/>
+    </clipPath>
+  </defs>
+
+  <style>
+    .font-serif { font-family: 'Playfair Display', 'Libre Baskerville', Georgia, serif; }
+    .font-sans { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+  </style>
+
+  <!-- Background Canvas -->
+  <rect width="1600" height="900" fill="url(#gtBg)"/>
+
+  <!-- Top Navigation Bar -->
+  <g id="navbar">
+    <!-- Logo -->
+    <rect x="80" y="44" width="40" height="40" rx="10" fill="#1C1A17"/>
+    <path d="M100 52 L102 59 L109 61 L102 63 L100 70 L98 63 L91 61 L98 59 Z" fill="#FBF8F3"/>
+    <circle cx="100" cy="61" r="1.5" fill="#B88338"/>
+    <text x="132" y="71" class="font-serif" font-size="24" font-weight="700" fill="#1C1A17" letter-spacing="-0.5">GlobeTrotter</text>
+
+    <!-- Nav Links -->
+    <text x="660" y="69" class="font-sans" font-size="15" font-weight="500" fill="#524C42">Features</text>
+    <text x="760" y="69" class="font-sans" font-size="15" font-weight="500" fill="#524C42">How It Works</text>
+    <text x="890" y="69" class="font-sans" font-size="15" font-weight="500" fill="#524C42">Explore</text>
+
+    <!-- Auth Buttons -->
+    <rect x="1300" y="44" width="90" height="42" rx="8" fill="#FFFFFF" stroke="#E3DDCF" stroke-width="1.2"/>
+    <text x="1325" y="70" class="font-sans" font-size="14" font-weight="600" fill="#2C2720">Sign In</text>
+
+    <rect x="1406" y="44" width="114" height="42" rx="8" fill="url(#goldButton)"/>
+    <text x="1425" y="70" class="font-sans" font-size="14" font-weight="600" fill="#FFFFFF">Get Started</text>
+  </g>
+
+  <!-- Left Hero Column -->
+  <g id="heroContent" transform="translate(80, 240)">
+    <!-- Small Category Eyebrow -->
+    <g>
+      <path d="M4 14 L5.5 19 L10.5 20.5 L5.5 22 L4 27 L2.5 22 L-2.5 20.5 L2.5 19 Z" fill="#B88338"/>
+      <text x="22" y="24" class="font-sans" font-size="13" font-weight="700" fill="#B88338" letter-spacing="1.8">THE INTELLIGENT JOURNEY PLANNER</text>
+    </g>
+
+    <!-- Main Headline -->
+    <text x="0" y="110" class="font-serif" font-size="74" font-weight="700" fill="#191714" letter-spacing="-1.5">Plan less.</text>
+    <text x="0" y="196" class="font-serif" font-size="74" font-weight="400" font-style="italic" fill="#B88338" letter-spacing="-1">Travel more.</text>
+
+    <!-- Subtitle Body -->
+    <text x="0" y="270" class="font-sans" font-size="20" font-weight="400" fill="#544D42">
+      <tspan x="0" dy="0">Build multi-city itineraries, discover unforgettable places, and</tspan>
+      <tspan x="0" dy="32">keep your trip on budget — all in one beautifully organized</tspan>
+      <tspan x="0" dy="32">workspace.</tspan>
+    </text>
+
+    <!-- Action Buttons -->
+    <g transform="translate(0, 390)">
+      <!-- Start Planning CTA -->
+      <rect x="0" y="0" width="205" height="58" rx="10" fill="url(#goldButton)"/>
+      <text x="32" y="35" class="font-sans" font-size="16" font-weight="600" fill="#FFFFFF">Start Planning</text>
+      <path d="M165 29 L175 29 M170 24 L175 29 L170 34" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+
+      <!-- Explore Trips Button -->
+      <rect x="225" y="0" width="180" height="58" rx="10" fill="#FFFFFF" stroke="#DFD7C7" stroke-width="1.2"/>
+      <circle cx="260" cy="29" r="9" stroke="#3D372E" stroke-width="1.8" fill="none"/>
+      <polygon points="260,23 263,28 260,35 257,28" fill="#B88338"/>
+      <polygon points="260,35 263,30 260,23 257,30" fill="#3D372E"/>
+      <text x="282" y="35" class="font-sans" font-size="16" font-weight="600" fill="#2B261F">Explore Trips</text>
+    </g>
+  </g>
+
+  <!-- Right Visual Showcase: Paris Alexandre III Bridge Card -->
+  <g filter="url(#cardShadow)">
+    <g clip-path="url(#photoClip)">
+      <!-- Sky Gradient -->
+      <rect x="840" y="160" width="680" height="640" fill="url(#parisSky)"/>
+
+      <!-- Distant Paris Skyline Silhouettes -->
+      <path d="M 840 540 Q 940 530 1020 540 L 1050 510 L 1060 540 L 1120 535 L 1135 480 L 1145 470 L 1155 480 L 1170 540 L 1300 535 Q 1400 545 1520 540 L 1520 620 L 840 620 Z" fill="#1B1424" opacity="0.85"/>
+
+      <!-- River Seine Water -->
+      <rect x="840" y="580" width="680" height="220" fill="url(#waterGrad)"/>
+
+      <!-- Pont Alexandre III Ornate Arch Structure -->
+      <path d="M 840 490 Q 1160 460 1520 530 L 1520 600 Q 1180 540 840 580 Z" fill="#2E2436"/>
+      <path d="M 840 520 Q 1160 480 1520 550 L 1520 575 Q 1180 515 840 550 Z" fill="#4A3B52" opacity="0.6"/>
+
+      <!-- Bridge Ornate Balustrades and Columns -->
+      <rect x="870" y="420" width="28" height="110" rx="4" fill="#3B2E42"/>
+      <rect x="990" y="410" width="24" height="100" rx="3" fill="#3B2E42"/>
+      <rect x="1110" y="405" width="22" height="90" rx="3" fill="#3B2E42"/>
+      <rect x="1230" y="415" width="24" height="95" rx="3" fill="#3B2E42"/>
+      <rect x="1350" y="430" width="26" height="105" rx="4" fill="#3B2E42"/>
+      <rect x="1460" y="450" width="30" height="115" rx="4" fill="#3B2E42"/>
+
+      <!-- Golden Classical Lamp Posts & Ornate Candelabras -->
+      <!-- Lamp 1 -->
+      <g filter="url(#lampGlow)">
+        <circle cx="884" cy="410" r="16" fill="#FFDE82" opacity="0.45"/>
+        <circle cx="884" cy="410" r="9" fill="#FFF2B8" opacity="0.8"/>
+        <circle cx="884" cy="410" r="4" fill="#FFFFFF"/>
+        <!-- 3-branch lights -->
+        <circle cx="872" cy="414" r="5" fill="#FFEAA8" opacity="0.9"/>
+        <circle cx="896" cy="414" r="5" fill="#FFEAA8" opacity="0.9"/>
+      </g>
+      <rect x="882" y="410" width="4" height="40" fill="#E5B25D"/>
+
+      <!-- Lamp 2 -->
+      <g filter="url(#lampGlow)">
+        <circle cx="1002" cy="398" r="18" fill="#FFDE82" opacity="0.45"/>
+        <circle cx="1002" cy="398" r="9" fill="#FFF2B8" opacity="0.85"/>
+        <circle cx="1002" cy="398" r="4" fill="#FFFFFF"/>
+        <circle cx="990" cy="403" r="5" fill="#FFEAA8" opacity="0.9"/>
+        <circle cx="1014" cy="403" r="5" fill="#FFEAA8" opacity="0.9"/>
+      </g>
+      <rect x="1000" y="398" width="4" height="40" fill="#E5B25D"/>
+
+      <!-- Lamp 3 -->
+      <g filter="url(#lampGlow)">
+        <circle cx="1121" cy="392" r="19" fill="#FFDE82" opacity="0.5"/>
+        <circle cx="1121" cy="392" r="10" fill="#FFF8CC" opacity="0.9"/>
+        <circle cx="1121" cy="392" r="4.5" fill="#FFFFFF"/>
+        <circle cx="1108" cy="397" r="5.5" fill="#FFEAA8" opacity="0.9"/>
+        <circle cx="1134" cy="397" r="5.5" fill="#FFEAA8" opacity="0.9"/>
+      </g>
+      <rect x="1119" y="392" width="4" height="42" fill="#E5B25D"/>
+
+      <!-- Lamp 4 -->
+      <g filter="url(#lampGlow)">
+        <circle cx="1242" cy="402" r="18" fill="#FFDE82" opacity="0.45"/>
+        <circle cx="1242" cy="402" r="9" fill="#FFF2B8" opacity="0.85"/>
+        <circle cx="1242" cy="402" r="4" fill="#FFFFFF"/>
+        <circle cx="1230" cy="407" r="5" fill="#FFEAA8" opacity="0.9"/>
+        <circle cx="1254" cy="407" r="5" fill="#FFEAA8" opacity="0.9"/>
+      </g>
+      <rect x="1240" y="402" width="4" height="40" fill="#E5B25D"/>
+
+      <!-- Lamp 5 -->
+      <g filter="url(#lampGlow)">
+        <circle cx="1363" cy="418" r="16" fill="#FFDE82" opacity="0.45"/>
+        <circle cx="1363" cy="418" r="8" fill="#FFF2B8" opacity="0.8"/>
+        <circle cx="1363" cy="418" r="3.5" fill="#FFFFFF"/>
+      </g>
+
+      <!-- Water Reflections -->
+      <g opacity="0.65">
+        <path d="M 870 590 L 898 590 L 888 720 L 880 720 Z" fill="url(#lampGlow)" opacity="0.3"/>
+        <ellipse cx="884" cy="620" rx="30" ry="4" fill="#FFE599" opacity="0.5"/>
+        <ellipse cx="884" cy="660" rx="20" ry="3" fill="#FFD166" opacity="0.4"/>
+        <ellipse cx="1002" cy="610" rx="35" ry="4" fill="#FFE599" opacity="0.6"/>
+        <ellipse cx="1002" cy="640" rx="28" ry="3.5" fill="#FFD166" opacity="0.5"/>
+        <ellipse cx="1002" cy="680" rx="18" ry="2.5" fill="#FFBA08" opacity="0.35"/>
+        <ellipse cx="1121" cy="605" rx="40" ry="4.5" fill="#FFF3B0" opacity="0.7"/>
+        <ellipse cx="1121" cy="635" rx="30" ry="3.5" fill="#FFE599" opacity="0.6"/>
+        <ellipse cx="1121" cy="670" rx="22" ry="3" fill="#FFD166" opacity="0.4"/>
+        <ellipse cx="1242" cy="615" rx="35" ry="4" fill="#FFE599" opacity="0.6"/>
+        <ellipse cx="1242" cy="650" rx="25" ry="3" fill="#FFD166" opacity="0.45"/>
+      </g>
+
+      <!-- Bottom Dark Scrim for Text Readability -->
+      <rect x="840" y="520" width="680" height="280" fill="url(#photoScrim)"/>
+
+      <!-- Featured Itinerary Caption on Photo -->
+      <text x="880" y="690" class="font-sans" font-size="12" font-weight="700" fill="#E8BD77" letter-spacing="1.8">FEATURED ITINERARY</text>
+      <text x="880" y="736" class="font-serif" font-size="34" font-weight="700" fill="#FFFFFF" letter-spacing="-0.5">Paris • Rome • Barcelona</text>
+      <text x="880" y="774" class="font-sans" font-size="15" font-weight="400" fill="#E6DED1">14 Days  •  3 Countries  •  8 Curated Stops</text>
+    </g>
+
+    <!-- Floating Top-Right Badge: "Itinerary Synced" -->
+    <g filter="url(#badgeShadow)" transform="translate(1200, 180)">
+      <rect x="0" y="0" width="280" height="88" rx="20" fill="#FFFFFF"/>
+      <!-- Checkmark Circle -->
+      <circle cx="44" cy="44" r="22" fill="#E8F5E9"/>
+      <path d="M35 44 L41 50 L53 38" stroke="#2E7D32" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <!-- Badge Text -->
+      <text x="78" y="38" class="font-sans" font-size="16" font-weight="700" fill="#1C1A17">Itinerary Synced</text>
+      <text x="78" y="58" class="font-sans" font-size="13" font-weight="500" fill="#756E63">Stops &amp; Budget Calculated</text>
+    </g>
+  </g>
+</svg>

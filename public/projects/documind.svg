@@ -1,0 +1,123 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="100%" height="100%">
+  <defs>
+    <linearGradient id="dmBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#090D16"/>
+      <stop offset="50%" stop-color="#0E1626"/>
+      <stop offset="100%" stop-color="#141F36"/>
+    </linearGradient>
+    <linearGradient id="purpleGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8B5CF6"/>
+      <stop offset="100%" stop-color="#6366F1"/>
+    </linearGradient>
+    <linearGradient id="cyanAccent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#06B6D4"/>
+      <stop offset="100%" stop-color="#3B82F6"/>
+    </linearGradient>
+  </defs>
+  <style>
+    .font-sans { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
+    .font-mono { font-family: 'Source Code Pro', monospace; }
+  </style>
+  <rect width="1600" height="900" fill="url(#dmBg)"/>
+
+  <!-- Top bar -->
+  <g transform="translate(80, 50)">
+    <rect x="0" y="0" width="1440" height="60" rx="12" fill="#111827" stroke="#1F2937" stroke-width="1.2"/>
+    <circle cx="36" cy="30" r="10" fill="#8B5CF6"/>
+    <text x="58" y="36" class="font-sans" font-size="18" font-weight="700" fill="#FFFFFF">DocuMind AI</text>
+    <text x="1100" y="36" class="font-mono" font-size="13" font-weight="600" fill="#A78BFA">CrewAI Orchestration • Google Gemini 1.5</text>
+  </g>
+
+  <!-- Left: Source Ingestion & Multi-Agent Flow -->
+  <g transform="translate(80, 150)">
+    <rect x="0" y="0" width="680" height="680" rx="16" fill="#0F172A" stroke="#1E293B" stroke-width="1.5"/>
+    <text x="36" y="52" class="font-sans" font-size="22" font-weight="700" fill="#FFFFFF">Multi-Agent Generation Pipeline</text>
+    <text x="36" y="80" class="font-mono" font-size="13" fill="#64748B">Autonomous Code &amp; Dataset Synthesis</text>
+
+    <!-- Agent Node 1 -->
+    <g transform="translate(36, 120)">
+      <rect x="0" y="0" width="608" height="95" rx="10" fill="#1E293B" stroke="#334155" stroke-width="1.2"/>
+      <circle cx="48" cy="48" r="18" fill="#3B82F6"/>
+      <text x="80" y="40" class="font-sans" font-size="16" font-weight="700" fill="#FFFFFF">Agent 1: Repository Parser &amp; AST Extractor</text>
+      <text x="80" y="65" class="font-mono" font-size="12" fill="#94A3B8">Traversing Python modules, docstrings, schema models &amp; Jupyter cells</text>
+      <text x="520" y="48" class="font-mono" font-size="12" font-weight="700" fill="#10B981">DONE ✓</text>
+    </g>
+
+    <!-- Arrow down -->
+    <path d="M 340 225 L 340 245 M 335 240 L 340 245 L 345 240" stroke="#8B5CF6" stroke-width="2" fill="none"/>
+
+    <!-- Agent Node 2 -->
+    <g transform="translate(36, 255)">
+      <rect x="0" y="0" width="608" height="95" rx="10" fill="#1E293B" stroke="#6366F1" stroke-width="1.5"/>
+      <circle cx="48" cy="48" r="18" fill="#8B5CF6"/>
+      <text x="80" y="40" class="font-sans" font-size="16" font-weight="700" fill="#FFFFFF">Agent 2: Technical Report Synthesizer</text>
+      <text x="80" y="65" class="font-mono" font-size="12" fill="#C4B5FD">Generating Executive Summary, Architecture diagrams &amp; API specifications</text>
+      <text x="490" y="48" class="font-mono" font-size="12" font-weight="700" fill="#60A5FA">ACTIVE ⟳</text>
+    </g>
+
+    <!-- Arrow down -->
+    <path d="M 340 360 L 340 380 M 335 375 L 340 380 L 345 375" stroke="#8B5CF6" stroke-width="2" fill="none"/>
+
+    <!-- Agent Node 3 -->
+    <g transform="translate(36, 390)">
+      <rect x="0" y="0" width="608" height="95" rx="10" fill="#1E293B" stroke="#334155" stroke-width="1.2"/>
+      <circle cx="48" cy="48" r="18" fill="#EC4899"/>
+      <text x="80" y="40" class="font-sans" font-size="16" font-weight="700" fill="#FFFFFF">Agent 3: Peer Review &amp; Quality Auditor</text>
+      <text x="80" y="65" class="font-mono" font-size="12" fill="#94A3B8">Auditing completeness, benchmark verification &amp; factual consistency</text>
+      <text x="500" y="48" class="font-mono" font-size="12" font-weight="700" fill="#F59E0B">PENDING</text>
+    </g>
+
+    <!-- Output formats -->
+    <g transform="translate(36, 525)">
+      <rect x="0" y="0" width="190" height="48" rx="8" fill="#1E293B" stroke="#334155" stroke-width="1"/>
+      <text x="24" y="30" class="font-mono" font-size="13" font-weight="600" fill="#E2E8F0">📄 Styled PDF</text>
+      <rect x="205" y="0" width="190" height="48" rx="8" fill="#1E293B" stroke="#334155" stroke-width="1"/>
+      <text x="229" y="30" class="font-mono" font-size="13" font-weight="600" fill="#E2E8F0">📝 DOCX Package</text>
+      <rect x="410" y="0" width="198" height="48" rx="8" fill="#1E293B" stroke="#334155" stroke-width="1"/>
+      <text x="434" y="30" class="font-mono" font-size="13" font-weight="600" fill="#E2E8F0">📊 Markdown Bundle</text>
+    </g>
+  </g>
+
+  <!-- Right: Generated Document Preview -->
+  <g transform="translate(800, 150)">
+    <rect x="0" y="0" width="720" height="680" rx="16" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5"/>
+    <text x="48" y="58" class="font-sans" font-size="24" font-weight="800" fill="#0F172A">System Architecture &amp; Benchmark Report</text>
+    <text x="48" y="86" class="font-mono" font-size="13" fill="#64748B">PUBLICATION-READY TECHNICAL SPECIFICATION</text>
+    
+    <line x1="48" y1="110" x2="672" y2="110" stroke="#E2E8F0" stroke-width="1.5"/>
+
+    <!-- Document Section 1 -->
+    <text x="48" y="150" class="font-sans" font-size="18" font-weight="700" fill="#1E293B">1. Executive Overview</text>
+    <text x="48" y="180" class="font-sans" font-size="14" fill="#475569" width="620">
+      <tspan x="48" dy="0">This autonomous report synthesizes the core algorithms, throughput latency,</tspan>
+      <tspan x="48" dy="24">and data flow invariants of the production pipeline. Evaluated across 1,200</tspan>
+      <tspan x="48" dy="24">distributed nodes with zero regression anomalies.</tspan>
+    </text>
+
+    <!-- Document Section 2 -->
+    <text x="48" y="280" class="font-sans" font-size="18" font-weight="700" fill="#1E293B">2. Performance Metrics &amp; P99 Latency</text>
+    <!-- Mini Bar Chart -->
+    <g transform="translate(48, 310)">
+      <rect x="0" y="0" width="624" height="160" rx="8" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1"/>
+      <text x="24" y="32" class="font-mono" font-size="12" font-weight="600" fill="#64748B">INFERENCE THROUGHPUT (TOKENS / SEC)</text>
+      <rect x="24" y="50" width="500" height="24" rx="4" fill="#8B5CF6"/>
+      <text x="535" y="67" class="font-mono" font-size="12" font-weight="700" fill="#8B5CF6">2,480 t/s</text>
+      <text x="24" y="98" class="font-mono" font-size="12" font-weight="600" fill="#64748B">AST GRAPH SYNTHESIS</text>
+      <rect x="24" y="112" width="420" height="24" rx="4" fill="#06B6D4"/>
+      <text x="455" y="129" class="font-mono" font-size="12" font-weight="700" fill="#06B6D4">410 ms</text>
+    </g>
+
+    <!-- Document Section 3 -->
+    <text x="48" y="520" class="font-sans" font-size="18" font-weight="700" fill="#1E293B">3. Verified Security &amp; Compliance</text>
+    <text x="48" y="550" class="font-sans" font-size="14" fill="#475569">
+      <tspan x="48" dy="0">Hermetic environment validation confirmed. No unauthorized outbound calls.</tspan>
+      <tspan x="48" dy="24">Cryptographic integrity signatures appended to release manifest.</tspan>
+    </text>
+
+    <!-- Bottom Status Badge -->
+    <g transform="translate(48, 620)">
+      <rect x="0" y="0" width="220" height="32" rx="16" fill="#F0FDF4" stroke="#BBF7D0" stroke-width="1"/>
+      <text x="18" y="21" class="font-sans" font-size="12" font-weight="700" fill="#15803D">✓ Review Passed: 100/100</text>
+    </g>
+  </g>
+</svg>
