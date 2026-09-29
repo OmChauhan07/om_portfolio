@@ -65,6 +65,19 @@
     font-size: 17px;
     line-height: 1.8;
   }
+
+  /* Hide right side scrollbar while retaining page scrollability */
+  html, body {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+  }
+
+  ::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+    width: 0px;
+    height: 0px;
+    background: transparent;
+  }
   
   h1, h2, h3, h4, h5, h6 {
     @apply font-display font-bold text-text-primary tracking-tight;
@@ -133,4 +146,31 @@ html[data-magicui-theme-vt="active"]::view-transition-group(root) {
 
 html[data-magicui-theme-vt="active"]::view-transition-new(root) {
   clip-path: var(--magicui-theme-vt-clip-from, none);
+}
+
+/* Magic UI Marquee Animations */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(-100% - var(--gap, 1rem)));
+  }
+}
+
+@keyframes marquee-vertical {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(calc(-100% - var(--gap, 1rem)));
+  }
+}
+
+.animate-marquee {
+  animation: marquee var(--duration, 30s) infinite linear;
+}
+
+.animate-marquee-vertical {
+  animation: marquee-vertical var(--duration, 30s) linear infinite;
 }

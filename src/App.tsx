@@ -6,6 +6,8 @@ import { MagicCard, GlobalSpotlight } from "./components/MagicCard";
 import ShapeGrid from "./components/ShapeGrid";
 import { GitHubCalendar } from "react-github-calendar";
 import { AnimatedThemeToggler } from "@/registry/magicui/animated-theme-toggler";
+import { ScrollProgress } from "@/registry/magicui/scroll-progress";
+import SkillsMarquee from "./components/SkillsMarquee";
 import { Tooltip } from "react-tooltip";
 import "react-tooltip/dist/react-tooltip.css";
 import { format, subDays, differenceInDays, parseISO } from "date-fns";
@@ -18,7 +20,6 @@ import {
   Code2, 
   BrainCircuit, 
   BarChart3, 
-  Smartphone,
   ChevronRight,
   Database,
   Terminal,
@@ -46,10 +47,8 @@ import {
   Scale,
   Sparkles,
   Globe,
-  Award,
   FileText,
-  MapPin,
-  Phone
+  MapPin
 } from "lucide-react";
 
 const sectionVariants = {
@@ -533,6 +532,7 @@ export default function App() {
           </div>
         </div>
       </nav>
+      <ScrollProgress className="top-[64px]" />
 
       <main className="max-w-[1024px] mx-auto px-6 pt-32 pb-huge">
         {/* Hero Section */}
@@ -603,90 +603,16 @@ export default function App() {
           ref={skillsRef}
         >
           <GlobalSpotlight sectionRef={skillsRef} glowColor={glowColor} />
-          <h2 className="text-3xl mb-12">Skills & Disciplines</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <MagicCard className="card-default group" glowColor={glowColor}>
-              <div className="flex items-center gap-4 mb-6">
-                <div className="p-3 bg-primary/10 rounded-lg group-hover:scale-110 transition-transform">
-                  <Code2 size={24} className="text-primary" />
-                </div>
-                <h3 className="text-xl font-bold">Web & Backend</h3>
-              </div>
-              <p className="text-sm text-text-secondary mb-8 leading-relaxed">
-                Architecting high-performance web applications and resilient REST APIs with Django, FastAPI, Node.js, and modern ORMs.
-              </p>
-              <div className="flex flex-wrap gap-3">
-                {[
-                  { name: "REACT", icon: <Atom size={14} />, color: "text-[#61DAFB]" },
-                  { name: "NODE.JS", icon: <Server size={14} />, color: "text-[#339933]" },
-                  { name: "DJANGO", icon: <Server size={14} />, color: "text-[#44B78B]" },
-                  { name: "FASTAPI", icon: <Zap size={14} />, color: "text-[#059669]" },
-                  { name: "DRF", icon: <Code2 size={14} />, color: "text-[#A30000]" },
-                  { name: "PRISMA ORM", icon: <Layers size={14} />, color: "text-[#5A67D8]" },
-                  { name: "NEON POSTGRESQL", icon: <Database size={14} />, color: "text-[#00E599]" },
-                  { name: "SUPABASE", icon: <Database size={14} />, color: "text-[#3ECF8E]" }
-                ].map(skill => (
-                  <div key={skill.name} className="flex items-center gap-2 px-3 py-2 border border-border-medium bg-background group/skill hover:border-primary transition-colors">
-                    <span className={`${skill.color} filter brightness-90 group-hover/skill:brightness-110 transition-all`}>{skill.icon}</span>
-                    <span className="text-[10px] font-bold tracking-widest text-text-primary">{skill.name}</span>
-                  </div>
-                ))}
-              </div>
-            </MagicCard>
-
-            <MagicCard className="card-default group" glowColor={glowColor}>
-              <div className="flex items-center gap-4 mb-6">
-                <div className="p-3 bg-primary/10 rounded-lg group-hover:scale-110 transition-transform">
-                  <BrainCircuit size={24} className="text-primary" />
-                </div>
-                <h3 className="text-xl font-bold">AI & Autonomous Systems</h3>
-              </div>
-              <p className="text-sm text-text-secondary mb-8 leading-relaxed">
-                Engineering generative AI applications, agentic workflows with CrewAI & LangChain, and integrating Gemini API models.
-              </p>
-              <div className="flex flex-wrap gap-3">
-                {[
-                  { name: "PYTHON", icon: <FileCode2 size={14} />, color: "text-[#3776AB]" },
-                  { name: "GEMINI API", icon: <Sparkles size={14} />, color: "text-[#4E75F8]" },
-                  { name: "CREWAI", icon: <Brain size={14} />, color: "text-[#F97316]" },
-                  { name: "LANGCHAIN", icon: <Network size={14} />, color: "text-[#22D3EE]" },
-                  { name: "LLMS", icon: <MessageSquare size={14} />, color: "text-[#FF9900]" },
-                  { name: "SCIKIT-LEARN", icon: <Brain size={14} />, color: "text-[#F7931E]" }
-                ].map(skill => (
-                  <div key={skill.name} className="flex items-center gap-2 px-3 py-2 border border-border-medium bg-background group/skill hover:border-primary transition-colors">
-                    <span className={`${skill.color} filter brightness-90 group-hover/skill:brightness-110 transition-all`}>{skill.icon}</span>
-                    <span className="text-[10px] font-bold tracking-widest text-text-primary">{skill.name}</span>
-                  </div>
-                ))}
-              </div>
-            </MagicCard>
-
-            <MagicCard className="card-default group" glowColor={glowColor}>
-              <div className="flex items-center gap-4 mb-6">
-                <div className="p-3 bg-primary/10 rounded-lg group-hover:scale-110 transition-transform">
-                  <BarChart3 size={24} className="text-primary" />
-                </div>
-                <h3 className="text-xl font-bold">Data Science & Analytics</h3>
-              </div>
-              <p className="text-sm text-text-secondary mb-8 leading-relaxed">
-                Extracting narratives from complex datasets through EDA, statistical analysis, and clean visualizations.
-              </p>
-              <div className="flex flex-wrap gap-3">
-                {[
-                  { name: "PANDAS", icon: <Table size={14} />, color: "text-[#150458]" },
-                  { name: "NUMPY", icon: <Grid3X3 size={14} />, color: "text-[#013243]" },
-                  { name: "EDA", icon: <Search size={14} />, color: "text-[#00A3E0]" },
-                  { name: "SQL", icon: <Database size={14} />, color: "text-[#336791]" },
-                  { name: "POWER BI", icon: <BarChart3 size={14} />, color: "text-[#F2C811]" }
-                ].map(skill => (
-                  <div key={skill.name} className="flex items-center gap-2 px-3 py-2 border border-border-medium bg-background group/skill hover:border-primary transition-colors">
-                    <span className={`${skill.color} filter brightness-90 group-hover/skill:brightness-110 transition-all`}>{skill.icon}</span>
-                    <span className="text-[10px] font-bold tracking-widest text-text-primary">{skill.name}</span>
-                  </div>
-                ))}
-              </div>
-            </MagicCard>
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+            <div>
+              <h2 className="text-3xl mb-2">Skills & Technologies</h2>
+              <p className="text-sm text-text-secondary">Core languages, frameworks, and developer tools I leverage to build robust software.</p>
+            </div>
+            <div className="text-xs font-mono text-text-tertiary">
+              Hover to pause • Auto-scrolling
+            </div>
           </div>
+          <SkillsMarquee />
         </motion.section>
 
         <hr className="section-divider" />
@@ -929,70 +855,6 @@ export default function App() {
               </div>
             </div>
           </div>
-
-          {/* Achievements & Certifications */}
-          <div className="mt-16">
-            <h3 className="text-2xl font-bold mb-8 flex items-center gap-3">
-              <Award className="text-primary" size={24} /> Achievements & Certifications
-            </h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <MagicCard className="p-6 bg-surface border border-border-subtle" glowColor={glowColor}>
-                <div className="flex items-start gap-4">
-                  <div className="p-3 bg-primary/10 border border-primary/20 shrink-0">
-                    <Trophy size={20} className="text-primary" />
-                  </div>
-                  <div>
-                    <h4 className="font-bold text-text-primary text-base">National Hackathon Finalist (3x)</h4>
-                    <p className="text-xs text-text-secondary mt-1.5 leading-relaxed">
-                      Reached the national finals at Odoo x SPIT (Dec 2025), Odoo x CGC Mohali (Aug 2025), and Odoo x GVP (Mar 2025).
-                    </p>
-                  </div>
-                </div>
-              </MagicCard>
-
-              <MagicCard className="p-6 bg-surface border border-border-subtle" glowColor={glowColor}>
-                <div className="flex items-start gap-4">
-                  <div className="p-3 bg-primary/10 border border-primary/20 shrink-0">
-                    <Award size={20} className="text-primary" />
-                  </div>
-                  <div>
-                    <h4 className="font-bold text-text-primary text-base">FreeCodeCamp Python Certification</h4>
-                    <p className="text-xs text-text-secondary mt-1.5 leading-relaxed">
-                      Demonstrated proficiency in Python programming, problem solving, data structures, and algorithmic concepts.
-                    </p>
-                  </div>
-                </div>
-              </MagicCard>
-
-              <MagicCard className="p-6 bg-surface border border-border-subtle" glowColor={glowColor}>
-                <div className="flex items-start gap-4">
-                  <div className="p-3 bg-primary/10 border border-primary/20 shrink-0">
-                    <BrainCircuit size={20} className="text-primary" />
-                  </div>
-                  <div>
-                    <h4 className="font-bold text-text-primary text-base">IBM Machine Learning Professional Certificate</h4>
-                    <p className="text-xs text-text-secondary mt-1.5 leading-relaxed">
-                      Applied ML algorithms, data preprocessing pipelines, feature engineering, and predictive modeling.
-                    </p>
-                  </div>
-                </div>
-              </MagicCard>
-
-              <MagicCard className="p-6 bg-surface border border-border-subtle" glowColor={glowColor}>
-                <div className="flex items-start gap-4">
-                  <div className="p-3 bg-primary/10 border border-primary/20 shrink-0">
-                    <Server size={20} className="text-primary" />
-                  </div>
-                  <div>
-                    <h4 className="font-bold text-text-primary text-base">AWS Cloud Development Certification</h4>
-                    <p className="text-xs text-text-secondary mt-1.5 leading-relaxed">
-                      Cloud computing fundamentals, infrastructure architecture, and application deployment workflows.
-                    </p>
-                  </div>
-                </div>
-              </MagicCard>
-            </div>
-          </div>
         </motion.section>
         <hr className="section-divider" />
 
@@ -1011,20 +873,7 @@ export default function App() {
             <h2 className="text-4xl mb-4">Let's Connect</h2>
             <p className="text-text-secondary mb-8">Currently open for new opportunities or collaborations. Feel free to reach out via direct channels or send a message below.</p>
             
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
-              <a 
-                href="tel:+917359798392"
-                className="p-4 bg-surface border border-border-subtle hover:border-primary transition-colors flex items-center gap-3 group"
-              >
-                <div className="p-2.5 bg-primary/10 text-primary shrink-0 group-hover:scale-105 transition-transform">
-                  <Phone size={18} />
-                </div>
-                <div>
-                  <div className="text-[10px] uppercase font-bold tracking-wider text-text-tertiary">Phone</div>
-                  <div className="text-xs font-mono font-semibold text-text-primary">+91-7359798392</div>
-                </div>
-              </a>
-
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
               <a 
                 href="mailto:odchauhan0702@gmail.com"
                 className="p-4 bg-surface border border-border-subtle hover:border-primary transition-colors flex items-center gap-3 group"
