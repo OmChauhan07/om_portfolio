@@ -730,7 +730,8 @@ export default function App() {
                 ],
                 icon: <Compass className="text-primary" size={32} />,
                 image: "/projects/globetrotter.svg",
-                url: "https://github.com/OmChauhan07/GlobeTrotter.git"
+                url: "https://github.com/OmChauhan07/GlobeTrotter.git",
+                liveUrl: "https://globetrotter-demo.vercel.app/"
               },
               {
                 title: "Urban Furniture Accounting System",
