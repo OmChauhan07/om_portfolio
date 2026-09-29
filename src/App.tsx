@@ -6,7 +6,6 @@ import { MagicCard, GlobalSpotlight } from "./components/MagicCard";
 import ShapeGrid from "./components/ShapeGrid";
 import { GitHubCalendar } from "react-github-calendar";
 import { AnimatedThemeToggler } from "@/registry/magicui/animated-theme-toggler";
-import ResumeModal from "./components/ResumeModal";
 import { Tooltip } from "react-tooltip";
 import "react-tooltip/dist/react-tooltip.css";
 import { format, subDays, differenceInDays, parseISO } from "date-fns";
@@ -411,7 +410,6 @@ export default function App() {
   const projectsRef = useRef<HTMLDivElement>(null);
   const experienceRef = useRef<HTMLDivElement>(null);
   const contactRef = useRef<HTMLDivElement>(null);
-  const [isResumeOpen, setIsResumeOpen] = useState(false);
 
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
     if (typeof window !== 'undefined') {
@@ -518,12 +516,13 @@ export default function App() {
             <a href="#skills" className="text-sm font-medium hover:text-primary transition-colors">Skills</a>
             <a href="#experience" className="text-sm font-medium hover:text-primary transition-colors">Experience</a>
             <a href="#contact" className="text-sm font-medium hover:text-primary transition-colors">Contact</a>
-            <button 
-              onClick={() => setIsResumeOpen(true)}
-              className="bg-tertiary text-background px-4 py-2 text-sm font-semibold tracking-wide hover:bg-primary transition-colors inline-block cursor-pointer"
+            <a 
+              href="/Om.pdf" 
+              download="Om.pdf"
+              className="bg-tertiary text-background px-4 py-2 text-sm font-semibold tracking-wide hover:bg-primary transition-colors inline-block"
             >
               Resume
-            </button>
+            </a>
             
             <AnimatedThemeToggler 
               theme={theme}
@@ -558,12 +557,13 @@ export default function App() {
             <a href="#work" className="btn-primary flex items-center gap-2">
               View Work <ChevronRight size={18} />
             </a>
-            <button 
-              onClick={() => setIsResumeOpen(true)}
-              className="btn-secondary flex items-center gap-2 cursor-pointer"
+            <a 
+              href="/Om_Chauhan_Resume.pdf" 
+              download="Om_Chauhan_Resume.pdf"
+              className="btn-secondary flex items-center gap-2"
             >
-              <FileText size={18} /> View Resume
-            </button>
+              <FileText size={18} /> Download Resume
+            </a>
             <a href="#contact" className="text-sm font-semibold text-text-secondary hover:text-primary transition-colors px-2 py-3">
               Get in Touch
             </a>
@@ -1135,13 +1135,13 @@ export default function App() {
                   >
                     Send Message
                   </button>
-                  <button 
-                    type="button"
-                    onClick={() => setIsResumeOpen(true)}
-                    className="text-xs font-semibold text-text-tertiary hover:text-primary transition-colors flex items-center gap-1.5 cursor-pointer"
+                  <a 
+                    href="/Om_Chauhan_Resume.pdf" 
+                    download="Om_Chauhan_Resume.pdf"
+                    className="text-xs font-semibold text-text-tertiary hover:text-primary transition-colors flex items-center gap-1.5"
                   >
-                    <FileText size={14} /> Open Full Resume
-                  </button>
+                    <FileText size={14} /> Download Resume (PDF)
+                  </a>
                 </div>
               </form>
             </MagicCard>
@@ -1154,12 +1154,13 @@ export default function App() {
         <div className="max-w-[1024px] mx-auto px-6 py-12 flex flex-col md:flex-row justify-between items-center gap-8">
           <p className="text-sm text-text-tertiary">© 2026 Om Chauhan. Mahemdavad, Gujarat, India.</p>
           <div className="flex flex-wrap gap-8 items-center">
-            <button 
-              onClick={() => setIsResumeOpen(true)}
-              className="text-text-secondary hover:text-primary transition-colors flex items-center gap-1.5 text-sm font-semibold tracking-wide cursor-pointer"
+            <a 
+              href="/Om_Chauhan_Resume.pdf" 
+              download="Om_Chauhan_Resume.pdf"
+              className="text-text-secondary hover:text-primary transition-colors flex items-center gap-1.5 text-sm font-semibold tracking-wide"
             >
               <FileText size={16} /> Resume
-            </button>
+            </a>
             <a href="https://www.linkedin.com/in/om-chauhan-21043824b/" target="_blank" rel="noopener noreferrer" className="text-text-secondary hover:text-primary transition-colors flex items-center gap-2 text-sm font-semibold tracking-wide">
               <Linkedin size={16} /> LinkedIn
             </a>
@@ -1174,12 +1175,6 @@ export default function App() {
       </footer>
         </div>
       </motion.div>
-
-      {/* Full Resume Modal */}
-      <ResumeModal 
-        isOpen={isResumeOpen} 
-        onClose={() => setIsResumeOpen(false)} 
-      />
     </div>
   );
 }

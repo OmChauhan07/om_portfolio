@@ -35,6 +35,17 @@ async function startServer() {
     }
   });
 
+  // Resume PDF download routes
+  app.get(["/Om_Chauhan_Resume.pdf", "/resume.pdf"], (req, res) => {
+    const resumePath = path.join(process.cwd(), "public", "Om_Chauhan_Resume.pdf");
+    res.download(resumePath, "Om_Chauhan_Resume.pdf", (err) => {
+      if (err) {
+        console.error("Error sending resume PDF:", err);
+        res.status(404).send("Resume not found");
+      }
+    });
+  });
+
   // Vite middleware for development
   if (process.env.NODE_ENV !== "production") {
     const vite = await createViteServer({
