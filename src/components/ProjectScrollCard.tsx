@@ -110,36 +110,31 @@ export function ProjectScrollCard({
         zIndex: index + 10,
       }}
     >
-      {/* Sticky Frame with Rounded Corners */}
+      {/* Sticky Frame */}
       <div
-        className="sticky w-full rounded-2xl md:rounded-3xl border border-border-subtle bg-surface shadow-2xl overflow-hidden transition-all duration-300"
+        className="sticky w-full rounded-2xl md:rounded-3xl shadow-2xl overflow-hidden transition-all duration-300"
         style={{
           top: `${topOffset}px`,
-          height: `calc(100vh - ${topOffset + 24}px)`,
-          maxHeight: "750px",
-          minHeight: "520px",
+          aspectRatio: "1203 / 753",
         }}
       >
         {/* ============================================================== */}
         {/* BASE LAYER: Safari Browser Card Preview                        */}
         {/* ============================================================== */}
-        <div className="absolute inset-0 w-full h-full flex flex-col bg-background/95 select-none overflow-hidden items-center justify-between p-3 sm:p-5 md:p-6">
-          {/* Centered Safari Component Window */}
-          <div className="relative w-full max-w-[1203px] flex-1 min-h-0 flex items-center justify-center py-2">
-            <a
-              href={targetRedirectUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-full block group cursor-pointer transition-transform duration-500 hover:scale-[1.008]"
-              title={`Click to open ${project.title} (${safariUrl})`}
-            >
-              <Safari
-                url={safariUrl}
-                mode="default"
-                className="w-full shadow-2xl drop-shadow-2xl"
-              />
-            </a>
-          </div>
+        <div className="absolute inset-0 w-full h-full select-none overflow-hidden">
+          <a
+            href={targetRedirectUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-full h-full block group cursor-pointer transition-transform duration-500 hover:scale-[1.005]"
+            title={`Click to open ${project.title} (${safariUrl})`}
+          >
+            <Safari
+              url={safariUrl}
+              mode="default"
+              className="w-full h-full"
+            />
+          </a>
 
           {/* Floating scroll prompt indicator */}
           <motion.div
@@ -149,7 +144,7 @@ export function ProjectScrollCard({
               opacity: { duration: 0.5, delay: 0.2 },
               y: { repeat: Infinity, duration: 2, ease: "easeInOut" }
             }}
-            className="shrink-0 pt-1 pointer-events-none z-10"
+            className="absolute bottom-3 sm:bottom-4 left-1/2 -translate-x-1/2 pointer-events-none z-10"
           >
             <div className="bg-surface/95 backdrop-blur-md border border-border-subtle shadow-xl px-4 py-1.5 rounded-full text-xs font-mono font-medium text-text-secondary flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
