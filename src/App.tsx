@@ -718,7 +718,7 @@ export default function App() {
                 tags: "React • Vite • Node.js • Express • Prisma • Neon PostgreSQL • Recharts",
                 desc: "An end-to-end transport operations and fleet management platform that digitizes vehicle & driver registries, trip dispatching, maintenance ticketing, and expense auditing while enforcing strict operational business rules and calculating fleet ROI through real-time KPI analytics.",
                 icon: <Truck className="text-primary" size={32} />,
-                image: "/projects/transitops.svg",
+                image: "/projects/Screenshot 2026-09-29 230654.png",
                 url: "https://github.com/OmChauhan07/TransitOps.git",
                 liveUrl: "https://transit-ops-peach.vercel.app"
               },
@@ -728,17 +728,17 @@ export default function App() {
                 tags: "React 19 • Vite • Django REST Framework • Neon PostgreSQL • @dnd-kit • Recharts • Geoapify",
                 desc: "A modern multi-city travel planning platform designed to make itinerary creation, attraction discovery, and budget analytics visual and effortless. Features drag-and-drop schedule reordering, multi-view calendar/timeline matrices, and public itinerary cloning.",
                 icon: <Compass className="text-primary" size={32} />,
-                image: "/projects/globetrotter.svg",
+                image: "/projects/Screenshot 2026-09-29 230608.png",
                 url: "https://github.com/OmChauhan07/GlobeTrotter.git",
                 liveUrl: "https://globetrotter-demo.vercel.app/"
               },
               {
-                title: "Urban Furniture Accounting System",
-                category: "Enterprise Financial Ledger",
+                title: "UrbanLedger",
+                category: "Atelier Accounting & Enterprise Financial Ledger",
                 tags: "React 19 • Vite • Django 5.2 • DRF • Neon PostgreSQL • SimpleJWT • Swagger/OpenAPI",
-                desc: "An enterprise-grade full-stack double-entry accounting application engineered for bespoke furniture manufacturers. Enforces strict mathematical ledger invariants (Σ Debits == Σ Credits) with zero cached balances and real-time aggregated financial statements.",
+                desc: "A tailored accounting atelier and double-entry financial platform engineered for bespoke furniture manufacturers, showrooms, and interior ateliers. Enforces strict mathematical ledger invariants with real-time kiln batch valuation, artisan production tracking, and zero balance drift.",
                 icon: <Scale className="text-primary" size={32} />,
-                image: "/projects/urban-furniture.svg",
+                image: "/projects/Screenshot 2026-09-29 233138.png",
                 url: "https://github.com/OmChauhan07/Urban-Furniture-Accounting-System.git"
               },
               {
@@ -747,7 +747,7 @@ export default function App() {
                 tags: "React • Tailwind CSS • Python • CrewAI • Google Gemini • DOCX/PDF Pipeline",
                 desc: "An AI-powered smart documentation platform that automates publication-ready technical report generation from source code, Jupyter notebooks, datasets, and project files using CrewAI multi-agent orchestration backed by Google Gemini models with DOCX and PDF export pipelines.",
                 icon: <Sparkles className="text-primary" size={32} />,
-                image: "/projects/documind.svg",
+                image: "/projects/documind-error.svg",
                 url: "https://github.com/OmChauhan07/DocuMind.git"
               }
             ].map((project, idx, arr) => (

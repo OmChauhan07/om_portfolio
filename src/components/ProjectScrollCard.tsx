@@ -13,6 +13,7 @@ import {
   CheckCircle2,
   Code2
 } from "lucide-react";
+import { Safari } from "@/registry/magicui/safari";
 
 export interface ProjectData {
   title: string;
@@ -92,6 +93,16 @@ export function ProjectScrollCard({
 
   const targetRedirectUrl = project.liveUrl || project.url;
 
+  const getCleanUrl = (urlStr?: string, fallback: string = ""): string => {
+    if (!urlStr) return fallback;
+    return urlStr.replace(/^https?:\/\//, "").replace(/\/$/, "");
+  };
+
+  const safariUrl = getCleanUrl(
+    project.liveUrl,
+    getCleanUrl(project.url, `${project.title.toLowerCase().replace(/[^a-z0-9]/g, "")}.vercel.app`)
+  );
+
   return (
     <div
       ref={containerRef}
@@ -106,49 +117,33 @@ export function ProjectScrollCard({
         style={{
           top: `${topOffset}px`,
           height: `calc(100vh - ${topOffset + 24}px)`,
-          maxHeight: "740px",
+          maxHeight: "750px",
           minHeight: "520px",
         }}
       >
         {/* ============================================================== */}
-        {/* BASE LAYER: The Whole Image of the Project Landing Page        */}
+        {/* BASE LAYER: The Whole Image of the Project in Safari Component */}
         {/* ============================================================== */}
-        <div className="absolute inset-0 w-full h-full flex flex-col bg-background select-none">
-          {/* Browser Mockup Chrome Header */}
-          <div className="h-12 border-b border-border-subtle bg-surface/90 backdrop-blur-md px-4 flex items-center justify-between gap-3 shrink-0 z-10">
-            {/* Mac Window Dots */}
+        <div className="absolute inset-0 w-full h-full flex flex-col bg-background/95 select-none overflow-hidden items-center justify-between p-3 sm:p-5 md:p-6">
+          {/* Top Quick Bar */}
+          <div className="w-full max-w-[1203px] flex items-center justify-between gap-3 mb-2 shrink-0 z-10">
             <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded-full bg-[#FF5F56] border border-[#E0443E]/50" />
-              <div className="w-3 h-3 rounded-full bg-[#FFBD2E] border border-[#DEA123]/50" />
-              <div className="w-3 h-3 rounded-full bg-[#27C93F] border border-[#1AAB29]/50" />
-              <span className="hidden sm:inline-block ml-2 text-xs font-mono font-medium text-text-tertiary">
-                {project.title} — Landing Page
+              <span className="text-xs font-mono font-semibold text-text-primary px-3 py-1 rounded-full bg-surface border border-border-subtle shadow-sm flex items-center gap-1.5">
+                <span className="w-2 h-2 rounded-full bg-primary" />
+                <span>{project.title}</span>
+              </span>
+              <span className="hidden md:inline-block text-xs font-mono text-text-tertiary">
+                Landing Page Preview
               </span>
             </div>
 
-            {/* Address Bar with Redirecting URL (e.g. globetrotter-demo.vercel.app) */}
-            <a
-              href={targetRedirectUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 bg-background/80 hover:bg-background border border-border-subtle rounded-full px-3.5 py-1 text-xs font-mono text-text-secondary hover:text-text-primary transition-colors max-w-xs sm:max-w-md w-full truncate shadow-inner group"
-              title={`Visit ${targetRedirectUrl}`}
-            >
-              <Lock size={11} className="text-primary shrink-0" />
-              <span className="truncate group-hover:underline">
-                {project.liveUrl || project.url}
-              </span>
-              <ArrowUpRight size={12} className="shrink-0 ml-auto opacity-70 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-            </a>
-
-            {/* Quick Actions */}
             <div className="flex items-center gap-2">
               {project.liveUrl && (
                 <a
                   href={project.liveUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hidden md:flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-semibold bg-primary text-surface hover:opacity-90 transition-opacity"
+                  className="flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-semibold bg-primary text-surface hover:opacity-90 transition-opacity shadow-sm"
                 >
                   <span>Open Live App</span>
                   <ExternalLink size={11} />
@@ -156,55 +151,49 @@ export function ProjectScrollCard({
               )}
               <button
                 onClick={() => setManualShowDetails(manualShowDetails === true ? false : true)}
-                className="flex items-center gap-1 text-xs font-mono px-2.5 py-1 border border-border-subtle rounded-full bg-surface hover:bg-background text-text-secondary hover:text-text-primary transition-colors cursor-pointer"
+                className="flex items-center gap-1.5 text-xs font-mono px-3 py-1 border border-border-subtle rounded-full bg-surface hover:bg-background text-text-secondary hover:text-text-primary transition-colors cursor-pointer shadow-sm"
                 title="Toggle Project Details"
               >
                 <Layers size={12} className="text-primary" />
-                <span className="hidden sm:inline">Details</span>
+                <span>View Details</span>
               </button>
             </div>
           </div>
 
-          {/* Whole Landing Page Image Display */}
-          <div className="relative flex-1 w-full h-[calc(100%-48px)] overflow-hidden bg-background/50 flex items-center justify-center p-2 sm:p-4">
+          {/* Centered Safari Component Window */}
+          <div className="relative w-full max-w-[1203px] flex-1 min-h-0 flex items-center justify-center py-1">
             <a
               href={targetRedirectUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="relative w-full h-full block rounded-xl overflow-hidden group cursor-pointer border border-border-subtle/60 shadow-lg"
-              title={`Click to open ${project.title}`}
+              className="w-full block group cursor-pointer transition-transform duration-500 hover:scale-[1.008]"
+              title={`Click to open ${project.title} (${safariUrl})`}
             >
-              <img
-                src={project.image}
-                alt={`${project.title} Landing Page`}
-                className="w-full h-full object-cover sm:object-contain object-top transition-transform duration-700 group-hover:scale-[1.01]"
-                loading="eager"
+              <Safari
+                url={safariUrl}
+                imageSrc={project.image}
+                mode="default"
+                className="w-full shadow-2xl drop-shadow-2xl"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-background/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-center pb-6">
-                <span className="bg-background/90 text-text-primary text-xs font-mono font-semibold px-4 py-2 rounded-full border border-border-subtle shadow-xl flex items-center gap-2">
-                  <ExternalLink size={13} className="text-primary" />
-                  <span>Open Live Site: {project.liveUrl ? project.liveUrl : project.title}</span>
-                </span>
-              </div>
             </a>
-
-            {/* Floating scroll prompt indicator */}
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: [0, 6, 0] }}
-              transition={{
-                opacity: { duration: 0.5, delay: 0.2 },
-                y: { repeat: Infinity, duration: 2, ease: "easeInOut" }
-              }}
-              className="absolute bottom-4 left-1/2 -translate-x-1/2 pointer-events-none z-10"
-            >
-              <div className="bg-surface/95 backdrop-blur-md border border-border-subtle shadow-xl px-4 py-1.5 rounded-full text-xs font-mono font-medium text-text-secondary flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-                <span>Scroll to reveal project details</span>
-                <ChevronDown size={14} className="text-primary" />
-              </div>
-            </motion.div>
           </div>
+
+          {/* Floating scroll prompt indicator */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: [0, 6, 0] }}
+            transition={{
+              opacity: { duration: 0.5, delay: 0.2 },
+              y: { repeat: Infinity, duration: 2, ease: "easeInOut" }
+            }}
+            className="shrink-0 pt-1 pointer-events-none z-10"
+          >
+            <div className="bg-surface/95 backdrop-blur-md border border-border-subtle shadow-xl px-4 py-1.5 rounded-full text-xs font-mono font-medium text-text-secondary flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+              <span>Scroll to reveal project details</span>
+              <ChevronDown size={14} className="text-primary" />
+            </div>
+          </motion.div>
         </div>
 
         {/* ============================================================== */}
