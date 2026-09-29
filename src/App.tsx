@@ -7,7 +7,28 @@ import ShapeGrid from "./components/ShapeGrid";
 import { GitHubCalendar } from "react-github-calendar";
 import { AnimatedThemeToggler } from "@/registry/magicui/animated-theme-toggler";
 import { ScrollProgress } from "@/registry/magicui/scroll-progress";
-import SkillsMarquee from "./components/SkillsMarquee";
+import LogoLoop from "./LogoLoop";
+import ScrollStack, { ScrollStackItem } from "./ScrollStack";
+import { 
+  SiReact, 
+  SiNextdotjs, 
+  SiTypescript, 
+  SiTailwindcss,
+  SiPython,
+  SiFastapi,
+  SiDjango,
+  SiNodedotjs,
+  SiPostgresql,
+  SiSupabase,
+  SiPrisma,
+  SiDocker,
+  SiGit,
+  SiGithub,
+  SiPandas,
+  SiNumpy,
+  SiScikitlearn,
+  SiLangchain
+} from 'react-icons/si';
 import { Tooltip } from "react-tooltip";
 import "react-tooltip/dist/react-tooltip.css";
 import { format, subDays, differenceInDays, parseISO } from "date-fns";
@@ -59,6 +80,27 @@ const sectionVariants = {
     transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] }
   }
 };
+
+const techLogos = [
+  { node: <SiPython />, title: "Python", href: "https://www.python.org" },
+  { node: <SiReact />, title: "React", href: "https://react.dev" },
+  { node: <SiFastapi />, title: "FastAPI", href: "https://fastapi.tiangolo.com" },
+  { node: <SiDjango />, title: "Django", href: "https://www.djangoproject.com" },
+  { node: <SiNextdotjs />, title: "Next.js", href: "https://nextjs.org" },
+  { node: <SiTypescript />, title: "TypeScript", href: "https://www.typescriptlang.org" },
+  { node: <SiTailwindcss />, title: "Tailwind CSS", href: "https://tailwindcss.com" },
+  { node: <SiNodedotjs />, title: "Node.js", href: "https://nodejs.org" },
+  { node: <SiPostgresql />, title: "PostgreSQL", href: "https://www.postgresql.org" },
+  { node: <SiSupabase />, title: "Supabase", href: "https://supabase.com" },
+  { node: <SiPrisma />, title: "Prisma", href: "https://www.prisma.io" },
+  { node: <SiDocker />, title: "Docker", href: "https://www.docker.com" },
+  { node: <SiGit />, title: "Git", href: "https://git-scm.com" },
+  { node: <SiGithub />, title: "GitHub", href: "https://github.com" },
+  { node: <SiPandas />, title: "Pandas", href: "https://pandas.pydata.org" },
+  { node: <SiNumpy />, title: "NumPy", href: "https://numpy.org" },
+  { node: <SiScikitlearn />, title: "Scikit-Learn", href: "https://scikit-learn.org" },
+  { node: <SiLangchain />, title: "LangChain", href: "https://www.langchain.com" },
+];
 
 interface LeetCodeData {
   totalSolved: number;
@@ -603,16 +645,19 @@ export default function App() {
           ref={skillsRef}
         >
           <GlobalSpotlight sectionRef={skillsRef} glowColor={glowColor} />
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
-            <div>
-              <h2 className="text-3xl mb-2">Skills & Technologies</h2>
-              <p className="text-sm text-text-secondary">Core languages, frameworks, and developer tools I leverage to build robust software.</p>
-            </div>
-            <div className="text-xs font-mono text-text-tertiary">
-              Hover to pause • Auto-scrolling
-            </div>
+          <div className="py-2">
+            <LogoLoop
+              logos={techLogos}
+              speed={100}
+              direction="left"
+              logoHeight={56}
+              gap={60}
+              hoverSpeed={0}
+              scaleOnHover
+              fadeOut
+              ariaLabel="Technology partners"
+            />
           </div>
-          <SkillsMarquee />
         </motion.section>
 
         <hr className="section-divider" />
@@ -629,7 +674,8 @@ export default function App() {
         >
           <GlobalSpotlight sectionRef={projectsRef} glowColor={glowColor} />
           <h2 className="text-3xl mb-12">Selected Projects</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+
+          <ScrollStack offset={96} itemDistance={28}>
             {[
               {
                 title: "TransitOps",
@@ -689,90 +735,70 @@ export default function App() {
                 url: "https://github.com/OmChauhan07/DocuMind.git"
               }
             ].map((project, idx) => (
-              <MagicCard key={idx} className="group p-8 bg-surface border border-border-subtle flex flex-col justify-between" glowColor={glowColor}>
-                <div>
-                  <div className="aspect-video bg-background mb-8 flex flex-col items-center justify-center border border-border-subtle group-hover:border-border-medium transition-colors relative overflow-hidden p-6 text-center">
-                    <div className="p-4 bg-surface border border-border-subtle mb-3 group-hover:scale-110 transition-transform">
-                      {project.icon}
-                    </div>
-                    <span className="text-[10px] uppercase tracking-[0.2em] font-bold text-text-tertiary">
-                      {project.category}
-                    </span>
-                  </div>
-
-                  <div className="space-y-4">
-                    <div className="flex items-start justify-between gap-4">
-                      <div>
-                        <h3 className="text-2xl font-bold tracking-tight text-text-primary leading-snug">{project.title}</h3>
-                        <p className="text-xs text-primary font-semibold tracking-wider uppercase mt-1">{project.category}</p>
+              <ScrollStackItem key={idx}>
+                <div className="p-8 md:p-10 flex flex-col lg:flex-row gap-8 items-start justify-between">
+                  <div className="w-full lg:w-1/3 shrink-0 flex flex-col justify-between">
+                    <div>
+                      <div className="w-14 h-14 bg-background border border-border-subtle flex items-center justify-center mb-5">
+                        {project.icon}
                       </div>
-                      <div className="flex items-center gap-3 shrink-0">
-                        {'liveUrl' in project && project.liveUrl && (
-                          <a 
-                            href={project.liveUrl} 
-                            target="_blank" 
-                            rel="noopener noreferrer" 
-                            className="p-1 text-text-tertiary hover:text-primary transition-colors"
-                            title="Live Demo"
-                          >
-                            <ExternalLink size={18} />
-                          </a>
-                        )}
+                      <span className="text-[11px] font-mono uppercase tracking-[0.2em] font-bold text-primary">
+                        {project.category}
+                      </span>
+                      <h3 className="text-2xl md:text-3xl font-bold tracking-tight text-text-primary mt-2 mb-3">
+                        {project.title}
+                      </h3>
+                      <p className="text-[11px] text-text-secondary uppercase tracking-wider font-mono font-semibold mb-6">
+                        {project.tags}
+                      </p>
+                    </div>
+
+                    <div className="flex items-center gap-3 pt-4 border-t border-border-subtle">
+                      <a 
+                        href={project.url} 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        className="btn-primary text-xs py-2.5 px-4 flex items-center gap-2"
+                      >
+                        <Github size={15} /> GitHub <ChevronRight size={14} />
+                      </a>
+                      {'liveUrl' in project && project.liveUrl && (
                         <a 
-                          href={project.url} 
+                          href={project.liveUrl} 
                           target="_blank" 
                           rel="noopener noreferrer" 
-                          className="p-1 text-text-tertiary hover:text-primary transition-colors"
-                          title="GitHub Repository"
+                          className="btn-secondary text-xs py-2.5 px-4 flex items-center gap-1.5"
                         >
-                          <Github size={18} />
+                          Live Demo <ExternalLink size={14} />
                         </a>
-                      </div>
+                      )}
+                    </div>
+                  </div>
+
+                  <div className="w-full lg:w-2/3 lg:border-l lg:border-border-subtle lg:pl-8 space-y-6">
+                    <div>
+                      <h4 className="text-xs uppercase font-mono tracking-widest text-text-tertiary mb-2 font-bold">Overview</h4>
+                      <p className="text-sm md:text-base text-text-secondary leading-relaxed">
+                        {project.desc}
+                      </p>
                     </div>
 
-                    <p className="text-[11px] text-text-secondary leading-relaxed uppercase tracking-wider font-bold font-mono">
-                      {project.tags}
-                    </p>
-
-                    <p className="text-sm text-text-secondary leading-relaxed">
-                      {project.desc}
-                    </p>
-
-                    <div className="pt-2 border-t border-border-subtle space-y-1.5">
-                      {project.highlights.map((item, hIdx) => (
-                        <div key={hIdx} className="text-xs text-text-tertiary flex items-start gap-2">
-                          <span className="text-primary mt-1">•</span>
-                          <span>{item}</span>
-                        </div>
-                      ))}
+                    <div>
+                      <h4 className="text-xs uppercase font-mono tracking-widest text-text-tertiary mb-3 font-bold">Key Architectural Highlights</h4>
+                      <div className="grid grid-cols-1 gap-2.5">
+                        {project.highlights.map((item, hIdx) => (
+                          <div key={hIdx} className="text-xs md:text-sm text-text-secondary flex items-start gap-2.5 bg-background/50 border border-border-subtle p-3">
+                            <span className="text-primary font-bold mt-0.5">•</span>
+                            <span className="leading-relaxed">{item}</span>
+                          </div>
+                        ))}
+                      </div>
                     </div>
                   </div>
                 </div>
-
-                <div className="mt-8 pt-4 border-t border-border-subtle flex items-center justify-between">
-                  <a 
-                    href={project.url} 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    className="inline-flex items-center gap-1.5 text-xs font-bold tracking-widest text-primary uppercase hover:underline"
-                  >
-                    View on GitHub <ChevronRight size={14} />
-                  </a>
-
-                  {'liveUrl' in project && project.liveUrl && (
-                    <a 
-                      href={project.liveUrl} 
-                      target="_blank" 
-                      rel="noopener noreferrer" 
-                      className="inline-flex items-center gap-1 text-[11px] font-bold tracking-widest text-text-secondary hover:text-primary uppercase"
-                    >
-                      Live Demo <ExternalLink size={12} />
-                    </a>
-                  )}
-                </div>
-              </MagicCard>
+              </ScrollStackItem>
             ))}
-          </div>
+          </ScrollStack>
         </motion.section>
 
         <hr className="section-divider" />
