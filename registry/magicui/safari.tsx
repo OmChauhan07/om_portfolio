@@ -35,8 +35,13 @@ export function Safari({
   children,
   ...props
 }: SafariProps) {
-  const hasVideo = !!videoSrc
-  const hasMedia = hasVideo || !!imageSrc
+  const reactId = React.useId().replace(/:/g, "");
+  const punchId = `safariPunch-${reactId}`;
+  const path0Id = `path0-${reactId}`;
+  const roundedBottomId = `roundedBottom-${reactId}`;
+
+  const hasVideo = !!videoSrc;
+  const hasMedia = hasVideo || !!imageSrc;
 
   return (
     <div
@@ -47,16 +52,18 @@ export function Safari({
       }}
       {...props}
     >
-      {hasVideo && (
-        <div
-          className="pointer-events-none absolute z-0 overflow-hidden"
-          style={{
-            left: `${LEFT_PCT}%`,
-            top: `${TOP_PCT}%`,
-            width: `${WIDTH_PCT}%`,
-            height: `${HEIGHT_PCT}%`,
-          }}
-        >
+      {/* Inner Screen Viewport: Blank canvas or media display */}
+      <div
+        className="pointer-events-none absolute z-0 overflow-hidden bg-white dark:bg-[#0c0a09]"
+        style={{
+          left: `${LEFT_PCT}%`,
+          top: `${TOP_PCT}%`,
+          width: `${WIDTH_PCT}%`,
+          height: `${HEIGHT_PCT}%`,
+          borderRadius: "0 0 11px 11px",
+        }}
+      >
+        {hasVideo && (
           <video
             className="block size-full object-cover"
             src={videoSrc}
@@ -66,28 +73,17 @@ export function Safari({
             playsInline
             preload="metadata"
           />
-        </div>
-      )}
+        )}
 
-      {!hasVideo && imageSrc && (
-        <div
-          className="pointer-events-none absolute z-0 overflow-hidden"
-          style={{
-            left: `${LEFT_PCT}%`,
-            top: `${TOP_PCT}%`,
-            width: `${WIDTH_PCT}%`,
-            height: `${HEIGHT_PCT}%`,
-            borderRadius: "0 0 11px 11px",
-          }}
-        >
+        {!hasVideo && imageSrc && (
           <img
             src={imageSrc}
             alt=""
             className="block size-full object-cover object-top"
             referrerPolicy="no-referrer"
           />
-        </div>
-      )}
+        )}
+      </div>
 
       {children && (
         <div
@@ -111,7 +107,7 @@ export function Safari({
         style={{ transform: "translateZ(0)" }}
       >
         <defs>
-          <mask id="safariPunch" maskUnits="userSpaceOnUse">
+          <mask id={punchId} maskUnits="userSpaceOnUse">
             <rect
               x="0"
               y="0"
@@ -125,11 +121,11 @@ export function Safari({
             />
           </mask>
 
-          <clipPath id="path0">
+          <clipPath id={path0Id}>
             <rect width={SAFARI_WIDTH} height={SAFARI_HEIGHT} fill="white" />
           </clipPath>
 
-          <clipPath id="roundedBottom">
+          <clipPath id={roundedBottomId}>
             <path
               d="M1 52H1201V741C1201 747.075 1196.08 752 1190 752H12C5.92486 752 1 747.075 1 741V52Z"
               fill="white"
@@ -138,12 +134,12 @@ export function Safari({
         </defs>
 
         <g
-          clipPath="url(#path0)"
-          mask={hasMedia ? "url(#safariPunch)" : undefined}
+          clipPath={`url(#${path0Id})`}
+          mask={`url(#${punchId})`}
         >
           <path
             d="M0 52H1202V741C1202 747.627 1196.63 753 1190 753H12C5.37258 753 0 747.627 0 741V52Z"
-            className="fill-[#E5E5E5] dark:fill-[#404040]"
+            className="fill-[#E5E5E5] dark:fill-[#262626]"
           />
           <path
             fillRule="evenodd"

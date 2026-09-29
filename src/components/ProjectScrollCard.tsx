@@ -8,7 +8,6 @@ import {
   Lock, 
   ArrowUpRight,
   Eye,
-  Layers,
   Sparkles,
   CheckCircle2,
   Code2
@@ -122,46 +121,11 @@ export function ProjectScrollCard({
         }}
       >
         {/* ============================================================== */}
-        {/* BASE LAYER: The Whole Image of the Project in Safari Component */}
+        {/* BASE LAYER: Safari Browser Card Preview                        */}
         {/* ============================================================== */}
         <div className="absolute inset-0 w-full h-full flex flex-col bg-background/95 select-none overflow-hidden items-center justify-between p-3 sm:p-5 md:p-6">
-          {/* Top Quick Bar */}
-          <div className="w-full max-w-[1203px] flex items-center justify-between gap-3 mb-2 shrink-0 z-10">
-            <div className="flex items-center gap-2">
-              <span className="text-xs font-mono font-semibold text-text-primary px-3 py-1 rounded-full bg-surface border border-border-subtle shadow-sm flex items-center gap-1.5">
-                <span className="w-2 h-2 rounded-full bg-primary" />
-                <span>{project.title}</span>
-              </span>
-              <span className="hidden md:inline-block text-xs font-mono text-text-tertiary">
-                Landing Page Preview
-              </span>
-            </div>
-
-            <div className="flex items-center gap-2">
-              {project.liveUrl && (
-                <a
-                  href={project.liveUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-semibold bg-primary text-surface hover:opacity-90 transition-opacity shadow-sm"
-                >
-                  <span>Open Live App</span>
-                  <ExternalLink size={11} />
-                </a>
-              )}
-              <button
-                onClick={() => setManualShowDetails(manualShowDetails === true ? false : true)}
-                className="flex items-center gap-1.5 text-xs font-mono px-3 py-1 border border-border-subtle rounded-full bg-surface hover:bg-background text-text-secondary hover:text-text-primary transition-colors cursor-pointer shadow-sm"
-                title="Toggle Project Details"
-              >
-                <Layers size={12} className="text-primary" />
-                <span>View Details</span>
-              </button>
-            </div>
-          </div>
-
           {/* Centered Safari Component Window */}
-          <div className="relative w-full max-w-[1203px] flex-1 min-h-0 flex items-center justify-center py-1">
+          <div className="relative w-full max-w-[1203px] flex-1 min-h-0 flex items-center justify-center py-2">
             <a
               href={targetRedirectUrl}
               target="_blank"
@@ -171,7 +135,6 @@ export function ProjectScrollCard({
             >
               <Safari
                 url={safariUrl}
-                imageSrc={project.image}
                 mode="default"
                 className="w-full shadow-2xl drop-shadow-2xl"
               />

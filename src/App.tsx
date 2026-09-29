@@ -10,10 +10,10 @@ import { ScrollProgress } from "@/registry/magicui/scroll-progress";
 import LogoLoop from "./LogoLoop";
 import ScrollStack, { ScrollStackItem } from "./ScrollStack";
 import ProjectScrollCard from "./components/ProjectScrollCard";
-import { 
-  SiReact, 
-  SiNextdotjs, 
-  SiTypescript, 
+import {
+  SiReact,
+  SiNextdotjs,
+  SiTypescript,
   SiTailwindcss,
   SiPython,
   SiFastapi,
@@ -38,14 +38,14 @@ import { Tooltip } from "react-tooltip";
 import "react-tooltip/dist/react-tooltip.css";
 import { format, subDays, differenceInDays, parseISO } from "date-fns";
 import axios from "axios";
-import { 
-  Github, 
-  Linkedin, 
-  Mail, 
-  ExternalLink, 
-  Code2, 
-  BrainCircuit, 
-  BarChart3, 
+import {
+  Github,
+  Linkedin,
+  Mail,
+  ExternalLink,
+  Code2,
+  BrainCircuit,
+  BarChart3,
   ChevronRight,
   Database,
   Terminal,
@@ -79,8 +79,8 @@ import {
 
 const sectionVariants = {
   hidden: { opacity: 0, y: 20 },
-  visible: { 
-    opacity: 1, 
+  visible: {
+    opacity: 1,
     y: 0,
     transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] }
   }
@@ -150,15 +150,15 @@ function LeetCodeStats({ glowColor }: { glowColor: string }) {
 
   const streakInfo = useMemo(() => {
     if (!data?.submissionCalendar) return { current: 0, max: 0, activeDays: 0 };
-    
+
     const timestamps = Object.keys(data.submissionCalendar)
       .map(t => parseInt(t))
       .sort((a, b) => a - b);
-      
+
     if (timestamps.length === 0) return { current: 0, max: 0, activeDays: 0 };
 
     const activeDays = timestamps.length;
-    
+
     // Sort dates
     const dates = timestamps.map(t => format(new Date(t * 1000), 'yyyy-MM-dd'));
     const uniqueDates = [...new Set(dates)].sort();
@@ -168,10 +168,10 @@ function LeetCodeStats({ glowColor }: { glowColor: string }) {
     let tempStreak = 1;
 
     for (let i = 1; i < uniqueDates.length; i++) {
-      const prev = parseISO(uniqueDates[i-1]);
+      const prev = parseISO(uniqueDates[i - 1]);
       const curr = parseISO(uniqueDates[i]);
       const diff = differenceInDays(curr, prev);
-      
+
       if (diff === 1) {
         tempStreak++;
       } else {
@@ -185,13 +185,13 @@ function LeetCodeStats({ glowColor }: { glowColor: string }) {
     const today = new Date();
     const todayStr = format(today, 'yyyy-MM-dd');
     const yesterdayStr = format(subDays(today, 1), 'yyyy-MM-dd');
-    
+
     const lastActiveDate = uniqueDates[uniqueDates.length - 1];
     if (lastActiveDate === todayStr || lastActiveDate === yesterdayStr) {
       let cs = 1;
       for (let i = uniqueDates.length - 1; i > 0; i--) {
         const curr = parseISO(uniqueDates[i]);
-        const prev = parseISO(uniqueDates[i-1]);
+        const prev = parseISO(uniqueDates[i - 1]);
         const diff = differenceInDays(curr, prev);
         if (diff === 1) {
           cs++;
@@ -212,25 +212,25 @@ function LeetCodeStats({ glowColor }: { glowColor: string }) {
   );
 
   return (
-    <MagicCard 
+    <MagicCard
       className="bg-surface p-8 border border-border-subtle flex flex-col group relative"
       glowColor={glowColor}
     >
       <div className="flex justify-between items-start mb-6 relative z-20">
         <div>
           <h3 className="text-text-primary text-lg font-bold mb-1">LeetCode Progress</h3>
-          <a 
-            href="https://leetcode.com/u/rQc2d1FK7A/" 
-            target="_blank" 
+          <a
+            href="https://leetcode.com/u/rQc2d1FK7A/"
+            target="_blank"
             rel="noopener noreferrer"
             className="text-text-tertiary text-xs uppercase tracking-widest hover:text-primary transition-colors flex items-center gap-1 font-mono"
           >
             rQc2d1FK7A
           </a>
         </div>
-        <a 
-          href="https://leetcode.com/u/rQc2d1FK7A/" 
-          target="_blank" 
+        <a
+          href="https://leetcode.com/u/rQc2d1FK7A/"
+          target="_blank"
           rel="noopener noreferrer"
           className="flex items-center gap-2 group p-1"
           title="Visit LeetCode Profile"
@@ -242,7 +242,7 @@ function LeetCodeStats({ glowColor }: { glowColor: string }) {
           </svg>
         </a>
       </div>
-      
+
       {data ? (
         <div className="space-y-6">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -272,8 +272,8 @@ function LeetCodeStats({ glowColor }: { glowColor: string }) {
                 <span className="text-xs font-mono font-bold text-text-primary">{data.easySolved} <span className="text-text-tertiary font-normal">/ {data.totalEasy}</span></span>
               </div>
               <div className="w-full bg-surface h-2 border border-border-subtle overflow-hidden">
-                <div 
-                  className="bg-emerald-500 h-full transition-all duration-500" 
+                <div
+                  className="bg-emerald-500 h-full transition-all duration-500"
                   style={{ width: `${data.totalEasy ? Math.min(100, (data.easySolved / data.totalEasy) * 100) : 0}%` }}
                 />
               </div>
@@ -289,8 +289,8 @@ function LeetCodeStats({ glowColor }: { glowColor: string }) {
                 <span className="text-xs font-mono font-bold text-text-primary">{data.mediumSolved} <span className="text-text-tertiary font-normal">/ {data.totalMedium}</span></span>
               </div>
               <div className="w-full bg-surface h-2 border border-border-subtle overflow-hidden">
-                <div 
-                  className="bg-amber-500 h-full transition-all duration-500" 
+                <div
+                  className="bg-amber-500 h-full transition-all duration-500"
                   style={{ width: `${data.totalMedium ? Math.min(100, (data.mediumSolved / data.totalMedium) * 100) : 0}%` }}
                 />
               </div>
@@ -306,8 +306,8 @@ function LeetCodeStats({ glowColor }: { glowColor: string }) {
                 <span className="text-xs font-mono font-bold text-text-primary">{data.hardSolved} <span className="text-text-tertiary font-normal">/ {data.totalHard}</span></span>
               </div>
               <div className="w-full bg-surface h-2 border border-border-subtle overflow-hidden">
-                <div 
-                  className="bg-rose-500 h-full transition-all duration-500" 
+                <div
+                  className="bg-rose-500 h-full transition-all duration-500"
                   style={{ width: `${data.totalHard ? Math.min(100, (data.hardSolved / data.totalHard) * 100) : 0}%` }}
                 />
               </div>
@@ -341,7 +341,7 @@ function LeetCodeStats({ glowColor }: { glowColor: string }) {
         </div>
       ) : (
         <div className="py-12 flex items-center justify-center text-text-tertiary italic text-sm text-center">
-          Failed to load stats.<br/>The API might be down.
+          Failed to load stats.<br />The API might be down.
         </div>
       )}
     </MagicCard>
@@ -354,16 +354,16 @@ function GitHubActivity({ glowColor }: { glowColor: string }) {
   const [selectedYear, setSelectedYear] = useState(years[0]);
 
   return (
-    <MagicCard 
+    <MagicCard
       className="bg-surface p-8 border border-border-subtle flex flex-col group relative"
       glowColor={glowColor}
     >
       <div className="flex justify-between items-start mb-6 relative z-20">
         <div>
           <h3 className="text-text-primary text-lg font-bold mb-1">GitHub Activity</h3>
-          <a 
-            href="https://github.com/OmChauhan07" 
-            target="_blank" 
+          <a
+            href="https://github.com/OmChauhan07"
+            target="_blank"
             rel="noopener noreferrer"
             className="text-text-tertiary text-xs uppercase tracking-widest hover:text-primary transition-colors flex items-center gap-1"
           >
@@ -389,9 +389,9 @@ function GitHubActivity({ glowColor }: { glowColor: string }) {
               </svg>
             </div>
           </div>
-          <a 
-            href="https://github.com/OmChauhan07" 
-            target="_blank" 
+          <a
+            href="https://github.com/OmChauhan07"
+            target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-2 group"
           >
@@ -399,41 +399,41 @@ function GitHubActivity({ glowColor }: { glowColor: string }) {
           </a>
         </div>
       </div>
-      
+
       <div className="flex-1 flex flex-col justify-center min-h-[220px] p-4 bg-background border border-border-subtle">
         <div className="overflow-x-auto overflow-y-hidden custom-scrollbar pb-2">
           <div className="min-w-[700px]">
-            <GitHubCalendar 
-            username="OmChauhan07" 
-            year={selectedYear === currentYear ? undefined : selectedYear}
-            fontSize={12}
-            blockSize={11}
-            blockMargin={4}
-            colorScheme="light"
-            theme={{
-               light: ['#EBEDF0', '#9BE9A8', '#40C463', '#30A14E', '#216E39'],
-            }}
-            hideColorLegend
-            showWeekdayLabels
-            renderBlock={(block, activity) => 
-              React.cloneElement(block as React.ReactElement, {
-                'data-tooltip-id': 'gh-tooltip',
-                'data-tooltip-content': `${activity.count} contributions on ${activity.date}`,
-              })
-            }
-          />
-          <Tooltip id="gh-tooltip" style={{ borderRadius: '0', fontSize: '11px', backgroundColor: '#1A1A1A', color: 'white' }} />
+            <GitHubCalendar
+              username="OmChauhan07"
+              year={selectedYear === currentYear ? undefined : selectedYear}
+              fontSize={12}
+              blockSize={11}
+              blockMargin={4}
+              colorScheme="light"
+              theme={{
+                light: ['#EBEDF0', '#9BE9A8', '#40C463', '#30A14E', '#216E39'],
+              }}
+              hideColorLegend
+              showWeekdayLabels
+              renderBlock={(block, activity) =>
+                React.cloneElement(block as React.ReactElement, {
+                  'data-tooltip-id': 'gh-tooltip',
+                  'data-tooltip-content': `${activity.count} contributions on ${activity.date}`,
+                })
+              }
+            />
+            <Tooltip id="gh-tooltip" style={{ borderRadius: '0', fontSize: '11px', backgroundColor: '#1A1A1A', color: 'white' }} />
           </div>
         </div>
         <div className="mt-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-[10px] text-text-tertiary uppercase tracking-widest font-bold">
           <div className="flex items-center gap-4">
-             <span>Less</span>
-             <div className="flex gap-1">
-               {['#EBEDF0', '#9BE9A8', '#40C463', '#30A14E', '#216E39'].map(c => (
-                 <div key={c} className="w-3 h-3" style={{ backgroundColor: c }} />
-               ))}
-             </div>
-             <span>More</span>
+            <span>Less</span>
+            <div className="flex gap-1">
+              {['#EBEDF0', '#9BE9A8', '#40C463', '#30A14E', '#216E39'].map(c => (
+                <div key={c} className="w-3 h-3" style={{ backgroundColor: c }} />
+              ))}
+            </div>
+            <span>More</span>
           </div>
           <div className="flex items-center gap-2 text-primary bg-primary/10 px-3 py-1 border border-primary/20">
             <CalendarDays size={12} />
@@ -449,7 +449,7 @@ export default function App() {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollY } = useScroll();
   const [hasEntered, setHasEntered] = useState(false);
-  
+
   // Transition into content when scrolled
   useEffect(() => {
     const unsubscribe = scrollY.on("change", (latest) => {
@@ -494,7 +494,7 @@ export default function App() {
     <div ref={containerRef} className={`bg-background relative transition-colors duration-300 ${!hasEntered ? 'min-h-[110vh]' : ''}`}>
       <AnimatePresence mode="wait">
         {!hasEntered && (
-          <motion.div 
+          <motion.div
             key="splash"
             initial={{ opacity: 1 }}
             exit={{ opacity: 0, scale: 1.05, filter: "blur(10px)" }}
@@ -502,8 +502,8 @@ export default function App() {
             className="fixed inset-0 z-[100] flex items-center justify-center bg-background overflow-hidden"
           >
             <div className="absolute inset-0 z-0 opacity-40">
-              <ShapeGrid 
-                speed={0.1} 
+              <ShapeGrid
+                speed={0.1}
                 squareSize={80}
                 direction='diagonal'
                 borderColor={gridColor}
@@ -512,7 +512,7 @@ export default function App() {
                 hoverTrailAmount={5}
               />
             </div>
-            
+
             <div className="relative z-10 text-center px-6">
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
@@ -520,7 +520,7 @@ export default function App() {
                 transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
               >
                 <h1 className="text-6xl sm:text-8xl md:text-9xl font-display font-bold tracking-tighter text-text-primary px-4 border-l-4 border-primary">
-                  <TextType 
+                  <TextType
                     text={["Om Chauhan"]}
                     typingSpeed={100}
                     loop={false}
@@ -528,7 +528,7 @@ export default function App() {
                     cursorCharacter="_"
                   />
                 </h1>
-                <motion.p 
+                <motion.p
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 0.5 }}
                   transition={{ delay: 0.6, duration: 1 }}
@@ -543,472 +543,475 @@ export default function App() {
       </AnimatePresence>
 
       {/* Main Content */}
-      <motion.div 
+      <motion.div
         initial={false}
         animate={hasEntered ? { opacity: 1, y: 0 } : { opacity: 0.05, y: 20 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
       >
         <div className={hasEntered ? "min-h-screen" : "h-screen overflow-hidden"}>
           {/* Background Grid */}
-      <div className="fixed inset-0 z-0 opacity-40 pointer-events-none">
-        <ShapeGrid 
-          speed={0.2} 
-          squareSize={50}
-          direction='diagonal'
-          borderColor={gridColor}
-          hoverFillColor={gridHoverColor}
-          shape='square'
-          hoverTrailAmount={10}
-        />
-      </div>
-
-      {/* Navigation */}
-      <nav className="fixed top-0 w-full bg-background/80 backdrop-blur-md border-b border-border-subtle z-50">
-        <div className="max-w-[1024px] mx-auto px-6 h-16 flex items-center justify-between">
-          <a href="#" className="font-display font-bold text-xl tracking-tight">Om Chauhan</a>
-          <div className="hidden md:flex gap-8 items-center">
-            <a href="#work" className="text-sm font-medium hover:text-primary transition-colors">Work</a>
-            <a href="#skills" className="text-sm font-medium hover:text-primary transition-colors">Skills</a>
-            <a href="#experience" className="text-sm font-medium hover:text-primary transition-colors">Experience</a>
-            <a href="#contact" className="text-sm font-medium hover:text-primary transition-colors">Contact</a>
-            <a 
-              href="/Om.pdf" 
-              download="Om.pdf"
-              className="bg-tertiary text-background px-4 py-2 text-sm font-semibold tracking-wide hover:bg-primary transition-colors inline-block"
-            >
-              Resume
-            </a>
-            
-            <AnimatedThemeToggler 
-              theme={theme}
-              onThemeChange={(newTheme) => setTheme(newTheme)}
-              className="p-2 ml-2 bg-surface border border-border-subtle hover:border-primary transition-colors text-text-primary cursor-pointer"
-              duration={450}
+          <div className="fixed inset-0 z-0 opacity-40 pointer-events-none">
+            <ShapeGrid
+              speed={0.2}
+              squareSize={50}
+              direction='diagonal'
+              borderColor={gridColor}
+              hoverFillColor={gridHoverColor}
+              shape='square'
+              hoverTrailAmount={10}
             />
           </div>
-        </div>
-      </nav>
-      <ScrollProgress className="top-[64px] bg-neutral-900 dark:bg-white" />
 
-      <main className="max-w-[1024px] mx-auto px-6 pt-32 pb-huge">
-        {/* Hero Section */}
-        <motion.section 
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={sectionVariants}
-          className="max-w-3xl mb-huge"
-        >
-          <BlurText
-            text="Hi, I'm Om Chauhan."
-            delay={150}
-            animateBy="words"
-            direction="top"
-            className="text-5xl md:text-6xl lg:text-7xl mb-8 leading-[1.1] font-display font-bold"
-          />
-          <p className="text-xl text-text-secondary mb-10 max-w-2xl leading-relaxed">
-            B.Tech Information Technology student & 3x national hackathon finalist with hands-on experience building full-stack applications, AI-powered systems, and data-driven solutions using Python, FastAPI, React, SQL, and generative AI.
-          </p>
-          <div className="flex flex-wrap gap-4 items-center">
-            <a href="#work" className="btn-primary flex items-center gap-2">
-              View Work <ChevronRight size={18} />
-            </a>
-            <a 
-              href="/Om_Chauhan_Resume.pdf" 
-              download="Om_Chauhan_Resume.pdf"
-              className="btn-secondary flex items-center gap-2"
-            >
-              <FileText size={18} /> Download Resume
-            </a>
-            <a href="#contact" className="text-sm font-semibold text-text-secondary hover:text-primary transition-colors px-2 py-3">
-              Get in Touch
-            </a>
-          </div>
-        </motion.section>
+          {/* Navigation */}
+          <nav className="fixed top-0 w-full bg-background/80 backdrop-blur-md border-b border-border-subtle z-50">
+            <div className="max-w-[1024px] mx-auto px-6 h-16 flex items-center justify-between">
+              <a href="#" className="font-display font-bold text-xl tracking-tight">Om Chauhan</a>
+              <div className="hidden md:flex gap-8 items-center">
+                <a href="#work" className="text-sm font-medium hover:text-primary transition-colors">Work</a>
+                <a href="#skills" className="text-sm font-medium hover:text-primary transition-colors">Skills</a>
+                <a href="#experience" className="text-sm font-medium hover:text-primary transition-colors">Experience</a>
+                <a href="#contact" className="text-sm font-medium hover:text-primary transition-colors">Contact</a>
+                <a
+                  href="/Om.pdf"
+                  download="Om.pdf"
+                  className="bg-tertiary text-background px-4 py-2 text-sm font-semibold tracking-wide hover:bg-primary transition-colors inline-block"
+                >
+                  Resume
+                </a>
 
-        <hr className="section-divider" />
-
-        {/* Activity Section */}
-        <motion.section 
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={sectionVariants}
-          className="mb-huge relative"
-          id="activity"
-          ref={activityRef}
-        >
-          <GlobalSpotlight sectionRef={activityRef} glowColor={glowColor} />
-          <h2 className="text-3xl mb-12">Live Activity</h2>
-          <div className="flex flex-col gap-8">
-            <GitHubActivity glowColor={glowColor} />
-            <LeetCodeStats glowColor={glowColor} />
-          </div>
-        </motion.section>
-
-        <hr className="section-divider" />
-
-        {/* Skills Section */}
-        <motion.section 
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={sectionVariants}
-          className="mb-huge relative"
-          id="skills"
-          ref={skillsRef}
-        >
-          <GlobalSpotlight sectionRef={skillsRef} glowColor={glowColor} />
-          <div className="flex flex-col gap-6 py-4">
-            <LogoLoop
-              logos={techLogosRow1}
-              speed={35}
-              direction="left"
-              logoHeight={56}
-              gap={60}
-              hoverSpeed={0}
-              scaleOnHover
-              fadeOut
-              ariaLabel="Skills & Technologies - Row 1"
-            />
-            <LogoLoop
-              logos={techLogosRow2}
-              speed={35}
-              direction="right"
-              logoHeight={56}
-              gap={60}
-              hoverSpeed={0}
-              scaleOnHover
-              fadeOut
-              ariaLabel="Skills & Technologies - Row 2"
-            />
-          </div>
-        </motion.section>
-
-        <hr className="section-divider" />
-
-        {/* Projects Section */}
-        <motion.section 
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={sectionVariants}
-          className="mb-huge relative"
-          id="work"
-          ref={projectsRef}
-        >
-          <GlobalSpotlight sectionRef={projectsRef} glowColor={glowColor} />
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-12 gap-4">
-            <div>
-              <span className="text-xs font-mono uppercase tracking-[0.25em] text-primary font-bold block mb-2">
-                Portfolio Showcases
-              </span>
-              <h2 className="text-3xl md:text-4xl font-bold tracking-tight">Selected Projects</h2>
-            </div>
-            <p className="text-xs font-mono text-text-tertiary">
-              Scroll down each card to inspect specs & live deployments ↓
-            </p>
-          </div>
-
-          <div className="relative w-full flex flex-col">
-            {[
-              {
-                title: "TransitOps",
-                category: "Fleet Management & Operations",
-                tags: "React • Vite • Node.js • Express • Prisma • Neon PostgreSQL • Recharts",
-                desc: "An end-to-end transport operations and fleet management platform that digitizes vehicle & driver registries, trip dispatching, maintenance ticketing, and expense auditing while enforcing strict operational business rules and calculating fleet ROI through real-time KPI analytics.",
-                icon: <Truck className="text-primary" size={32} />,
-                image: "/projects/Screenshot 2026-09-29 230654.png",
-                url: "https://github.com/OmChauhan07/TransitOps.git",
-                liveUrl: "https://transit-ops-peach.vercel.app"
-              },
-              {
-                title: "GlobeTrotter",
-                category: "Multi-City Travel & Discovery",
-                tags: "React 19 • Vite • Django REST Framework • Neon PostgreSQL • @dnd-kit • Recharts • Geoapify",
-                desc: "A modern multi-city travel planning platform designed to make itinerary creation, attraction discovery, and budget analytics visual and effortless. Features drag-and-drop schedule reordering, multi-view calendar/timeline matrices, and public itinerary cloning.",
-                icon: <Compass className="text-primary" size={32} />,
-                image: "/projects/Screenshot 2026-09-29 230608.png",
-                url: "https://github.com/OmChauhan07/GlobeTrotter.git",
-                liveUrl: "https://globetrotter-demo.vercel.app/"
-              },
-              {
-                title: "UrbanLedger",
-                category: "Atelier Accounting & Enterprise Financial Ledger",
-                tags: "React 19 • Vite • Django 5.2 • DRF • Neon PostgreSQL • SimpleJWT • Swagger/OpenAPI",
-                desc: "A tailored accounting atelier and double-entry financial platform engineered for bespoke furniture manufacturers, showrooms, and interior ateliers. Enforces strict mathematical ledger invariants with real-time kiln batch valuation, artisan production tracking, and zero balance drift.",
-                icon: <Scale className="text-primary" size={32} />,
-                image: "/projects/Screenshot 2026-09-29 233138.png",
-                url: "https://github.com/OmChauhan07/Urban-Furniture-Accounting-System.git"
-              },
-              {
-                title: "DocuMind",
-                category: "Generative AI & Autonomous Documentation",
-                tags: "React • Tailwind CSS • Python • CrewAI • Google Gemini • DOCX/PDF Pipeline",
-                desc: "An AI-powered smart documentation platform that automates publication-ready technical report generation from source code, Jupyter notebooks, datasets, and project files using CrewAI multi-agent orchestration backed by Google Gemini models with DOCX and PDF export pipelines.",
-                icon: <Sparkles className="text-primary" size={32} />,
-                image: "/projects/documind-error.svg",
-                url: "https://github.com/OmChauhan07/DocuMind.git"
-              }
-            ].map((project, idx, arr) => (
-              <ProjectScrollCard
-                key={project.title}
-                project={project}
-                index={idx}
-                total={arr.length}
-                topOffset={88}
-              />
-            ))}
-          </div>
-        </motion.section>
-
-        <hr className="section-divider" />
-
-        {/* Experience & Education Section */}
-        <motion.section 
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={sectionVariants}
-          className="mb-huge relative"
-          id="experience"
-          ref={experienceRef}
-        >
-          <GlobalSpotlight sectionRef={experienceRef} glowColor={glowColor} />
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
-            <div>
-              <h2 className="text-3xl mb-12">Experience</h2>
-              <div className="space-y-8">
-                <MagicCard className="relative pl-8 border-l border-border-subtle p-6 bg-surface" glowColor={glowColor}>
-                  <div className="absolute left-0 top-0 w-[5px] h-full bg-primary" />
-                  <div className="flex justify-between items-start mb-1">
-                    <h3 className="text-xl font-bold">Data Analysis Intern</h3>
-                    <span className="text-xs text-text-tertiary font-mono">MAY 2026 – JUNE 2026</span>
-                  </div>
-                  <p className="text-primary font-bold text-sm mb-1">Elevance Skills</p>
-                  <p className="text-[11px] text-text-tertiary font-mono mb-3">NumPy • Pandas • Matplotlib • Seaborn • Plotly • Streamlit</p>
-                  <ul className="text-sm text-text-secondary space-y-2 leading-relaxed">
-                    <li>• Cleaned and analyzed operational data, building Pandas/Streamlit dashboards to visualize trends and surface key insights for the team.</li>
-                  </ul>
-                </MagicCard>
-
-                <MagicCard className="relative pl-8 border-l border-border-subtle p-6 bg-surface" glowColor={glowColor}>
-                  <div className="absolute left-0 top-0 w-[5px] h-full bg-primary" />
-                  <div className="flex justify-between items-start mb-1">
-                    <h3 className="text-xl font-bold">Data Science Intern</h3>
-                    <span className="text-xs text-text-tertiary font-mono">APR 2025 – MAY 2025</span>
-                  </div>
-                  <p className="text-primary font-bold text-sm mb-1">Cognifyz Technologies</p>
-                  <p className="text-[11px] text-text-tertiary font-mono mb-3">NumPy • Pandas • Matplotlib • Seaborn • Scikit-learn</p>
-                  <ul className="text-sm text-text-secondary space-y-2 leading-relaxed">
-                    <li>• Cleaned and preprocessed large-scale datasets, engineered features, and trained/cross-validated predictive models in Scikit-learn, achieving 85% accuracy.</li>
-                  </ul>
-                </MagicCard>
+                <AnimatedThemeToggler
+                  theme={theme}
+                  onThemeChange={(newTheme) => setTheme(newTheme)}
+                  className="p-2 ml-2 bg-surface border border-border-subtle hover:border-primary transition-colors text-text-primary cursor-pointer"
+                  duration={450}
+                />
               </div>
             </div>
-            <div>
-              <h2 className="text-3xl mb-12">Education</h2>
-              <div className="space-y-8">
+          </nav>
+          <ScrollProgress className="top-[64px] bg-neutral-900 dark:bg-white" />
+
+          <main className="max-w-[1024px] mx-auto px-6 pt-32 pb-huge">
+            {/* Hero Section */}
+            <motion.section
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={sectionVariants}
+              className="max-w-3xl mb-huge"
+            >
+              <BlurText
+                text="Hi, I'm Om Chauhan."
+                delay={150}
+                animateBy="words"
+                direction="top"
+                className="text-5xl md:text-6xl lg:text-7xl mb-8 leading-[1.1] font-display font-bold"
+              />
+              <p className="text-xl text-text-secondary mb-10 max-w-2xl leading-relaxed">
+                I turn business ideas into digital solutions.
+                Building websites and custom applications that work for you.
+                From automation and AI to data-driven tools,
+                I create technology around your business needs.
+              </p>
+              <div className="flex flex-wrap gap-4 items-center">
+                <a href="#work" className="btn-primary flex items-center gap-2">
+                  View Work <ChevronRight size={18} />
+                </a>
+                <a
+                  href="/Om_Chauhan_Resume.pdf"
+                  download="Om_Chauhan_Resume.pdf"
+                  className="btn-secondary flex items-center gap-2"
+                >
+                  <FileText size={18} /> Download Resume
+                </a>
+                <a href="#contact" className="text-sm font-semibold text-text-secondary hover:text-primary transition-colors px-2 py-3">
+                  Get in Touch
+                </a>
+              </div>
+            </motion.section>
+
+            <hr className="section-divider" />
+
+            {/* Activity Section */}
+            <motion.section
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={sectionVariants}
+              className="mb-huge relative"
+              id="activity"
+              ref={activityRef}
+            >
+              <GlobalSpotlight sectionRef={activityRef} glowColor={glowColor} />
+              <h2 className="text-3xl mb-12">Live Activity</h2>
+              <div className="flex flex-col gap-8">
+                <GitHubActivity glowColor={glowColor} />
+                <LeetCodeStats glowColor={glowColor} />
+              </div>
+            </motion.section>
+
+            <hr className="section-divider" />
+
+            {/* Skills Section */}
+            <motion.section
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={sectionVariants}
+              className="mb-huge relative"
+              id="skills"
+              ref={skillsRef}
+            >
+              <GlobalSpotlight sectionRef={skillsRef} glowColor={glowColor} />
+              <div className="flex flex-col gap-6 py-4">
+                <LogoLoop
+                  logos={techLogosRow1}
+                  speed={35}
+                  direction="left"
+                  logoHeight={56}
+                  gap={60}
+                  hoverSpeed={0}
+                  scaleOnHover
+                  fadeOut
+                  ariaLabel="Skills & Technologies - Row 1"
+                />
+                <LogoLoop
+                  logos={techLogosRow2}
+                  speed={35}
+                  direction="right"
+                  logoHeight={56}
+                  gap={60}
+                  hoverSpeed={0}
+                  scaleOnHover
+                  fadeOut
+                  ariaLabel="Skills & Technologies - Row 2"
+                />
+              </div>
+            </motion.section>
+
+            <hr className="section-divider" />
+
+            {/* Projects Section */}
+            <motion.section
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={sectionVariants}
+              className="mb-huge relative"
+              id="work"
+              ref={projectsRef}
+            >
+              <GlobalSpotlight sectionRef={projectsRef} glowColor={glowColor} />
+              <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-12 gap-4">
+                <div>
+                  <span className="text-xs font-mono uppercase tracking-[0.25em] text-primary font-bold block mb-2">
+                    Portfolio Showcases
+                  </span>
+                  <h2 className="text-3xl md:text-4xl font-bold tracking-tight">Selected Projects</h2>
+                </div>
+                <p className="text-xs font-mono text-text-tertiary">
+                  Scroll down each card to inspect specs & live deployments ↓
+                </p>
+              </div>
+
+              <div className="relative w-full flex flex-col">
                 {[
                   {
-                    degree: "Bachelor of Technology in Information Technology",
-                    school: "Charotar University of Science and Technology (CHARUSAT)",
-                    location: "Anand, Gujarat",
-                    date: "JULY 2024 – PRESENT",
-                    cgpa: "CGPA: 7.14 / 10.00"
+                    title: "TransitOps",
+                    category: "Fleet Management & Operations",
+                    tags: "React • Vite • Node.js • Express • Prisma • Neon PostgreSQL • Recharts",
+                    desc: "An end-to-end transport operations and fleet management platform that digitizes vehicle & driver registries, trip dispatching, maintenance ticketing, and expense auditing while enforcing strict operational business rules and calculating fleet ROI through real-time KPI analytics.",
+                    icon: <Truck className="text-primary" size={32} />,
+                    image: "/projects/Screenshot 2026-09-29 230654.png",
+                    url: "https://github.com/OmChauhan07/TransitOps.git",
+                    liveUrl: "https://transit-ops-peach.vercel.app"
                   },
                   {
-                    degree: "Diploma in Computer Engineering",
-                    school: "D A Degree Engineering and Technology (GTU)",
-                    location: "Mahemdavad, Gujarat",
-                    date: "MAY 2021 – JUNE 2024",
-                    cgpa: "CGPA: 8.00 / 10.00"
+                    title: "GlobeTrotter",
+                    category: "Multi-City Travel & Discovery",
+                    tags: "React 19 • Vite • Django REST Framework • Neon PostgreSQL • @dnd-kit • Recharts • Geoapify",
+                    desc: "A modern multi-city travel planning platform designed to make itinerary creation, attraction discovery, and budget analytics visual and effortless. Features drag-and-drop schedule reordering, multi-view calendar/timeline matrices, and public itinerary cloning.",
+                    icon: <Compass className="text-primary" size={32} />,
+                    image: "/projects/Screenshot 2026-09-29 230608.png",
+                    url: "https://github.com/OmChauhan07/GlobeTrotter.git",
+                    liveUrl: "https://globetrotter-demo.vercel.app/"
+                  },
+                  {
+                    title: "UrbanLedger",
+                    category: "Atelier Accounting & Enterprise Financial Ledger",
+                    tags: "React 19 • Vite • Django 5.2 • DRF • Neon PostgreSQL • SimpleJWT • Swagger/OpenAPI",
+                    desc: "A tailored accounting atelier and double-entry financial platform engineered for bespoke furniture manufacturers, showrooms, and interior ateliers. Enforces strict mathematical ledger invariants with real-time kiln batch valuation, artisan production tracking, and zero balance drift.",
+                    icon: <Scale className="text-primary" size={32} />,
+                    image: "/projects/Screenshot 2026-09-29 233138.png",
+                    url: "https://github.com/OmChauhan07/Urban-Furniture-Accounting-System.git"
+                  },
+                  {
+                    title: "DocuMind",
+                    category: "Generative AI & Autonomous Documentation",
+                    tags: "React • Tailwind CSS • Python • CrewAI • Google Gemini • DOCX/PDF Pipeline",
+                    desc: "An AI-powered smart documentation platform that automates publication-ready technical report generation from source code, Jupyter notebooks, datasets, and project files using CrewAI multi-agent orchestration backed by Google Gemini models with DOCX and PDF export pipelines.",
+                    icon: <Sparkles className="text-primary" size={32} />,
+                    image: "/projects/documind-error.svg",
+                    url: "https://github.com/OmChauhan07/DocuMind.git"
                   }
-                ].map((edu, idx) => (
-                  <MagicCard key={idx} className="flex gap-6 items-start p-6 bg-surface border border-border-subtle" glowColor={glowColor}>
-                    <div className="p-3 bg-background border border-border-subtle shrink-0">
-                      <GraduationCap size={24} className="text-primary" />
-                    </div>
-                    <div>
-                      <div className="flex justify-between items-start mb-1">
-                        <h3 className="text-lg font-bold leading-snug">{edu.degree}</h3>
-                      </div>
-                      <p className="text-text-secondary text-sm mb-0.5">{edu.school}</p>
-                      <p className="text-xs text-text-tertiary font-mono mb-2">{edu.location} • {edu.date}</p>
-                      <p className="text-primary font-bold text-sm font-mono">{edu.cgpa}</p>
-                    </div>
-                  </MagicCard>
+                ].map((project, idx, arr) => (
+                  <ProjectScrollCard
+                    key={project.title}
+                    project={project}
+                    index={idx}
+                    total={arr.length}
+                    topOffset={88}
+                  />
                 ))}
               </div>
-            </div>
-          </div>
-        </motion.section>
-        <hr className="section-divider" />
+            </motion.section>
 
-        {/* Contact Section */}
-        <motion.section 
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={sectionVariants}
-          className="mb-huge relative"
-          id="contact"
-          ref={contactRef}
-        >
-          <GlobalSpotlight sectionRef={contactRef} glowColor={glowColor} />
-          <div className="max-w-3xl">
-            <h2 className="text-4xl mb-4">Let's Connect</h2>
-            <p className="text-text-secondary mb-8">Currently open for new opportunities or collaborations. Feel free to reach out via direct channels or send a message below.</p>
-            
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
-              <a 
-                href="mailto:odchauhan0702@gmail.com"
-                className="p-4 bg-surface border border-border-subtle hover:border-primary transition-colors flex items-center gap-3 group"
-              >
-                <div className="p-2.5 bg-primary/10 text-primary shrink-0 group-hover:scale-105 transition-transform">
-                  <Mail size={18} />
-                </div>
-                <div>
-                  <div className="text-[10px] uppercase font-bold tracking-wider text-text-tertiary">Email</div>
-                  <div className="text-xs font-mono font-semibold text-text-primary truncate">odchauhan0702@gmail.com</div>
-                </div>
-              </a>
+            <hr className="section-divider" />
 
-              <div className="p-4 bg-surface border border-border-subtle flex items-center gap-3">
-                <div className="p-2.5 bg-primary/10 text-primary shrink-0">
-                  <MapPin size={18} />
-                </div>
-                <div>
-                  <div className="text-[10px] uppercase font-bold tracking-wider text-text-tertiary">Location</div>
-                  <div className="text-xs font-semibold text-text-primary">Mahemdavad, Gujarat</div>
-                </div>
-              </div>
-            </div>
-
-            <MagicCard className="p-10 bg-surface border border-border-subtle" glowColor={glowColor}>
-              <div id="contact-success" className="hidden flex flex-col items-center justify-center text-center py-10 space-y-6">
-                <div className="w-16 h-16 bg-primary/10 flex items-center justify-center rounded-full">
-                  <Mail size={32} className="text-primary" />
-                </div>
-                <div>
-                  <h3 className="text-2xl font-bold mb-2">Message Sent!</h3>
-                  <p className="text-text-secondary">Thank you for reaching out. I'll get back to you as soon as possible.</p>
-                </div>
-                <button 
-                  onClick={() => {
-                    const success = document.getElementById('contact-success');
-                    const form = document.getElementById('contact-form');
-                    if (success && form) {
-                      success.classList.add('hidden');
-                      form.classList.remove('hidden');
-                    }
-                  }}
-                  className="btn-secondary"
-                >
-                  Send Another
-                </button>
-              </div>
-
-              <form 
-                id="contact-form"
-                className="space-y-8 relative z-20" 
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  const form = e.currentTarget;
-                  const formData = new FormData(form);
-                  const name = formData.get('name') || '';
-                  const email = formData.get('email') || '';
-                  const message = formData.get('message') || '';
-                  
-                  // Direct to email (Gmail/default email client)
-                  const subject = encodeURIComponent(`Portfolio Contact from ${name}`);
-                  const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
-                  window.location.href = `mailto:odchauhan0702@gmail.com?subject=${subject}&body=${body}`;
-                  
-                  // Show success state
-                  const success = document.getElementById('contact-success');
-                  if (success) {
-                    form.classList.add('hidden');
-                    success.classList.remove('hidden');
-                    form.reset();
-                  }
-                }}
-              >
-                <div className="space-y-2">
-                  <label className="text-[11px] font-bold tracking-widest text-text-secondary uppercase">Name</label>
-                  <input 
-                    name="name"
-                    type="text" 
-                    required
-                    className="w-full bg-background border border-border-medium px-4 py-3 text-sm focus:outline-none focus:border-primary transition-colors"
-                    placeholder="Name"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <label className="text-[11px] font-bold tracking-widest text-text-secondary uppercase">Mail</label>
-                  <input 
-                    name="email"
-                    type="email" 
-                    required
-                    className="w-full bg-background border border-border-medium px-4 py-3 text-sm focus:outline-none focus:border-primary transition-colors"
-                    placeholder="Email"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <label className="text-[11px] font-bold tracking-widest text-text-secondary uppercase">Message</label>
-                  <textarea 
-                    name="message"
-                    rows={4} 
-                    required
-                    className="w-full bg-background border border-border-medium px-4 py-3 text-sm focus:outline-none focus:border-primary transition-colors"
-                    placeholder="message"
-                  />
-                </div>
-                <div className="flex flex-wrap items-center justify-between gap-4">
-                  <button 
-                    type="submit" 
-                    className="btn-primary w-full md:w-auto disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
-                  >
-                    Send Message
-                  </button>
-                  <a 
-                    href="/Om_Chauhan_Resume.pdf" 
-                    download="Om_Chauhan_Resume.pdf"
-                    className="text-xs font-semibold text-text-tertiary hover:text-primary transition-colors flex items-center gap-1.5"
-                  >
-                    <FileText size={14} /> Download Resume (PDF)
-                  </a>
-                </div>
-              </form>
-            </MagicCard>
-          </div>
-        </motion.section>
-      </main>
-
-      {/* Footer */}
-      <footer className="border-t border-border-subtle bg-background">
-        <div className="max-w-[1024px] mx-auto px-6 py-12 flex flex-col md:flex-row justify-between items-center gap-8">
-          <p className="text-sm text-text-tertiary">© 2026 Om Chauhan. Mahemdavad, Gujarat, India.</p>
-          <div className="flex flex-wrap gap-8 items-center">
-            <a 
-              href="/Om_Chauhan_Resume.pdf" 
-              download="Om_Chauhan_Resume.pdf"
-              className="text-text-secondary hover:text-primary transition-colors flex items-center gap-1.5 text-sm font-semibold tracking-wide"
+            {/* Experience & Education Section */}
+            <motion.section
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={sectionVariants}
+              className="mb-huge relative"
+              id="experience"
+              ref={experienceRef}
             >
-              <FileText size={16} /> Resume
-            </a>
-            <a href="https://www.linkedin.com/in/om-chauhan-21043824b/" target="_blank" rel="noopener noreferrer" className="text-text-secondary hover:text-primary transition-colors flex items-center gap-2 text-sm font-semibold tracking-wide">
-              <Linkedin size={16} /> LinkedIn
-            </a>
-            <a href="https://github.com/OmChauhan07" target="_blank" rel="noopener noreferrer" className="text-text-secondary hover:text-primary transition-colors flex items-center gap-2 text-sm font-semibold tracking-wide">
-              <Github size={16} /> GitHub
-            </a>
-            <a href="mailto:odchauhan0702@gmail.com" className="text-text-secondary hover:text-primary transition-colors flex items-center gap-2 text-sm font-semibold tracking-wide">
-              <Mail size={16} /> Email
-            </a>
-          </div>
-        </div>
-      </footer>
+              <GlobalSpotlight sectionRef={experienceRef} glowColor={glowColor} />
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
+                <div>
+                  <h2 className="text-3xl mb-12">Experience</h2>
+                  <div className="space-y-8">
+                    <MagicCard className="relative pl-8 border-l border-border-subtle p-6 bg-surface" glowColor={glowColor}>
+                      <div className="absolute left-0 top-0 w-[5px] h-full bg-primary" />
+                      <div className="flex justify-between items-start mb-1">
+                        <h3 className="text-xl font-bold">Data Analysis Intern</h3>
+                        <span className="text-xs text-text-tertiary font-mono">MAY 2026 – JUNE 2026</span>
+                      </div>
+                      <p className="text-primary font-bold text-sm mb-1">Elevance Skills</p>
+                      <p className="text-[11px] text-text-tertiary font-mono mb-3">NumPy • Pandas • Matplotlib • Seaborn • Plotly • Streamlit</p>
+                      <ul className="text-sm text-text-secondary space-y-2 leading-relaxed">
+                        <li>• Cleaned and analyzed operational data, building Pandas/Streamlit dashboards to visualize trends and surface key insights for the team.</li>
+                      </ul>
+                    </MagicCard>
+
+                    <MagicCard className="relative pl-8 border-l border-border-subtle p-6 bg-surface" glowColor={glowColor}>
+                      <div className="absolute left-0 top-0 w-[5px] h-full bg-primary" />
+                      <div className="flex justify-between items-start mb-1">
+                        <h3 className="text-xl font-bold">Data Science Intern</h3>
+                        <span className="text-xs text-text-tertiary font-mono">APR 2025 – MAY 2025</span>
+                      </div>
+                      <p className="text-primary font-bold text-sm mb-1">Cognifyz Technologies</p>
+                      <p className="text-[11px] text-text-tertiary font-mono mb-3">NumPy • Pandas • Matplotlib • Seaborn • Scikit-learn</p>
+                      <ul className="text-sm text-text-secondary space-y-2 leading-relaxed">
+                        <li>• Cleaned and preprocessed large-scale datasets, engineered features, and trained/cross-validated predictive models in Scikit-learn, achieving 85% accuracy.</li>
+                      </ul>
+                    </MagicCard>
+                  </div>
+                </div>
+                <div>
+                  <h2 className="text-3xl mb-12">Education</h2>
+                  <div className="space-y-8">
+                    {[
+                      {
+                        degree: "Bachelor of Technology in Information Technology",
+                        school: "Charotar University of Science and Technology (CHARUSAT)",
+                        location: "Anand, Gujarat",
+                        date: "JULY 2024 – PRESENT",
+                        cgpa: "CGPA: 7.14 / 10.00"
+                      },
+                      {
+                        degree: "Diploma in Computer Engineering",
+                        school: "D A Degree Engineering and Technology (GTU)",
+                        location: "Mahemdavad, Gujarat",
+                        date: "MAY 2021 – JUNE 2024",
+                        cgpa: "CGPA: 8.00 / 10.00"
+                      }
+                    ].map((edu, idx) => (
+                      <MagicCard key={idx} className="flex gap-6 items-start p-6 bg-surface border border-border-subtle" glowColor={glowColor}>
+                        <div className="p-3 bg-background border border-border-subtle shrink-0">
+                          <GraduationCap size={24} className="text-primary" />
+                        </div>
+                        <div>
+                          <div className="flex justify-between items-start mb-1">
+                            <h3 className="text-lg font-bold leading-snug">{edu.degree}</h3>
+                          </div>
+                          <p className="text-text-secondary text-sm mb-0.5">{edu.school}</p>
+                          <p className="text-xs text-text-tertiary font-mono mb-2">{edu.location} • {edu.date}</p>
+                          <p className="text-primary font-bold text-sm font-mono">{edu.cgpa}</p>
+                        </div>
+                      </MagicCard>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </motion.section>
+            <hr className="section-divider" />
+
+            {/* Contact Section */}
+            <motion.section
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={sectionVariants}
+              className="mb-huge relative"
+              id="contact"
+              ref={contactRef}
+            >
+              <GlobalSpotlight sectionRef={contactRef} glowColor={glowColor} />
+              <div className="max-w-3xl">
+                <h2 className="text-4xl mb-4">Let's Connect</h2>
+                <p className="text-text-secondary mb-8">Currently open for new opportunities or collaborations. Feel free to reach out via direct channels or send a message below.</p>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+                  <a
+                    href="mailto:odchauhan0702@gmail.com"
+                    className="p-4 bg-surface border border-border-subtle hover:border-primary transition-colors flex items-center gap-3 group"
+                  >
+                    <div className="p-2.5 bg-primary/10 text-primary shrink-0 group-hover:scale-105 transition-transform">
+                      <Mail size={18} />
+                    </div>
+                    <div>
+                      <div className="text-[10px] uppercase font-bold tracking-wider text-text-tertiary">Email</div>
+                      <div className="text-xs font-mono font-semibold text-text-primary truncate">odchauhan0702@gmail.com</div>
+                    </div>
+                  </a>
+
+                  <div className="p-4 bg-surface border border-border-subtle flex items-center gap-3">
+                    <div className="p-2.5 bg-primary/10 text-primary shrink-0">
+                      <MapPin size={18} />
+                    </div>
+                    <div>
+                      <div className="text-[10px] uppercase font-bold tracking-wider text-text-tertiary">Location</div>
+                      <div className="text-xs font-semibold text-text-primary">Mahemdavad, Gujarat</div>
+                    </div>
+                  </div>
+                </div>
+
+                <MagicCard className="p-10 bg-surface border border-border-subtle" glowColor={glowColor}>
+                  <div id="contact-success" className="hidden flex flex-col items-center justify-center text-center py-10 space-y-6">
+                    <div className="w-16 h-16 bg-primary/10 flex items-center justify-center rounded-full">
+                      <Mail size={32} className="text-primary" />
+                    </div>
+                    <div>
+                      <h3 className="text-2xl font-bold mb-2">Message Sent!</h3>
+                      <p className="text-text-secondary">Thank you for reaching out. I'll get back to you as soon as possible.</p>
+                    </div>
+                    <button
+                      onClick={() => {
+                        const success = document.getElementById('contact-success');
+                        const form = document.getElementById('contact-form');
+                        if (success && form) {
+                          success.classList.add('hidden');
+                          form.classList.remove('hidden');
+                        }
+                      }}
+                      className="btn-secondary"
+                    >
+                      Send Another
+                    </button>
+                  </div>
+
+                  <form
+                    id="contact-form"
+                    className="space-y-8 relative z-20"
+                    onSubmit={(e) => {
+                      e.preventDefault();
+                      const form = e.currentTarget;
+                      const formData = new FormData(form);
+                      const name = formData.get('name') || '';
+                      const email = formData.get('email') || '';
+                      const message = formData.get('message') || '';
+
+                      // Direct to email (Gmail/default email client)
+                      const subject = encodeURIComponent(`Portfolio Contact from ${name}`);
+                      const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
+                      window.location.href = `mailto:odchauhan0702@gmail.com?subject=${subject}&body=${body}`;
+
+                      // Show success state
+                      const success = document.getElementById('contact-success');
+                      if (success) {
+                        form.classList.add('hidden');
+                        success.classList.remove('hidden');
+                        form.reset();
+                      }
+                    }}
+                  >
+                    <div className="space-y-2">
+                      <label className="text-[11px] font-bold tracking-widest text-text-secondary uppercase">Name</label>
+                      <input
+                        name="name"
+                        type="text"
+                        required
+                        className="w-full bg-background border border-border-medium px-4 py-3 text-sm focus:outline-none focus:border-primary transition-colors"
+                        placeholder="Name"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <label className="text-[11px] font-bold tracking-widest text-text-secondary uppercase">Mail</label>
+                      <input
+                        name="email"
+                        type="email"
+                        required
+                        className="w-full bg-background border border-border-medium px-4 py-3 text-sm focus:outline-none focus:border-primary transition-colors"
+                        placeholder="Email"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <label className="text-[11px] font-bold tracking-widest text-text-secondary uppercase">Message</label>
+                      <textarea
+                        name="message"
+                        rows={4}
+                        required
+                        className="w-full bg-background border border-border-medium px-4 py-3 text-sm focus:outline-none focus:border-primary transition-colors"
+                        placeholder="message"
+                      />
+                    </div>
+                    <div className="flex flex-wrap items-center justify-between gap-4">
+                      <button
+                        type="submit"
+                        className="btn-primary w-full md:w-auto disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                      >
+                        Send Message
+                      </button>
+                      <a
+                        href="/Om_Chauhan_Resume.pdf"
+                        download="Om_Chauhan_Resume.pdf"
+                        className="text-xs font-semibold text-text-tertiary hover:text-primary transition-colors flex items-center gap-1.5"
+                      >
+                        <FileText size={14} /> Download Resume (PDF)
+                      </a>
+                    </div>
+                  </form>
+                </MagicCard>
+              </div>
+            </motion.section>
+          </main>
+
+          {/* Footer */}
+          <footer className="border-t border-border-subtle bg-background">
+            <div className="max-w-[1024px] mx-auto px-6 py-12 flex flex-col md:flex-row justify-between items-center gap-8">
+              <p className="text-sm text-text-tertiary">© 2026 Om Chauhan. Mahemdavad, Gujarat, India.</p>
+              <div className="flex flex-wrap gap-8 items-center">
+                <a
+                  href="/Om_Chauhan_Resume.pdf"
+                  download="Om_Chauhan_Resume.pdf"
+                  className="text-text-secondary hover:text-primary transition-colors flex items-center gap-1.5 text-sm font-semibold tracking-wide"
+                >
+                  <FileText size={16} /> Resume
+                </a>
+                <a href="https://www.linkedin.com/in/om-chauhan-21043824b/" target="_blank" rel="noopener noreferrer" className="text-text-secondary hover:text-primary transition-colors flex items-center gap-2 text-sm font-semibold tracking-wide">
+                  <Linkedin size={16} /> LinkedIn
+                </a>
+                <a href="https://github.com/OmChauhan07" target="_blank" rel="noopener noreferrer" className="text-text-secondary hover:text-primary transition-colors flex items-center gap-2 text-sm font-semibold tracking-wide">
+                  <Github size={16} /> GitHub
+                </a>
+                <a href="mailto:odchauhan0702@gmail.com" className="text-text-secondary hover:text-primary transition-colors flex items-center gap-2 text-sm font-semibold tracking-wide">
+                  <Mail size={16} /> Email
+                </a>
+              </div>
+            </div>
+          </footer>
         </div>
       </motion.div>
     </div>
